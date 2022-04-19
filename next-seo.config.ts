@@ -1,12 +1,13 @@
-export default {
-    title: "NextJS Boilerplate",
-    description:
-        "A boilerplate for NextJS with TypeScript, SWR, Jest, Crypess, Eslint, Prettier and Storybook.",
-    canonical: "http://localhost:3000/",
+const SEO = {
+    title: "Tweeter",
+    description: "Tweeter is a social network based in twitter.",
+    canonical: process.env.baseURL || "http://localhost:3000/",
     openGraph: {
         type: "website",
         locale: "pt_BR",
-        url: "http://localhost:3000/",
-        site_name: "NextJS Boilerplate",
+        url: process.env.baseURL || "http://localhost:3000/",
+        site_name: "Tweeter",
     },
 };
+
+export default SEO;

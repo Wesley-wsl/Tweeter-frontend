@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 
 import { INextSEO } from "../../@types";
 
-export function NextSEO({ title, description, children }: INextSEO) {
+const NextSEO: React.FC<INextSEO> = ({ title, description, children }) => {
     const { pathname } = useRouter();
     const url = `http://localhost:3000${pathname}`;
     return (
@@ -17,4 +17,6 @@ export function NextSEO({ title, description, children }: INextSEO) {
             {children}
         </>
     );
-}
+};
+
+export default NextSEO;
