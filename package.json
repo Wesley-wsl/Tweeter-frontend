@@ -10,11 +10,12 @@
         "test:watch": "jest --watch",
         "test:coverage": "jest --coverage",
         "cypress": "cypress open",
-        "storybook": "start-storybook -p 6006",
+        "storybook": "start-storybook -s ./public -p 6006",
         "build-storybook": "build-storybook"
     },
     "dependencies": {
         "@styled-icons/bootstrap": "^10.34.0",
+        "@styled-icons/material-outlined": "^10.34.0",
         "@styled-icons/zondicons": "^10.18.0",
         "axios": "^0.26.1",
         "next": "12.1.5",
@@ -33,6 +34,7 @@
         "@storybook/addon-links": "^6.4.22",
         "@storybook/react": "^6.4.22",
         "@storybook/testing-library": "^0.0.9",
+        "@styled-icons/ionicons-sharp": "^10.34.0",
         "@testing-library/jest-dom": "^5.16.4",
         "@testing-library/react": "^13.1.1",
         "@types/jest": "^27.4.1",
