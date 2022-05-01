@@ -15,6 +15,7 @@ const GlobalStyles = createGlobalStyle`
     --grey-two: #4F4F4F;
     --grey-three: #828282;
     --grey-four: #BDBDBD;
+    --grey-five: #E0E0E0;
     --red-one:#EB5757 ;
     --green-one: #27AE60;
     --font-poppins: "Poppins" ;
@@ -34,6 +35,7 @@ html {
 
 body {
     font-family: "Poppins", "Noto Sans", --apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    background-color: var(--background-color);
 }
 
 `;
