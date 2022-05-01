@@ -1,9 +1,16 @@
+import { yupResolver } from "@hookform/resolvers/yup";
 import { PersonFill } from "@styled-icons/bootstrap";
 import { ViewShow, ViewHide } from "@styled-icons/zondicons";
 import Image from "next/image";
 import Link from "next/link";
+import Router from "next/router";
 import { useState } from "react";
+import { useForm, SubmitHandler } from "react-hook-form";
+import { toast } from "react-toastify";
 
+import { IHandleSignIn } from "../../../@types";
+import signInFormSchema from "../../../schemas/signIn";
+import api from "../../../services/api";
 import ButtonForm from "../ButtonForm";
 import Input from "../Input";
 import * as S from "../shared";
@@ -12,18 +19,44 @@ const SignInForm: React.FC = () => {
     const [hidePassword, setHidePassword] = useState(true);
 
     const changePasswordMode = () => setHidePassword(!hidePassword);
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm<IHandleSignIn>({
+        resolver: yupResolver(signInFormSchema),
+    });
+
+    const handleSignIn: SubmitHandler<IHandleSignIn> = data => {
+        api.post("/user/login", data)
+            .then(response => {
+                toast.success("Successfully logged in");
+                Router.push(`/profile/${response.data.id}`);
+            })
+            .catch(error =>
+                toast.error(
+                    error.response.data.error ??
+                        "Something went wrong, please try again later.",
+                ),
+            );
+    };
 
     return (
-        <S.FormContainer>
-            <Image
-                src={"/assets/tweeter.svg"}
-                width="200"
-                height="90"
-                alt="Logo"
-            />
+        <S.FormContainer onSubmit={handleSubmit(handleSignIn)}>
+            <span>
+                <Image
+                    src={"/assets/tweeter.svg"}
+                    width="200"
+                    height="45"
+                    alt="Logo"
+                />
+            </span>
             <Input
                 type="email"
                 placeholder="Email"
+                error={errors.email}
+                {...register("email")}
+                autoComplete="email"
                 IconRight={
                     <PersonFill
                         width="20"
@@ -36,6 +69,10 @@ const SignInForm: React.FC = () => {
             <Input
                 type={hidePassword ? "password" : "text"}
                 placeholder="Password"
+                error={errors.password}
+                {...register("password")}
+                maxLength={18}
+                autoComplete="current-password"
                 IconRight={
                     hidePassword ? (
                         <ViewShow

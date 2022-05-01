@@ -12,6 +12,10 @@ export const FormContainer = styled.form`
     margin: auto;
     justify-content: space-between;
 
+    span {
+        margin-bottom: 0.7rem;
+    }
+
     p > a {
         margin-top: 2rem;
         font-size: var(--x-small);
