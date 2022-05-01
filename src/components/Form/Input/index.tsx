@@ -1,13 +1,23 @@
+import { forwardRef, ForwardRefRenderFunction } from "react";
+
 import { IInput } from "../../../@types";
 import * as S from "./styles";
 
-const Input: React.FC<IInput> = ({ type, placeholder, IconRight }) => {
+const InputBase: ForwardRefRenderFunction<HTMLInputElement, IInput> = (
+    { error, IconRight, ...rest },
+    ref,
+) => {
     return (
-        <S.Container>
-            <input type={type} placeholder={placeholder} />
-            {IconRight}
-        </S.Container>
+        <>
+            <S.Container margin={!error ? "17px" : "0"}>
+                <input {...rest} ref={ref} />
+                {IconRight}
+            </S.Container>
+            {!!error && <S.ErrorMessage>{error.message}</S.ErrorMessage>}
+        </>
     );
 };
+
+const Input = forwardRef(InputBase);
 
 export default Input;

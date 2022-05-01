@@ -1,12 +1,16 @@
 import styled from "styled-components";
 
-export const Container = styled.div`
+interface IInputContainer {
+    margin: string;
+}
+
+export const Container = styled.div<IInputContainer>`
     position: relative;
 
     input {
         padding: 1.5rem;
         width: 25rem;
-        margin-bottom: 1.5rem;
+        margin-bottom: ${({ margin }) => margin};
         border-radius: 0.4rem;
         padding-right: 3.5rem;
         outline: none;
@@ -29,4 +33,13 @@ export const Container = styled.div`
         right: 0.7rem;
         cursor: pointer;
     }
+`;
+
+export const ErrorMessage = styled.p`
+    color: red;
+    font-size: 1.2rem;
+    font-weight: 500;
+    font-family: var(--font-NotoSans);
+    text-align: center;
+    opacity: 0.9;
 `;
