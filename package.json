@@ -22,6 +22,7 @@
         "axios": "^0.26.1",
         "next": "12.1.5",
         "next-seo": "^5.4.0",
+        "nookies": "^2.5.2",
         "react": "18.0.0",
         "react-dom": "18.0.0",
         "react-hook-form": "^7.30.0",
