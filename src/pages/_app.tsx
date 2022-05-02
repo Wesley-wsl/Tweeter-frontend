@@ -1,5 +1,6 @@
 import { DefaultSeo } from "next-seo";
 import { AppProps } from "next/app";
+import NextNProgress from "nextjs-progressbar";
 import { Provider } from "react-redux";
 import { ToastContainer, Zoom } from "react-toastify";
 import "react-toastify/dist/ReactToastify.min.css";
@@ -24,6 +25,7 @@ function MyApp({ Component, pageProps }: AppProps) {
                 transition={Zoom}
                 theme="light"
             />
+            <NextNProgress color="#2F80ED" startPosition={0.5} />
             <Provider store={store}>
                 <Component {...pageProps} />
             </Provider>
