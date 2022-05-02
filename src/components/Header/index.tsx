@@ -23,10 +23,10 @@ const Header: React.FC = () => {
                         <Link href={"/home"}>Home</Link>
                     </li>
                     <li className={asPath === "/explorer" ? "active" : ""}>
-                        <Link href={"/home"}>Explorer</Link>
+                        <Link href={"/explorer"}>Explorer</Link>
                     </li>
                     <li className={asPath === "/bookmarks" ? "active" : ""}>
-                        <Link href={"/home"}>Bookmarks</Link>
+                        <Link href={"/bookmarks"}>Bookmarks</Link>
                     </li>
                 </ul>
             </nav>
