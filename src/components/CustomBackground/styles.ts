@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
-import { IBackgroundCustomStyle } from "../../@types";
+import { IImage } from "../../@types";
 
-export const Background = styled.main<IBackgroundCustomStyle>`
+export const Background = styled.main<IImage>`
     width: 100vw;
     height: 100vh;
     display: flex;
