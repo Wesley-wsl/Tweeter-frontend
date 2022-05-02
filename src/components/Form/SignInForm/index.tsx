@@ -4,6 +4,7 @@ import { ViewShow, ViewHide } from "@styled-icons/zondicons";
 import Image from "next/image";
 import Link from "next/link";
 import Router from "next/router";
+import { setCookie } from "nookies";
 import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { toast } from "react-toastify";
@@ -30,8 +31,16 @@ const SignInForm: React.FC = () => {
     const handleSignIn: SubmitHandler<IHandleSignIn> = data => {
         api.post("/user/login", data)
             .then(response => {
+                setCookie(
+                    undefined,
+                    "tweeter-token",
+                    response.data.data.token,
+                    {
+                        maxAge: 60 * 60 * 1, // 1 hour
+                    },
+                );
                 toast.success("Successfully logged in");
-                Router.push(`/profile/${response.data.id}`);
+                Router.push(`/profile/${response.data.data.user.id}`);
             })
             .catch(error =>
                 toast.error(
