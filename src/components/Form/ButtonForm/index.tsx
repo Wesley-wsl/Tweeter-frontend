@@ -3,7 +3,7 @@ import * as S from "./styles";
 
 const ButtonForm: React.FC<IButtonForm> = ({ title, loading }) => {
     return (
-        <S.Button>
+        <S.Button disabled={loading}>
             {loading ? (
                 <div className="loading">
                     <div></div>
