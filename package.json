@@ -15,8 +15,8 @@
     },
     "dependencies": {
         "@hookform/resolvers": "^2.8.8",
-        "@reduxjs/toolkit": "^1.8.1",
         "@styled-icons/bootstrap": "^10.34.0",
+        "@styled-icons/material": "^10.34.0",
         "@styled-icons/material-outlined": "^10.34.0",
         "@styled-icons/zondicons": "^10.18.0",
         "axios": "^0.26.1",
@@ -27,7 +27,6 @@
         "react": "18.0.0",
         "react-dom": "18.0.0",
         "react-hook-form": "^7.30.0",
-        "react-redux": "^8.0.1",
         "react-toastify": "^8.2.0",
         "styled-components": "^5.3.5",
         "yup": "^0.32.11"
