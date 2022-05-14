@@ -9,6 +9,7 @@ export interface INextSEO {
 
 export interface IButtonForm {
     title: string;
+    loading?: boolean;
 }
 
 export interface IInput extends InputHTMLAttributes<HTMLInputElement> {
@@ -39,4 +40,30 @@ export interface IHandleSignUp {
 export interface IHandleSignIn {
     email: string;
     password: string;
+}
+
+export interface IHeaderStyle {
+    opacity: number;
+    boxShadow: boolean;
+}
+
+export interface ISignInData {
+    email: string;
+    password: string;
+}
+
+export interface IAuthContext {
+    signIn: (data: ISignInData) => Promise<void>;
+    loadingSignIn: boolean;
+    user: IUser | null;
+}
+
+export interface IChildren {
+    children: JSX.Element;
+}
+
+export interface IUser {
+    name: string;
+    avatar: string;
+    id: string;
 }
