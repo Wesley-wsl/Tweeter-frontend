@@ -1,4 +1,5 @@
 import { Search } from "@styled-icons/material-outlined";
+import { GetServerSideProps } from "next";
 
 import { Button } from "../../components/Button";
 import Header from "../../components/Header";
@@ -6,6 +7,7 @@ import NextSEO from "../../components/NextSEO";
 import Tweet from "../../components/Tweet";
 import * as S from "../../styles/pages/Explorer";
 import { TweetsFilterProfile } from "../../styles/pages/Profile";
+import { ensureAuthentication } from "../../utils/ensureAuthentication";
 
 export default function Explorer() {
     return (
@@ -32,11 +34,25 @@ export default function Explorer() {
                             <Button title="Search" />
                         </S.Search>
                         <Tweet />
-                        <Tweet />
-                        <Tweet />
                     </S.TweetsContainer>
                 </S.Container>
             </>
         </NextSEO>
     );
 }
+
+export const getServerSideProps: GetServerSideProps = async ctx => {
+    const userId = await ensureAuthentication(ctx);
+
+    if (!userId) {
+        return {
+            redirect: {
+                destination: "/",
+                permanent: false,
+            },
+        };
+    }
+    return {
+        props: {},
+    };
+};

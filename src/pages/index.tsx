@@ -1,9 +1,9 @@
 import { GetServerSideProps } from "next";
-import { parseCookies } from "nookies";
 
 import CustomBackground from "../components/CustomBackground";
 import SignInForm from "../components/Form/SignInForm";
 import NextSEO from "../components/NextSEO";
+import { ensureAuthentication } from "../utils/ensureAuthentication";
 
 export default function SignIn() {
     return (
@@ -19,12 +19,12 @@ export default function SignIn() {
 }
 
 export const getServerSideProps: GetServerSideProps = async ctx => {
-    const { "tweeter-token": token } = parseCookies(ctx);
+    const userId = await ensureAuthentication(ctx);
 
-    if (token) {
+    if (userId) {
         return {
             redirect: {
-                destination: "/home",
+                destination: `/profile/${userId}`,
                 permanent: false,
             },
         };

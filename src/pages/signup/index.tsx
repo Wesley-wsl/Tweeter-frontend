@@ -1,6 +1,9 @@
+import { GetServerSideProps } from "next";
+
 import CustomBackground from "../../components/CustomBackground";
 import SignUpForm from "../../components/Form/SignUpForm";
 import NextSEO from "../../components/NextSEO";
+import { ensureAuthentication } from "../../utils/ensureAuthentication";
 
 export default function SignUp() {
     return (
@@ -14,3 +17,20 @@ export default function SignUp() {
         </NextSEO>
     );
 }
+
+export const getServerSideProps: GetServerSideProps = async ctx => {
+    const userId = await ensureAuthentication(ctx);
+
+    if (userId) {
+        return {
+            redirect: {
+                destination: `/profile/${userId}`,
+                permanent: false,
+            },
+        };
+    }
+
+    return {
+        props: {},
+    };
+};

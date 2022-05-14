@@ -1,4 +1,5 @@
 import { PersonAdd } from "@styled-icons/ionicons-sharp";
+import { GetServerSideProps } from "next";
 import Image from "next/image";
 
 import { Button } from "../../components/Button";
@@ -6,6 +7,8 @@ import Header from "../../components/Header";
 import NextSEO from "../../components/NextSEO";
 import Tweet from "../../components/Tweet";
 import * as S from "../../styles/pages/Profile";
+import { ensureAuthentication } from "../../utils/ensureAuthentication";
+import { user } from "../../utils/helper";
 
 export default function Profile() {
     return (
@@ -16,15 +19,13 @@ export default function Profile() {
             <>
                 <Header />
                 <S.Container>
-                    <S.BackgroundProfile
-                        image={"/background/background.webp"}
-                    />
+                    <S.BackgroundProfile image={user.background} />
                     <S.About>
                         <span className="avatar">
                             <Image
                                 width="160"
                                 height="160"
-                                src="/background/akishino.webp"
+                                src={user.avatar}
                                 alt="Profile Avatar"
                             />
                         </span>
@@ -32,12 +33,14 @@ export default function Profile() {
                         <S.Informations>
                             <div>
                                 <div className="top-informations">
-                                    <h2>Aki Shino</h2>
+                                    <h2>{user.name}</h2>
                                     <p>
-                                        <span>2,495</span> Following
+                                        <span>{user.followingCount}</span>{" "}
+                                        Following
                                     </p>
                                     <p>
-                                        <span>10.98K</span> Followers
+                                        <span>{user.followersCount}</span>{" "}
+                                        Followers
                                     </p>
                                 </div>
 
@@ -53,10 +56,7 @@ export default function Profile() {
                                 />
                             </div>
 
-                            <S.Description>
-                                Photographer e Filmmaker based in Copenhagen,
-                                Denmarrk.
-                            </S.Description>
+                            <S.Description>{user.about_me}</S.Description>
                         </S.Informations>
                     </S.About>
 
@@ -78,3 +78,20 @@ export default function Profile() {
         </NextSEO>
     );
 }
+
+export const getServerSideProps: GetServerSideProps = async ctx => {
+    const userId = await ensureAuthentication(ctx);
+
+    if (!userId) {
+        return {
+            redirect: {
+                destination: "/",
+                permanent: false,
+            },
+        };
+    }
+
+    return {
+        props: {},
+    };
+};
