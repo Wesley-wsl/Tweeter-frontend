@@ -16,6 +16,7 @@ import * as S from "../shared";
 
 const SignUpForm: React.FC = () => {
     const [hidePassword, setHidePassword] = useState(true);
+    const [loading, setLoading] = useState(false);
 
     const {
         register,
@@ -29,17 +30,20 @@ const SignUpForm: React.FC = () => {
     const changePasswordMode = () => setHidePassword(!hidePassword);
 
     const handleSignUp: SubmitHandler<IHandleSignUp> = async data => {
-        api.post("/user/", data)
+        setLoading(true);
+        await api
+            .post("/user/", data)
             .then(() => {
                 reset();
                 toast.success("User created with success.");
             })
             .catch(error =>
                 toast.error(
-                    error.response.data.error ??
+                    error.response?.data.error ??
                         "Something went wrong, please try again later.",
                 ),
             );
+        setLoading(false);
     };
 
     return (
@@ -110,7 +114,7 @@ const SignUpForm: React.FC = () => {
                     )
                 }
             />
-            <ButtonForm title="Sign Up" />
+            <ButtonForm title="Sign Up" loading={loading} />
             <p>
                 <Link href="/">Already have an account? sign in here</Link>
             </p>
