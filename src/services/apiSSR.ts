@@ -3,7 +3,7 @@ import { GetServerSidePropsContext } from "next";
 import { parseCookies } from "nookies";
 
 export function getApiClient(ctx?: GetServerSidePropsContext) {
-    const { "tweeter-token": token } = parseCookies(ctx);
+    const { "tweeter.data": user } = parseCookies(ctx);
 
     const api = axios.create({
         baseURL: `${
@@ -13,8 +13,9 @@ export function getApiClient(ctx?: GetServerSidePropsContext) {
         }`,
     });
 
-    if (token) {
-        api.defaults.headers.Authorization = `Bearer ${token}`;
+    if (user) {
+        const data = user.split("\n");
+        api.defaults.headers.Authorization = `Bearer ${data[0]}`;
     }
 
     return api;
