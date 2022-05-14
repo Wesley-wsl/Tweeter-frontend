@@ -3,21 +3,19 @@ import { PersonFill } from "@styled-icons/bootstrap";
 import { ViewShow, ViewHide } from "@styled-icons/zondicons";
 import Image from "next/image";
 import Link from "next/link";
-import Router from "next/router";
-import { setCookie } from "nookies";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { toast } from "react-toastify";
 
 import { IHandleSignIn } from "../../../@types";
+import { AuthContext } from "../../../contexts/AuthContext";
 import signInFormSchema from "../../../schemas/signIn";
-import api from "../../../services/api";
 import ButtonForm from "../ButtonForm";
 import Input from "../Input";
 import * as S from "../shared";
 
 const SignInForm: React.FC = () => {
     const [hidePassword, setHidePassword] = useState(true);
+    const { signIn, loadingSignIn } = useContext(AuthContext);
 
     const changePasswordMode = () => setHidePassword(!hidePassword);
     const {
@@ -28,27 +26,7 @@ const SignInForm: React.FC = () => {
         resolver: yupResolver(signInFormSchema),
     });
 
-    const handleSignIn: SubmitHandler<IHandleSignIn> = data => {
-        api.post("/user/login", data)
-            .then(response => {
-                setCookie(
-                    undefined,
-                    "tweeter-token",
-                    response.data.data.token,
-                    {
-                        maxAge: 60 * 60 * 1, // 1 hour
-                    },
-                );
-                toast.success("Successfully logged in");
-                Router.push(`/profile/${response.data.data.user.id}`);
-            })
-            .catch(error =>
-                toast.error(
-                    error.response.data.error ??
-                        "Something went wrong, please try again later.",
-                ),
-            );
-    };
+    const handleSignIn: SubmitHandler<IHandleSignIn> = data => signIn(data);
 
     return (
         <S.FormContainer onSubmit={handleSubmit(handleSignIn)}>
@@ -102,7 +80,7 @@ const SignInForm: React.FC = () => {
                     )
                 }
             />
-            <ButtonForm title="Sign In" />
+            <ButtonForm title="Sign In" loading={loadingSignIn} />
             <p>
                 <Link href="/signup">
                     Don&apos; t have an account? register here
