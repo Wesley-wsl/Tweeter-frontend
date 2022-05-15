@@ -3,34 +3,41 @@ import { AccountCircle, ExitToApp, DarkMode } from "@styled-icons/material";
 import Image from "next/image";
 import Router from "next/router";
 import { destroyCookie } from "nookies";
-import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useContext, useState } from "react";
 
-import { IRootState } from "../../@types";
+import { AuthContext } from "../../contexts/AuthContext";
 import * as S from "./styles";
 
 export const ProfileWidget: React.FC = () => {
     const [showProfile, setShowProfile] = useState(false);
-    const { user, avatar } = useSelector((state: IRootState) => state.value);
+    const { user } = useContext(AuthContext);
 
     function handleLogout() {
-        destroyCookie(null, "tweeter-token");
+        destroyCookie(null, "tweeter.data", {
+            path: "/",
+        });
         Router.push("/");
     }
+
+    const handleMyProfile = () => Router.push(`/profile/${user?.id}`);
 
     return (
         <S.Container>
             <div onClick={() => setShowProfile(!showProfile)}>
                 <span>
                     <Image
-                        src={avatar}
+                        src={
+                            user && user.avatar != "null"
+                                ? user.avatar
+                                : "https://pm1.narvii.com/6879/34a567bc12e59a4c20f723a0809f5ad9b6f1df2fr1-736-590v2_hq.jpg"
+                        }
                         width="34"
                         height="34"
                         alt="Avatar image"
                     />
                 </span>
 
-                <p>{user.name}</p>
+                <p>{user && user.name}</p>
                 <CaretDownFill
                     width={7}
                     height={30}
@@ -40,7 +47,7 @@ export const ProfileWidget: React.FC = () => {
 
             {showProfile && (
                 <S.Options>
-                    <li>
+                    <li onClick={handleMyProfile}>
                         <AccountCircle width={22} height={22} color="#111" />
                         My profile
                     </li>
