@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { IImage } from "../../@types";
 
 export const Container = styled.main`
-    background-color: var(--background-color);
+    background-color: var(--background-color-two);
     min-height: 90vh;
 `;
 
@@ -23,6 +23,7 @@ export const About = styled.section`
     height: 15rem;
     margin: -5rem auto;
     border-radius: 1.2rem;
+    border: 0.1rem solid var(--border-one);
 
     .avatar {
         border-radius: 0.8rem;
@@ -33,6 +34,7 @@ export const About = styled.section`
         background-color: #ffff;
         img {
             border-radius: 0.8rem;
+            filter: contrast(120%);
         }
     }
 `;
@@ -101,12 +103,14 @@ export const Tweets = styled.section`
 
     div {
         flex: 2;
-        width: 100%;
-        height: 100%;
     }
 `;
 
 export const TweetsFilterProfile = styled.ul`
+    position: sticky;
+    right: 0;
+    left: 0;
+    top: 3rem;
     background-color: #fff;
     width: 20rem;
     height: 21rem;
@@ -117,7 +121,8 @@ export const TweetsFilterProfile = styled.ul`
     list-style: none;
     justify-content: space-around;
     margin-right: 2.4rem;
-
+    border-radius: 1.6rem;
+    border: 0.1rem solid var(--border-one);
     li {
         color: var(--grey-three);
         margin-left: 2rem;
