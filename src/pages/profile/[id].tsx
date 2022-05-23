@@ -1,9 +1,10 @@
 import { PersonAdd } from "@styled-icons/ionicons-sharp";
 import { GetServerSideProps } from "next";
-import Image from "next/image";
 import { useRouter } from "next/router";
 
 import { ITweet, IUserData } from "../../@types";
+import AvatarProfile from "../../components/AvatarProfile";
+import BackgroundProfile from "../../components/BackgroundProfile";
 import { Button } from "../../components/Button";
 import Header from "../../components/Header";
 import LittleLoading from "../../components/LittleLoading";
@@ -33,24 +34,15 @@ export default function Profile() {
             <>
                 <Header />
                 <S.Container>
-                    <S.BackgroundProfile
-                        image={
-                            user.data.background ??
-                            "https://www.nsvmundogeek.com.br/wp-content/uploads/2020/07/hyouka-thumb.png"
-                        }
+                    <BackgroundProfile
+                        background={user.data.background}
+                        userId={user.data.id}
                     />
                     <S.About>
-                        <span className="avatar">
-                            <Image
-                                width="160"
-                                height="160"
-                                src={
-                                    user.data.avatar ??
-                                    "https://i.pinimg.com/originals/43/0f/a5/430fa5bf955b632e57b605821ec2c566.png"
-                                }
-                                alt="Profile Avatar"
-                            />
-                        </span>
+                        <AvatarProfile
+                            avatar={user.data.avatar}
+                            userId={user.data.id}
+                        />
 
                         <S.Informations>
                             <div>
