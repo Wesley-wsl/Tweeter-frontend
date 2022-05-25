@@ -10,7 +10,6 @@ export const Container = styled.div<IImage>`
     background-size: cover;
     background-position: center center;
     height: 25rem;
-    cursor: pointer;
     position: relative;
 
     .changeImage {
