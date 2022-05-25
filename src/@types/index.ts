@@ -1,4 +1,9 @@
-import { InputHTMLAttributes, ReactNode } from "react";
+import {
+    Dispatch,
+    InputHTMLAttributes,
+    ReactNode,
+    SetStateAction,
+} from "react";
 import { FieldError } from "react-hook-form";
 
 export interface INextSEO {
@@ -25,10 +30,12 @@ export interface ICustomBackground {
 export interface IButton {
     title: string;
     iconLeft?: ReactNode;
+    color: string;
+    disabled?: boolean;
 }
 
 export interface IImage {
-    image: string;
+    image: string | null;
 }
 
 export interface IHandleSignUp {
@@ -56,6 +63,7 @@ export interface IAuthContext {
     signIn: (data: ISignInData) => Promise<void>;
     loadingSignIn: boolean;
     user: IUser | null;
+    setUser: Dispatch<SetStateAction<IUser | null>>;
 }
 
 export interface IChildren {
@@ -93,6 +101,8 @@ export interface IAuthor {
     background: string | null;
     followingCount: number;
     followersCount: number;
+    followers_id: string[];
+    following_id: string[];
     about_me: string;
     liked_tweets_id: string[];
     liked_comments_id: string[];
@@ -132,4 +142,39 @@ export interface ICommentData {
 
 export interface ILittleLoading {
     color: string;
+}
+
+export interface IAvatarProfile {
+    avatar: string | null;
+    userId: string;
+}
+
+export interface IModal {
+    children: JSX.Element;
+    isActive: boolean;
+    setIsActive: Dispatch<SetStateAction<boolean>>;
+}
+
+export interface IDropzoneStyle {
+    isDragActive: boolean;
+    isDragReject: boolean;
+}
+
+export interface IBackgroundProfile {
+    background: string | null;
+    userId: string;
+}
+
+export interface IDropzone {
+    imageName: string;
+    setIsActive?: Dispatch<SetStateAction<boolean>>;
+}
+
+export interface IFollowButton {
+    followersId: string[];
+    userToFollowId: string;
+}
+
+export interface IAboutProfile {
+    userInformations: IAuthor;
 }
