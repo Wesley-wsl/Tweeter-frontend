@@ -22,6 +22,13 @@ export const useInfiniteScroll = (url: string) => {
         }
     }
 
+    function handleReset() {
+        setCurrentPage(0);
+        setFilter("");
+        setIsEndPage(false);
+        setTweets([]);
+    }
+
     async function getTweets() {
         setScrollLoading(true);
         await api
@@ -43,5 +50,13 @@ export const useInfiniteScroll = (url: string) => {
         }
     }, [inView]);
 
-    return { ref, scrollLoading, isEndPage, tweets, handleFilter, filter };
+    return {
+        ref,
+        scrollLoading,
+        isEndPage,
+        tweets,
+        handleFilter,
+        filter,
+        handleReset,
+    };
 };
