@@ -6,6 +6,7 @@ import { destroyCookie } from "nookies";
 import { useContext, useState } from "react";
 
 import { AuthContext } from "../../contexts/AuthContext";
+import { API_BASE_URL } from "../../utils/constants";
 import * as S from "./styles";
 
 export const ProfileWidget: React.FC = () => {
@@ -13,13 +14,17 @@ export const ProfileWidget: React.FC = () => {
     const { user } = useContext(AuthContext);
 
     function handleLogout() {
+        setShowProfile(false);
         destroyCookie(null, "tweeter.data", {
             path: "/",
         });
         Router.push("/");
     }
 
-    const handleMyProfile = () => Router.push(`/profile/${user?.id}`);
+    const handleMyProfile = () => {
+        setShowProfile(false);
+        Router.push(`/profile/${user?.id}`);
+    };
 
     return (
         <S.Container>
@@ -28,8 +33,8 @@ export const ProfileWidget: React.FC = () => {
                     <Image
                         src={
                             user && user.avatar != "null"
-                                ? user.avatar
-                                : "https://pm1.narvii.com/6879/34a567bc12e59a4c20f723a0809f5ad9b6f1df2fr1-736-590v2_hq.jpg"
+                                ? `${API_BASE_URL}/files/${user.avatar}`
+                                : "/background/background.webp"
                         }
                         width="34"
                         height="34"
