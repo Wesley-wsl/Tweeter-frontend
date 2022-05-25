@@ -23,4 +23,8 @@ export const FormContainer = styled.form`
         color: var(--blue-one);
         font-family: var(--font-NotoSans);
     }
+
+    @media (max-width: 354px) {
+        padding: 2.5rem 3.5rem;
+    }
 `;
