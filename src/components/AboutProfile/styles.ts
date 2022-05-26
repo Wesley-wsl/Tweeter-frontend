@@ -80,10 +80,11 @@ export const Informations = styled.div`
             color: var(--grey-one);
         }
 
-        p {
+        > p {
             font-size: 1.2rem;
             font-weight: 500;
             color: var(--grey-three);
+            cursor: pointer;
 
             span {
                 font-size: 1.2rem;

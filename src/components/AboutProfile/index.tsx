@@ -6,11 +6,14 @@ import { AuthContext } from "../../contexts/AuthContext";
 import api from "../../services/api";
 import AvatarProfile from "../AvatarProfile";
 import FollowButton from "../FollowButton";
+import FollowList from "../FollowList";
 import * as S from "./styles";
 
 const AboutProfile: React.FC<IAboutProfile> = ({ userInformations }) => {
     const { user: userAuthenticated } = useContext(AuthContext);
     const [aboutMe, setAboutMe] = useState("");
+    const [showFollowing, setShowFollowing] = useState(false);
+    const [showFollowers, setShowFollowers] = useState(false);
 
     async function onEditAboutMe() {
         if (
@@ -48,14 +51,35 @@ const AboutProfile: React.FC<IAboutProfile> = ({ userInformations }) => {
                 <div>
                     <div className="top-informations">
                         <h2>{userInformations.name}</h2>
-                        <p>
+
+                        <p onClick={() => setShowFollowing(!showFollowing)}>
                             <span>{userInformations.followingCount}</span>{" "}
                             Following
                         </p>
-                        <p>
+                        <p onClick={() => setShowFollowers(!showFollowers)}>
                             <span>{userInformations.followersCount}</span>{" "}
                             Followers
                         </p>
+
+                        {showFollowing && (
+                            <FollowList
+                                showFollowing={showFollowing}
+                                setShowFollowing={setShowFollowing}
+                                userId={userInformations.id}
+                                path="following"
+                                owner={userInformations.name}
+                            />
+                        )}
+
+                        {showFollowers && (
+                            <FollowList
+                                showFollowing={showFollowers}
+                                setShowFollowing={setShowFollowers}
+                                userId={userInformations.id}
+                                path="followers"
+                                owner={userInformations.name}
+                            />
+                        )}
                     </div>
 
                     <FollowButton
