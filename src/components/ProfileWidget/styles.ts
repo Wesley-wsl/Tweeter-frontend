@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 export const Container = styled.div`
     position: relative;
+    z-index: 2;
     div {
         display: flex;
         align-items: center;
@@ -65,4 +66,14 @@ export const Options = styled.ul`
         width: 90%;
         height: 0.1rem;
     }
+`;
+
+export const Overlay = styled.div`
+    background-color: transparent;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
 `;

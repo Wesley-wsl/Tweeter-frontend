@@ -27,48 +27,55 @@ export const ProfileWidget: React.FC = () => {
     };
 
     return (
-        <S.Container>
-            <div onClick={() => setShowProfile(!showProfile)}>
-                <span>
-                    <Image
-                        src={
-                            user && user.avatar != "null"
-                                ? `${API_BASE_URL}/files/${user.avatar}`
-                                : "/background/background.webp"
-                        }
-                        width="34"
-                        height="34"
-                        alt="Avatar image"
+        <>
+            <S.Container>
+                <div onClick={() => setShowProfile(!showProfile)}>
+                    <span>
+                        <Image
+                            src={
+                                user && user.avatar != "null"
+                                    ? `${API_BASE_URL}/files/${user.avatar}`
+                                    : "/background/background.webp"
+                            }
+                            width="34"
+                            height="34"
+                            alt="Avatar image"
+                        />
+                    </span>
+
+                    <p>{user && user.name}</p>
+                    <CaretDownFill
+                        width={7}
+                        height={30}
+                        aria-label="Icon arrow down that open profile menu"
                     />
-                </span>
+                </div>
 
-                <p>{user && user.name}</p>
-                <CaretDownFill
-                    width={7}
-                    height={30}
-                    aria-label="Icon arrow down that open profile menu"
-                />
-            </div>
+                {showProfile && (
+                    <S.Options>
+                        <li onClick={handleMyProfile}>
+                            <AccountCircle
+                                width={22}
+                                height={22}
+                                color="#111"
+                            />
+                            My profile
+                        </li>
 
-            {showProfile && (
-                <S.Options>
-                    <li onClick={handleMyProfile}>
-                        <AccountCircle width={22} height={22} color="#111" />
-                        My profile
-                    </li>
-
-                    <hr />
-                    <li>
-                        <DarkMode width={22} height={22} color="#111" />
-                        Dark Mode
-                    </li>
-                    <hr />
-                    <li onClick={handleLogout}>
-                        <ExitToApp width={22} height={22} color="red" />
-                        Logout
-                    </li>
-                </S.Options>
-            )}
-        </S.Container>
+                        <hr />
+                        <li>
+                            <DarkMode width={22} height={22} color="#111" />
+                            Dark Mode
+                        </li>
+                        <hr />
+                        <li onClick={handleLogout}>
+                            <ExitToApp width={22} height={22} color="red" />
+                            Logout
+                        </li>
+                    </S.Options>
+                )}
+            </S.Container>
+            {showProfile && <S.Overlay onClick={() => setShowProfile(false)} />}
+        </>
     );
 };
