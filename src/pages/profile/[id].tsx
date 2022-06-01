@@ -1,11 +1,11 @@
-import { PersonAdd } from "@styled-icons/ionicons-sharp";
 import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
+import { useEffect } from "react";
 
-import { ITweet, IUserData } from "../../@types";
-import AvatarProfile from "../../components/AvatarProfile";
+import { IFilterOptions, ITweet, IUserData } from "../../@types";
+import AboutProfile from "../../components/AboutProfile";
 import BackgroundProfile from "../../components/BackgroundProfile";
-import { Button } from "../../components/Button";
+import FilterTweets from "../../components/FilterTweets";
 import Header from "../../components/Header";
 import LittleLoading from "../../components/LittleLoading";
 import { Loading } from "../../components/Loading";
@@ -19,10 +19,20 @@ import { ensureAuthentication } from "../../utils/ensureAuthentication";
 export default function Profile() {
     const router = useRouter();
     const { id } = router.query;
-
     const { data: user }: IUserData = useFetch(`/user/${id}`);
-    const { isEndPage, ref, scrollLoading, tweets, handleFilter, filter } =
-        useInfiniteScroll(`/tweet/${id}`);
+    const {
+        isEndPage,
+        ref,
+        scrollLoading,
+        tweets,
+        handleFilter,
+        filter,
+        handleReset,
+    } = useInfiniteScroll(`/tweet/${id}`);
+
+    useEffect(() => {
+        handleReset();
+    }, [id]);
 
     if (!user || !tweets) return <Loading />;
 
@@ -38,76 +48,22 @@ export default function Profile() {
                         background={user.data.background}
                         userId={user.data.id}
                     />
-                    <S.About>
-                        <AvatarProfile
-                            avatar={user.data.avatar}
-                            userId={user.data.id}
+                    <AboutProfile userInformations={user.data} />
+                    <S.Tweets>
+                        <FilterTweets
+                            filter={filter}
+                            handleFilter={handleFilter}
+                            options={[
+                                IFilterOptions.TWEETS,
+                                IFilterOptions.MEDIA,
+                                IFilterOptions.LIKES,
+                            ]}
                         />
 
-                        <S.Informations>
-                            <div>
-                                <div className="top-informations">
-                                    <h2>{user.data.name}</h2>
-                                    <p>
-                                        <span>{user.data.followingCount}</span>{" "}
-                                        Following
-                                    </p>
-                                    <p>
-                                        <span>{user.data.followersCount}</span>{" "}
-                                        Followers
-                                    </p>
-                                </div>
-
-                                <Button
-                                    title="Follow"
-                                    iconLeft={
-                                        <PersonAdd
-                                            width={12}
-                                            height={12}
-                                            aria-label="Person add icon"
-                                        />
-                                    }
-                                />
-                            </div>
-                            <S.Description>
-                                {user.data.about_me.length !== 0
-                                    ? user.data.about_me
-                                    : "Nothing about me. :/"}
-                            </S.Description>
-                        </S.Informations>
-                    </S.About>
-
-                    <S.Tweets>
-                        <S.TweetsFilterProfile>
-                            <li
-                                className={`${filter === "" ? "active" : ""}`}
-                                onClick={() => handleFilter("")}
-                            >
-                                Tweets
-                            </li>
-                            <li
-                                className={`${
-                                    filter === "media" ? "active" : ""
-                                }`}
-                                onClick={() => handleFilter("media")}
-                            >
-                                Media
-                            </li>
-                            <li
-                                className={`${
-                                    filter === "likes" ? "active" : ""
-                                }`}
-                                onClick={() => handleFilter("likes")}
-                            >
-                                Likes
-                            </li>
-                        </S.TweetsFilterProfile>
-
                         <div>
-                            {tweets &&
-                                tweets.map((data: ITweet, index: number) => (
-                                    <Tweet data={data} key={index} />
-                                ))}
+                            {tweets.map((data: ITweet, index: number) => (
+                                <Tweet data={data} key={index} />
+                            ))}
                             {!isEndPage && <div ref={ref} />}
                             {scrollLoading && <LittleLoading color="#000" />}
                         </div>
