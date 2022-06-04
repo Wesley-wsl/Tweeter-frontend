@@ -14,6 +14,7 @@ export const Container = styled.div`
         div {
             display: flex;
             align-items: center;
+            cursor: pointer;
 
             div {
                 display: flex;
