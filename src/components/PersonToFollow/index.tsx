@@ -1,40 +1,49 @@
-import { PersonAdd } from "@styled-icons/ionicons-sharp";
 import Image from "next/image";
+import Router from "next/router";
 import React from "react";
 
-import { Button } from "../Button";
+import { IFollowCard } from "../../@types";
+import { API_BASE_URL } from "../../utils/constants";
+import FollowButton from "../FollowButton";
 import * as S from "./styles";
 
-const PersonToFollow: React.FC = () => {
+const PersonToFollow = ({ data }: IFollowCard) => {
     return (
         <S.Container>
             <div>
-                <div>
+                <div onClick={() => Router.push(`/profile/${data.id}`)}>
                     <Image
                         width="40"
                         height="40"
-                        src="/background/akishino.webp"
+                        src={
+                            data.avatar
+                                ? `${API_BASE_URL}/files/${data.avatar}`
+                                : "/background/background.webp"
+                        }
                         alt="Profile Avatar"
                     />
 
                     <div>
-                        <p>Shino Aki</p>
-                        <p>230k followers</p>
+                        <p>{data.name}</p>
+                        <p>{data.followersCount} followers</p>
                     </div>
                 </div>
-                <Button
-                    title="Follow"
-                    iconLeft={<PersonAdd width={12} height={12} color="#fff" />}
+
+                <FollowButton
+                    followersId={data.followers_id}
+                    userToFollowId={data.id}
                 />
             </div>
-
-            <p>Photographer e Filmmaker based In Copenhagen, Denmark</p>
-
+            <p>
+                {data.about_me.length !== 0
+                    ? data.about_me
+                    : "Nothing about me. :/"}
+            </p>
             <span className="background_profile">
                 <Image
                     width="330"
                     height="165"
-                    src="/background/background.webp"
+                    src={data.background ?? "/background/background.webp"}
                     alt="Background image"
                 />
             </span>
