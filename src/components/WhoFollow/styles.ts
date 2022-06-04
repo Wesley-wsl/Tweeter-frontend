@@ -5,6 +5,7 @@ export const Container = styled.div`
     margin-bottom: 2rem;
     padding: 2rem;
     border-radius: 2.5rem;
+    border: 0.1rem solid var(--border-one);
 
     > p:nth-child(1) {
         border-bottom: 0.1rem solid var(--grey-five);
@@ -19,6 +20,14 @@ export const WhoFollow = styled.div`
     display: flex;
     flex-direction: column;
     border-bottom: 0.1rem solid var(--grey-five);
+
+    > p {
+        color: var(--grey-two);
+        font-weight: 600;
+        font-size: 1.2rem;
+        padding-bottom: 1rem;
+        margin: 1rem 0;
+    }
 `;
 
 export const FollowPerson = styled.div`
