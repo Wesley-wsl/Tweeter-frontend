@@ -39,5 +39,4 @@ const AvatarProfile: React.FC<IAvatarProfile> = ({ avatar, userId }) => {
         </>
     );
 };
-// f4b9a92d-6f3d-4bcc-a20c-50ba1d7e7192
 export default AvatarProfile;
