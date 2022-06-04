@@ -19,6 +19,7 @@
         "@styled-icons/boxicons-regular": "^10.38.0",
         "@styled-icons/material": "^10.34.0",
         "@styled-icons/material-outlined": "^10.34.0",
+        "@styled-icons/material-rounded": "^10.34.0",
         "@styled-icons/zondicons": "^10.18.0",
         "axios": "^0.26.1",
         "framer-motion": "^6.3.3",
