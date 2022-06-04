@@ -5,7 +5,7 @@ export const Container = styled.div`
     margin-bottom: 2rem;
     padding: 2rem;
     border-radius: 2.5rem;
-
+    border: 0.1rem solid var(--border-one);
     > p {
         margin-bottom: 1rem;
         border-bottom: 0.1rem solid var(--grey-five);

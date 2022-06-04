@@ -15,6 +15,11 @@ export const Container = styled.div<IDropzoneStyle>`
     justify-content: center;
     cursor: pointer;
     position: relative;
+    width: 50rem;
+    height: 40rem;
+    border: 0.1rem solid var(--border-one);
+    background-color: #fff;
+    border-radius: 1rem;
 
     .dropzone__container {
         display: flex;

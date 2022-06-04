@@ -9,19 +9,11 @@ export const Container = styled.div`
     right: 0;
     bottom: 0;
     left: 0;
-    max-width: 50rem;
-    max-height: 40rem;
+    max-width: 60rem;
+    max-height: 60rem;
     margin: auto;
     overflow: hidden;
     z-index: 9999;
-
-    div {
-        width: 50rem;
-        height: 40rem;
-        border: 0.1rem solid var(--border-one);
-        background-color: #fff;
-        border-radius: 1rem;
-    }
 `;
 
 export const Background = styled.div`
