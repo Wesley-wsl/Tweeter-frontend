@@ -5,6 +5,7 @@ export const Container = styled.div`
     background-color: #fff;
     border-radius: 2rem;
     margin: 2rem 0;
+    border: 0.1rem solid var(--border-one);
 
     > p {
         font-size: 1.2rem;
@@ -32,6 +33,7 @@ export const Write = styled.div`
         resize: vertical;
         height: 5rem;
         max-height: 50rem;
+        max-height: 15rem;
 
         &::placeholder {
             color: var(--grey-four);
@@ -46,7 +48,7 @@ export const Filter = styled.div`
     margin: 1rem;
     align-items: center;
 
-    div {
+    > div {
         display: flex;
         gap: 1rem;
         margin-left: 7rem;
@@ -54,17 +56,21 @@ export const Filter = styled.div`
         svg {
             cursor: pointer;
         }
-
-        p {
-            font-weight: 500;
-            font-family: var(--font-NotoSans);
-            font-size: 1.2rem;
-            color: var(--blue-one);
-            cursor: pointer;
-        }
     }
 
     button {
         width: 8rem;
+    }
+
+    #tweet-file {
+        display: none;
+    }
+
+    label {
+        cursor: pointer;
+
+        img {
+            border-radius: 0.2rem;
+        }
     }
 `;
