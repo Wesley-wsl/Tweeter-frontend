@@ -5,16 +5,21 @@ export const Container = styled.div`
     padding: 2rem;
     margin-bottom: 3.5rem;
     border-radius: 2rem;
+    border: 0.1rem solid var(--border-one);
 
     > p {
+        max-width: 67rem;
+        word-break: break-all;
         margin: 2rem 0;
         color: var(--grey-two);
         font-size: 1.6rem;
         font-family: var(--font-NotoSans);
+        text-align: justify;
+        white-space: pre-line;
     }
 
     img {
-        border-radius: 1rem;
+        border-radius: 1.5rem;
     }
 
     ul {
@@ -45,20 +50,23 @@ export const Container = styled.div`
     .divider {
         width: 100%;
         height: 0.1rem;
-        background-color: var(--background-color);
+        background-color: #000;
+        opacity: 0.1;
         margin: 1rem 0;
     }
 `;
 
 export const TopInformations = styled.div`
     display: flex;
+    cursor: pointer;
+    max-width: fit-content;
 
     div {
         margin-left: 1rem;
+
         p:nth-child(1) {
             font-size: 1.6rem;
             font-weight: 500;
-            cursor: pointer;
         }
 
         p:nth-child(2) {

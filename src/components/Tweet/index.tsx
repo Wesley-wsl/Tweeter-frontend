@@ -5,42 +5,56 @@ import {
 } from "@styled-icons/bootstrap";
 import { ModeComment, Loop } from "@styled-icons/material-outlined";
 import Image from "next/image";
-import React from "react";
+import Router from "next/router";
+import React, { useContext } from "react";
 
-import Comment from "../Comment";
+import { ITweetComponent } from "../../@types";
+import { AuthContext } from "../../contexts/AuthContext";
+import { API_BASE_URL } from "../../utils/constants";
+import { Comment } from "../Comment";
 import * as S from "./styles";
 
-const Tweet: React.FC = () => {
+const Tweet: React.FC<ITweetComponent> = ({ data }) => {
+    const { user } = useContext(AuthContext);
+    const createdAt = new Date(data.created_at).toLocaleDateString();
+
     return (
         <S.Container>
-            <S.TopInformations>
+            <S.TopInformations
+                onClick={() => Router.push(`/profile/${data.author.id}`)}
+            >
                 <Image
                     width="60"
                     height="60"
-                    src="/background/akishino.webp"
+                    src={
+                        data.author.avatar
+                            ? `${API_BASE_URL}/files/${data.author.avatar}`
+                            : "/background/background.webp"
+                    }
                     alt="Profile Avatar"
                 />
                 <div>
-                    <p>Shino Aki</p>
-                    <p>24 August at 20:43</p>
+                    <p>{data.author.name}</p>
+                    <p>{createdAt}</p>
                 </div>
             </S.TopInformations>
 
-            <p>
-                Traveling - it leaves you speechless, then turns you into a
-                storyteller.
-            </p>
+            <p>{data.content}</p>
 
-            <Image
-                width="700"
-                height="400"
-                src="/background/background.webp"
-                alt="Image tweet"
-            />
+            {data.image && (
+                <Image
+                    width="700"
+                    height="400"
+                    src={`${API_BASE_URL}/files/${data.image}`}
+                    alt="Image tweet"
+                />
+            )}
+
             <S.Status>
-                <p>449 Comments</p>
-                <p>59k Retweets</p>
-                <p>234 Saved</p>
+                <p>{data.comments_id.length} Comments</p>
+                <p>{data.retweets_id.length} Retweets</p>
+                <p>{data.users_saved_id.length} Saved</p>
+                <p>{data.likes} Likes</p>
             </S.Status>
 
             <div className="divider" />
@@ -52,7 +66,7 @@ const Tweet: React.FC = () => {
                 <li>
                     <Loop size={18} /> Retweets
                 </li>
-                <li>
+                <li className={"heart"}>
                     <Heart size={18} /> Likes
                 </li>
                 <li>
@@ -66,7 +80,11 @@ const Tweet: React.FC = () => {
                 <Image
                     width="50"
                     height="50"
-                    src="/background/akishino.webp"
+                    src={
+                        user && user.avatar != "null"
+                            ? `${API_BASE_URL}/files/${user.avatar}`
+                            : "/background/background.webp"
+                    }
                     alt="Profile Avatar"
                 />
 
@@ -82,7 +100,10 @@ const Tweet: React.FC = () => {
             </S.Comment>
 
             <div>
-                <Comment />
+                {data.comments &&
+                    data.comments.map((data, index) => (
+                        <Comment data={data} key={index} />
+                    ))}
             </div>
         </S.Container>
     );
