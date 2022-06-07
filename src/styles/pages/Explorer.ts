@@ -24,7 +24,7 @@ export const TweetsContainer = styled.div`
     margin-bottom: 2rem;
 `;
 
-export const Search = styled.div`
+export const Search = styled.form`
     position: relative;
     margin-bottom: 2rem;
 
@@ -67,5 +67,18 @@ export const Search = styled.div`
         height: 3.2rem;
         font-size: 1.2rem;
         font-family: var(--font-NotoSans);
+    }
+`;
+
+export const Cards = styled.div`
+    background-color: #fff;
+    border-radius: 0.8rem;
+
+    div:nth-child(1) {
+        border: none;
+    }
+
+    span {
+        margin: 0;
     }
 `;
