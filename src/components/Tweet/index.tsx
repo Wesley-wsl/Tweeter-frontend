@@ -1,22 +1,37 @@
 import {
     Heart,
+    HeartFill,
     Bookmark,
-    Image as BootstrapImage,
+    BookmarkFill,
 } from "@styled-icons/bootstrap";
-import { ModeComment, Loop } from "@styled-icons/material-outlined";
+import { ModeComment } from "@styled-icons/material-outlined";
 import Image from "next/image";
 import Router from "next/router";
-import React, { useContext } from "react";
+import React, { useState } from "react";
 
 import { ITweetComponent } from "../../@types";
-import { AuthContext } from "../../contexts/AuthContext";
+import { useTweetServices } from "../../hooks/useTweetServices";
 import { API_BASE_URL } from "../../utils/constants";
 import { Comment } from "../Comment";
+import WriteComment from "../WriteComment";
 import * as S from "./styles";
 
 const Tweet: React.FC<ITweetComponent> = ({ data }) => {
-    const { user } = useContext(AuthContext);
+    const [commentsQuantity, setCommentsQuantity] = useState(3);
+    const [tweetComments, setTweetComments] = useState(data.comments);
     const createdAt = new Date(data.created_at).toLocaleDateString();
+
+    const showMoreComments = () => setCommentsQuantity(current => current + 3);
+    const {
+        alreadyLiked,
+        alreadySaved,
+        handleLikeTweet,
+        handleSaveTweet,
+        handleUnlikeTweet,
+        handleUnsaveTweet,
+        likedCount,
+        savedCount,
+    } = useTweetServices(data);
 
     return (
         <S.Container>
@@ -52,58 +67,61 @@ const Tweet: React.FC<ITweetComponent> = ({ data }) => {
 
             <S.Status>
                 <p>{data.comments_id.length} Comments</p>
-                <p>{data.retweets_id.length} Retweets</p>
-                <p>{data.users_saved_id.length} Saved</p>
-                <p>{data.likes} Likes</p>
+                <p>{savedCount} Saved</p>
+                <p>{likedCount} Likes</p>
             </S.Status>
 
-            <div className="divider" />
+            <S.Divider />
 
-            <ul>
-                <li>
-                    <ModeComment size={18} /> Comments
+            <S.Actions>
+                <label htmlFor={`comment-${data.id}`}>
+                    <li>
+                        <ModeComment size={18} /> Comment
+                    </li>
+                </label>
+                <li
+                    className={"heart"}
+                    onClick={alreadyLiked ? handleUnlikeTweet : handleLikeTweet}
+                >
+                    {alreadyLiked ? (
+                        <HeartFill size={18} color="#EB5757" />
+                    ) : (
+                        <Heart size={18} color="#EB5757" />
+                    )}
+                    Likes
                 </li>
-                <li>
-                    <Loop size={18} /> Retweets
+                <li
+                    className={"bookmark"}
+                    onClick={alreadySaved ? handleUnsaveTweet : handleSaveTweet}
+                >
+                    {alreadySaved ? (
+                        <BookmarkFill size={18} color="#2D9CDB" />
+                    ) : (
+                        <Bookmark size={18} color="#2D9CDB" />
+                    )}
+                    Saved
                 </li>
-                <li className={"heart"}>
-                    <Heart size={18} /> Likes
-                </li>
-                <li>
-                    <Bookmark size={18} /> Saved
-                </li>
-            </ul>
+            </S.Actions>
 
-            <div className="divider" />
+            <S.Divider />
 
-            <S.Comment>
-                <Image
-                    width="50"
-                    height="50"
-                    src={
-                        user && user.avatar != "null"
-                            ? `${API_BASE_URL}/files/${user.avatar}`
-                            : "/background/background.webp"
-                    }
-                    alt="Profile Avatar"
-                />
-
-                <div>
-                    <input
-                        type="text"
-                        name="reply"
-                        id="reply"
-                        placeholder="Tweet your reply"
-                    />
-                    <BootstrapImage size={17} />
-                </div>
-            </S.Comment>
+            <WriteComment
+                setTweetComments={setTweetComments}
+                tweetId={data.id}
+            />
 
             <div>
-                {data.comments &&
-                    data.comments.map((data, index) => (
+                {tweetComments
+                    ?.slice(0, commentsQuantity)
+                    .map((data, index) => (
                         <Comment data={data} key={index} />
                     ))}
+
+                {commentsQuantity < tweetComments?.length && (
+                    <S.LoadComment onClick={showMoreComments}>
+                        Load more.
+                    </S.LoadComment>
+                )}
             </div>
         </S.Container>
     );
