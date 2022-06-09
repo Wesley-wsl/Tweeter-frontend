@@ -61,25 +61,21 @@ const AboutProfile: React.FC<IAboutProfile> = ({ userInformations }) => {
                             Followers
                         </p>
 
-                        {showFollowing && (
-                            <FollowList
-                                showFollowing={showFollowing}
-                                setShowFollowing={setShowFollowing}
-                                userId={userInformations.id}
-                                path="following"
-                                owner={userInformations.name}
-                            />
-                        )}
+                        <FollowList
+                            showFollowing={showFollowing}
+                            setShowFollowing={setShowFollowing}
+                            userId={userInformations.id}
+                            path="following"
+                            owner={userInformations.name}
+                        />
 
-                        {showFollowers && (
-                            <FollowList
-                                showFollowing={showFollowers}
-                                setShowFollowing={setShowFollowers}
-                                userId={userInformations.id}
-                                path="followers"
-                                owner={userInformations.name}
-                            />
-                        )}
+                        <FollowList
+                            showFollowing={showFollowers}
+                            setShowFollowing={setShowFollowers}
+                            userId={userInformations.id}
+                            path="followers"
+                            owner={userInformations.name}
+                        />
                     </div>
 
                     <FollowButton
