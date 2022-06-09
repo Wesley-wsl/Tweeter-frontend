@@ -21,39 +21,47 @@ export const Container = styled.div`
     img {
         border-radius: 1.5rem;
     }
+`;
 
-    ul {
-        display: flex;
-        justify-content: space-around;
-        font-size: 1.4rem;
-        font-weight: 500;
-        font-family: var(--font-NotoSans);
-        list-style: none;
+export const Actions = styled.ul`
+    display: flex;
+    justify-content: space-around;
+    font-size: 1.4rem;
+    font-weight: 500;
+    font-family: var(--font-NotoSans);
+    list-style: none;
+    align-items: center;
+    margin-bottom: 1rem;
+
+    li {
         align-items: center;
-        margin-bottom: 1rem;
-
-        li {
-            align-items: center;
-            cursor: pointer;
-            padding: 1rem;
-            &:hover {
-                background-color: var(--backgrond-color);
-                border-radius: 0.2rem;
-            }
-        }
-
-        li > svg {
-            margin-right: 1.3rem;
+        cursor: pointer;
+        padding: 1rem;
+        &:hover {
+            background-color: var(--backgrond-color);
+            border-radius: 0.2rem;
         }
     }
 
-    .divider {
-        width: 100%;
-        height: 0.1rem;
-        background-color: #000;
-        opacity: 0.1;
-        margin: 1rem 0;
+    li > svg {
+        margin-right: 1.3rem;
     }
+
+    .heart {
+        color: var(--red-one);
+    }
+
+    .bookmark {
+        color: var(--blue-one);
+    }
+`;
+
+export const Divider = styled.div`
+    width: 100%;
+    height: 0.1rem;
+    background-color: #000;
+    opacity: 0.1;
+    margin: 1rem 0;
 `;
 
 export const TopInformations = styled.div`
@@ -87,34 +95,10 @@ export const Status = styled.div`
     margin: 1rem 0;
 `;
 
-export const Comment = styled.div`
-    image {
-        cursor: pointer;
-        margin-right: 1rem;
-    }
-
-    display: flex;
-    align-items: center;
-
-    div {
-        position: relative;
-        width: 100%;
-        input {
-            padding: 1.3rem;
-            width: 97%;
-            padding-right: 3rem;
-            background-color: var(--background-color);
-            border-bottom: 1rem;
-            margin-left: 2rem;
-            margin-right: 2rem;
-        }
-
-        svg {
-            position: absolute;
-            top: 30%;
-            right: 1rem;
-            opacity: 0.3;
-            cursor: pointer;
-        }
-    }
+export const LoadComment = styled.p`
+    color: var(--grey-two);
+    text-align: center;
+    font-weight: 700;
+    font-size: 1.4rem;
+    cursor: pointer;
 `;
