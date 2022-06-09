@@ -16,6 +16,8 @@ export const TopInformations = styled.div`
     align-items: center;
     gap: 2rem;
     border-radius: 1rem;
+    cursor: pointer;
+    width: fit-content;
 
     div {
         display: flex;
@@ -37,32 +39,39 @@ export const TopInformations = styled.div`
     }
 `;
 
-export const Comment = styled.div`
-    > p {
-        font-size: 1.6rem;
-        font-family: var(--font-NotoSans);
-        color: var(--grey-two);
-        margin-left: 6.5rem;
-        margin-bottom: 1.5rem;
-        margin-top: -0.6rem;
+export const Comment = styled.p`
+    font-size: 1.6rem;
+    font-family: var(--font-NotoSans);
+    color: var(--grey-two);
+    margin-left: 6.5rem;
+    margin-bottom: 1.5rem;
+    margin-top: -0.6rem;
+    max-width: 67rem;
+    word-break: break-all;
+    text-align: justify;
+    white-space: pre-line;
+`;
+
+export const LikeInformations = styled.div`
+    display: flex;
+    flex-direction: row;
+    margin-left: 5.5rem;
+    margin-top: 1rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--grey-four);
+    cursor: pointer;
+    width: fit-content;
+
+    &.liked {
+        color: var(--red-one);
     }
 
-    div {
-        display: flex;
-        flex-direction: row;
-        margin-left: 5rem;
-        margin-top: 1rem;
-        font-size: 1.2rem;
-        font-weight: 600;
-        color: var(--grey-four);
-
-        p:nth-child(1) {
-            font-family: var(--font-NotoSans);
-            margin-right: 2rem;
-            cursor: pointer;
-            svg {
-                margin-right: 0.4rem;
-            }
+    p:nth-child(1) {
+        font-family: var(--font-NotoSans);
+        margin-right: 1rem;
+        svg {
+            margin-right: 0.4rem;
         }
     }
 `;
