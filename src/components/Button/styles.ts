@@ -3,13 +3,14 @@ import styled from "styled-components";
 export const Container = styled.button`
     width: 10rem;
     height: 3rem;
-    background-color: var(--blue-one);
+    background-color: ${({ color }) => color};
     border-radius: 0.4rem;
     color: #fff;
-    cursor: pointer;
+    cursor: ${({ disabled }) => !disabled && "pointer"};
     font-weight: 500;
     font-family: var(--font-SotoSans);
     transition: all 0.2s linear;
+    opacity: ${({ disabled }) => (disabled ? 0.6 : 1)};
 
     svg {
         margin-top: -0.2rem;
@@ -17,6 +18,6 @@ export const Container = styled.button`
     }
 
     &:hover {
-        background-color: var(--blue-two);
+        opacity: ${({ disabled }) => !disabled && 0.8};
     }
 `;
