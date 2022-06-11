@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-    background-color: var(--background-color);
+    background-color: var(--background-color-two);
     min-height: 90vh;
     margin: 2rem auto 7rem auto;
     max-width: 110rem;
