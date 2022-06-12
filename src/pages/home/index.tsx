@@ -2,7 +2,6 @@ import { GetServerSideProps } from "next";
 import { useEffect } from "react";
 
 import { ITweet } from "../../@types";
-import Header from "../../components/Header";
 import LittleLoading from "../../components/LittleLoading";
 import { Loading } from "../../components/Loading";
 import NextSEO from "../../components/NextSEO";
@@ -15,8 +14,15 @@ import * as S from "../../styles/pages/Home";
 import { ensureAuthentication } from "../../utils/ensureAuthentication";
 
 export default function Home() {
-    const { isEndPage, ref, scrollLoading, tweets, handleFilter, setTweets } =
-        useInfiniteScroll(`/tweet`);
+    const {
+        isEndPage,
+        ref,
+        scrollLoading,
+        tweets,
+        handleFilter,
+        setTweets,
+        handleSearch,
+    } = useInfiniteScroll(`/tweet`);
 
     useEffect(() => {
         handleFilter("latest");
@@ -29,26 +35,23 @@ export default function Home() {
             title="Tweeter - Home"
             description="Home page with tweets destinate to your profile"
         >
-            <>
-                <Header />
-                <S.Container>
-                    <S.Tweets>
-                        <WriteTweet setTweets={setTweets} />
-                        <div>
-                            {tweets.map((data: ITweet, index: number) => (
-                                <Tweet data={data} key={index} />
-                            ))}
-                            {!isEndPage && <div ref={ref} />}
-                            {scrollLoading && <LittleLoading color="#000" />}
-                        </div>
-                    </S.Tweets>
+            <S.Container>
+                <S.Tweets>
+                    <WriteTweet setTweets={setTweets} />
+                    <div>
+                        {tweets.map((data: ITweet, index: number) => (
+                            <Tweet data={data} key={index} />
+                        ))}
+                        {!isEndPage && <div ref={ref} />}
+                        {scrollLoading && <LittleLoading color="#000" />}
+                    </div>
+                </S.Tweets>
 
-                    <S.Aside>
-                        <Trends />
-                        <WhoFollow />
-                    </S.Aside>
-                </S.Container>
-            </>
+                <S.Aside>
+                    <Trends handleSearch={handleSearch} />
+                    <WhoFollow />
+                </S.Aside>
+            </S.Container>
         </NextSEO>
     );
 }

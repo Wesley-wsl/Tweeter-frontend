@@ -6,7 +6,6 @@ import { IFilterOptions, ITweet, IUserData } from "../../@types";
 import AboutProfile from "../../components/AboutProfile";
 import BackgroundProfile from "../../components/BackgroundProfile";
 import FilterTweets from "../../components/FilterTweets";
-import Header from "../../components/Header";
 import LittleLoading from "../../components/LittleLoading";
 import { Loading } from "../../components/Loading";
 import NextSEO from "../../components/NextSEO";
@@ -41,35 +40,32 @@ export default function Profile() {
             title="Tweeter - Profile"
             description="Page with your profile informations."
         >
-            <>
-                <Header />
-                <S.Container>
-                    <BackgroundProfile
-                        background={user.data.background}
-                        userId={user.data.id}
+            <S.Container>
+                <BackgroundProfile
+                    background={user.data.background}
+                    userId={user.data.id}
+                />
+                <AboutProfile userInformations={user.data} />
+                <S.Tweets>
+                    <FilterTweets
+                        filter={filter}
+                        handleFilter={handleFilter}
+                        options={[
+                            IFilterOptions.TWEETS,
+                            IFilterOptions.MEDIA,
+                            IFilterOptions.LIKES,
+                        ]}
                     />
-                    <AboutProfile userInformations={user.data} />
-                    <S.Tweets>
-                        <FilterTweets
-                            filter={filter}
-                            handleFilter={handleFilter}
-                            options={[
-                                IFilterOptions.TWEETS,
-                                IFilterOptions.MEDIA,
-                                IFilterOptions.LIKES,
-                            ]}
-                        />
 
-                        <div>
-                            {tweets.map((data: ITweet, index: number) => (
-                                <Tweet data={data} key={index} />
-                            ))}
-                            {!isEndPage && <div ref={ref} />}
-                            {scrollLoading && <LittleLoading color="#000" />}
-                        </div>
-                    </S.Tweets>
-                </S.Container>
-            </>
+                    <div>
+                        {tweets.map((data: ITweet, index: number) => (
+                            <Tweet data={data} key={index} />
+                        ))}
+                        {!isEndPage && <div ref={ref} />}
+                        {scrollLoading && <LittleLoading color="#000" />}
+                    </div>
+                </S.Tweets>
+            </S.Container>
         </NextSEO>
     );
 }

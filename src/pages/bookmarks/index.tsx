@@ -3,7 +3,6 @@ import { Key, useContext } from "react";
 
 import { IFilterOptions, ITweet } from "../../@types";
 import FilterTweets from "../../components/FilterTweets";
-import Header from "../../components/Header";
 import LittleLoading from "../../components/LittleLoading";
 import { Loading } from "../../components/Loading";
 import NextSEO from "../../components/NextSEO";
@@ -31,32 +30,29 @@ export default function Bookmarks() {
             title="Tweeter - Bookmarks"
             description="Explore your bookmarks"
         >
-            <>
-                <Header />
-                <S.Container>
-                    <FilterTweets
-                        filter={filter}
-                        handleFilter={handleFilter}
-                        options={[
-                            IFilterOptions.TWEETS,
-                            IFilterOptions.MEDIA,
-                            IFilterOptions.LIKES,
-                        ]}
-                    />
+            <S.Container>
+                <FilterTweets
+                    filter={filter}
+                    handleFilter={handleFilter}
+                    options={[
+                        IFilterOptions.TWEETS,
+                        IFilterOptions.MEDIA,
+                        IFilterOptions.LIKES,
+                    ]}
+                />
 
-                    <S.TweetsContainer>
-                        {bookmarks.length !== 0 ? (
-                            bookmarks.map((data: ITweet, index: Key) => (
-                                <Tweet data={data} key={index} />
-                            ))
-                        ) : (
-                            <h1>Don&apos;t have nothing here.</h1>
-                        )}
-                        {!isEndPage && <div ref={ref} />}
-                        {scrollLoading && <LittleLoading color="#000" />}
-                    </S.TweetsContainer>
-                </S.Container>
-            </>
+                <S.TweetsContainer>
+                    {bookmarks.length !== 0 ? (
+                        bookmarks.map((data: ITweet, index: Key) => (
+                            <Tweet data={data} key={index} />
+                        ))
+                    ) : (
+                        <h1>Don&apos;t have nothing here.</h1>
+                    )}
+                    {!isEndPage && <div ref={ref} />}
+                    {scrollLoading && <LittleLoading color="#000" />}
+                </S.TweetsContainer>
+            </S.Container>
         </NextSEO>
     );
 }

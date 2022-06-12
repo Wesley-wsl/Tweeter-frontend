@@ -6,7 +6,6 @@ import { IAuthor, IFilterOptions, ITweet } from "../../@types";
 import { Button } from "../../components/Button";
 import FilterTweets from "../../components/FilterTweets";
 import FollowCard from "../../components/FollowCard";
-import Header from "../../components/Header";
 import LittleLoading from "../../components/LittleLoading";
 import { Loading } from "../../components/Loading";
 import NextSEO from "../../components/NextSEO";
@@ -40,61 +39,51 @@ export default function Explorer() {
 
     return (
         <NextSEO title="Tweeter - Explore" description="Explore tweets">
-            <>
-                <Header />
-                <S.Container>
-                    <FilterTweets
-                        filter={filter}
-                        handleFilter={handleFilter}
-                        options={[
-                            IFilterOptions.TOP,
-                            IFilterOptions.LATEST,
-                            IFilterOptions.PEOPLE,
-                            IFilterOptions.MEDIA,
-                        ]}
-                    />
+            <S.Container>
+                <FilterTweets
+                    filter={filter}
+                    handleFilter={handleFilter}
+                    options={[
+                        IFilterOptions.TOP,
+                        IFilterOptions.LATEST,
+                        IFilterOptions.PEOPLE,
+                        IFilterOptions.MEDIA,
+                    ]}
+                />
 
-                    <S.TweetsContainer>
-                        <S.Search onSubmit={e => handleSearch(e, search)}>
-                            <Search width={25} height={25} color="#BDBDBD" />
-                            <input
-                                type="text"
-                                placeholder="Search"
-                                onChange={({ target }) =>
-                                    setSearch(target.value)
-                                }
-                                value={search}
-                            />
-                            <Button
-                                title="Search"
-                                color={"#2D9CDB"}
-                                type="submit"
-                            />
-                        </S.Search>
-                        {filter !== "people" ? (
-                            tweets.map((data: ITweet, index: number) => (
-                                <Tweet data={data} key={index} />
-                            ))
-                        ) : (
-                            <>
-                                <S.Cards>
-                                    {users.map(
-                                        (data: IAuthor, index: number) => (
-                                            <FollowCard
-                                                data={data}
-                                                key={index}
-                                            />
-                                        ),
-                                    )}
-                                </S.Cards>
-                            </>
-                        )}
+                <S.TweetsContainer>
+                    <S.Search onSubmit={e => handleSearch(e, search)}>
+                        <Search width={25} height={25} color="#BDBDBD" />
+                        <input
+                            type="text"
+                            placeholder="Search"
+                            onChange={({ target }) => setSearch(target.value)}
+                            value={search}
+                        />
+                        <Button
+                            title="Search"
+                            color={"#2D9CDB"}
+                            type="submit"
+                        />
+                    </S.Search>
+                    {filter !== "people" ? (
+                        tweets.map((data: ITweet, index: number) => (
+                            <Tweet data={data} key={index} />
+                        ))
+                    ) : (
+                        <>
+                            <S.Cards>
+                                {users.map((data: IAuthor, index: number) => (
+                                    <FollowCard data={data} key={index} />
+                                ))}
+                            </S.Cards>
+                        </>
+                    )}
 
-                        {!isEndPage && <div ref={ref} />}
-                        {scrollLoading && <LittleLoading color="#000" />}
-                    </S.TweetsContainer>
-                </S.Container>
-            </>
+                    {!isEndPage && <div ref={ref} />}
+                    {scrollLoading && <LittleLoading color="#000" />}
+                </S.TweetsContainer>
+            </S.Container>
         </NextSEO>
     );
 }
