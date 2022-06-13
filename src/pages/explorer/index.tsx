@@ -22,6 +22,7 @@ export default function Explorer() {
         scrollLoading,
         tweets,
         handleFilter,
+        setTweets,
         filter,
         users,
         handleSearch,
@@ -68,7 +69,11 @@ export default function Explorer() {
                     </S.Search>
                     {filter !== "people" ? (
                         tweets.map((data: ITweet, index: number) => (
-                            <Tweet data={data} key={index} />
+                            <Tweet
+                                data={data}
+                                key={index}
+                                setTweets={setTweets}
+                            />
                         ))
                     ) : (
                         <>

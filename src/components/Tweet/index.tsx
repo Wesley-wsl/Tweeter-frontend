@@ -5,18 +5,21 @@ import {
     BookmarkFill,
 } from "@styled-icons/bootstrap";
 import { ModeComment } from "@styled-icons/material-outlined";
+import { Close } from "@styled-icons/material-rounded";
 import Image from "next/image";
 import Router from "next/router";
 import React, { useState } from "react";
+import { toast } from "react-toastify";
 
-import { ITweetComponent } from "../../@types";
+import { ITweet, ITweetComponent } from "../../@types";
 import { useTweetServices } from "../../hooks/useTweetServices";
+import api from "../../services/api";
 import { API_BASE_URL } from "../../utils/constants";
 import { Comment } from "../Comment";
 import WriteComment from "../WriteComment";
 import * as S from "./styles";
 
-const Tweet: React.FC<ITweetComponent> = ({ data }) => {
+const Tweet: React.FC<ITweetComponent> = ({ data, setTweets }) => {
     const [commentsQuantity, setCommentsQuantity] = useState(3);
     const [tweetComments, setTweetComments] = useState(data.comments);
     const createdAt = new Date(data.created_at).toLocaleDateString();
@@ -31,7 +34,27 @@ const Tweet: React.FC<ITweetComponent> = ({ data }) => {
         handleUnsaveTweet,
         likedCount,
         savedCount,
+        user,
     } = useTweetServices(data);
+
+    async function handleDeleteTweet() {
+        await api
+            .delete(`/tweet/${data.id}`)
+            .then(() => {
+                setTweets((tweets): ITweet[] => {
+                    const tweetsFiltered = tweets.filter(
+                        tweet => tweet.id !== data.id,
+                    );
+                    return tweetsFiltered;
+                });
+            })
+            .catch(error =>
+                toast.error(
+                    error.response?.data.validation.body.message ??
+                        "Something went wrong, please try again later.",
+                ),
+            );
+    }
 
     return (
         <S.Container>
@@ -123,6 +146,12 @@ const Tweet: React.FC<ITweetComponent> = ({ data }) => {
                     </S.LoadComment>
                 )}
             </div>
+
+            {data.author_id === user?.id && (
+                <S.DeleteTweet>
+                    <Close width={18} height={18} onClick={handleDeleteTweet} />
+                </S.DeleteTweet>
+            )}
         </S.Container>
     );
 };

@@ -6,6 +6,7 @@ export const Container = styled.div`
     margin-bottom: 3.5rem;
     border-radius: 2rem;
     border: 0.1rem solid var(--border-one);
+    position: relative;
 
     > p {
         max-width: 67rem;
@@ -101,4 +102,19 @@ export const LoadComment = styled.p`
     font-weight: 700;
     font-size: 1.4rem;
     cursor: pointer;
+`;
+
+export const DeleteTweet = styled.div`
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    opacity: 0.5;
+    cursor: pointer;
+    transition: all 0.2s linear;
+    color: #000;
+
+    &:hover {
+        opacity: 1;
+        color: var(--red-one);
+    }
 `;

@@ -18,6 +18,7 @@ export default function Bookmarks() {
         tweets: bookmarks,
         filter,
         handleFilter,
+        setTweets,
         ref,
         isEndPage,
         scrollLoading,
@@ -44,7 +45,11 @@ export default function Bookmarks() {
                 <S.TweetsContainer>
                     {bookmarks.length !== 0 ? (
                         bookmarks.map((data: ITweet, index: Key) => (
-                            <Tweet data={data} key={index} />
+                            <Tweet
+                                data={data}
+                                key={index}
+                                setTweets={setTweets}
+                            />
                         ))
                     ) : (
                         <h1>Don&apos;t have nothing here.</h1>

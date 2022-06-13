@@ -21,6 +21,7 @@ export default function Home() {
         tweets,
         handleFilter,
         setTweets,
+        search,
         handleSearch,
     } = useInfiniteScroll(`/tweet`);
 
@@ -40,7 +41,11 @@ export default function Home() {
                     <WriteTweet setTweets={setTweets} />
                     <div>
                         {tweets.map((data: ITweet, index: number) => (
-                            <Tweet data={data} key={index} />
+                            <Tweet
+                                data={data}
+                                key={index}
+                                setTweets={setTweets}
+                            />
                         ))}
                         {!isEndPage && <div ref={ref} />}
                         {scrollLoading && <LittleLoading color="#000" />}
@@ -48,7 +53,7 @@ export default function Home() {
                 </S.Tweets>
 
                 <S.Aside>
-                    <Trends handleSearch={handleSearch} />
+                    <Trends handleSearch={handleSearch} search={search} />
                     <WhoFollow />
                 </S.Aside>
             </S.Container>
