@@ -1,5 +1,10 @@
+import { useContext } from "react";
+
+import { ThemeContext } from "../../contexts/Theme";
 import * as S from "./styles";
 
 export const Loading: React.FC = () => {
-    return <S.Loader />;
+    const { lightMode } = useContext(ThemeContext);
+
+    return <S.Loader lightMode={lightMode} />;
 };

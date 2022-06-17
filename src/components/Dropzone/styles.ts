@@ -3,7 +3,7 @@ import styled, { css } from "styled-components";
 import { IDropzoneStyle } from "../../@types";
 
 const dragActive = css`
-    border-color: var(--blue-one);
+    border-color: ${({ theme }) => theme.button.primary};
 `;
 
 const dragReject = css`
@@ -17,15 +17,15 @@ export const Container = styled.div<IDropzoneStyle>`
     position: relative;
     width: 50rem;
     height: 40rem;
-    border: 0.1rem solid var(--border-one);
-    background-color: #fff;
+    border: 0.1rem solid ${({ theme }) => theme.border.primary};
+    background-color: ${({ theme }) => theme.background.primary};
     border-radius: 1rem;
 
     .dropzone__container {
         display: flex;
         justify-content: center;
         align-items: center;
-        border: 0.1rem dashed var(--grey-one);
+        border: 0.1rem dashed ${({ theme }) => theme.text.grey_100};
         width: 95%;
         height: 95%;
         margin: auto;
@@ -37,7 +37,7 @@ export const Container = styled.div<IDropzoneStyle>`
     p {
         font-size: 1.5rem;
         font-weight: bold;
-        color: var(--grey-one);
+        color: ${({ theme }) => theme.text.grey_100};
     }
 
     .error {

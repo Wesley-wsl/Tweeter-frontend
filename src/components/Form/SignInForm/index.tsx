@@ -8,6 +8,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 
 import { IHandleSignIn } from "../../../@types";
 import { AuthContext } from "../../../contexts/AuthContext";
+import { ThemeContext } from "../../../contexts/Theme";
 import signInFormSchema from "../../../schemas/signIn";
 import ButtonForm from "../ButtonForm";
 import Input from "../Input";
@@ -16,6 +17,7 @@ import * as S from "../shared";
 const SignInForm: React.FC = () => {
     const [hidePassword, setHidePassword] = useState(true);
     const { signIn, loadingSignIn } = useContext(AuthContext);
+    const { lightMode } = useContext(ThemeContext);
 
     const changePasswordMode = () => setHidePassword(!hidePassword);
     const {
@@ -32,7 +34,11 @@ const SignInForm: React.FC = () => {
         <S.FormContainer onSubmit={handleSubmit(handleSignIn)}>
             <span>
                 <Image
-                    src={"/assets/tweeter.svg"}
+                    src={
+                        lightMode
+                            ? "/assets/tweeter.svg"
+                            : "/assets/tweeter-light.svg"
+                    }
                     width="200"
                     height="45"
                     alt="Logo"

@@ -3,8 +3,8 @@ import styled from "styled-components";
 export const Container = styled.div`
     width: 60rem;
     height: 50rem;
-    border: 0.1rem solid var(--border-one);
-    background-color: #fff;
+    border: 0.1rem solid ${({ theme }) => theme.border.primary};
+    background-color: ${({ theme }) => theme.background.primary};
     border-radius: 1rem;
     overflow-y: scroll;
     overflow-x: hidden;
@@ -15,12 +15,12 @@ export const Container = styled.div`
     }
 
     &::-webkit-scrollbar-track {
-        background: var(--grey-four);
+        background: ${({ theme }) => theme.background.primary};
         border-radius: 3rem;
     }
 
     &::-webkit-scrollbar-thumb {
-        background-color: var(--grey-three);
+        background-color: ${({ theme }) => theme.background.input};
         border-radius: 3rem;
     }
 `;
@@ -33,7 +33,7 @@ export const TopFollowList = styled.div`
     > p {
         font-weight: 600;
         font-size: 1.4rem;
-        color: var(--grey-one);
+        color: ${({ theme }) => theme.text.grey_100};
     }
 
     svg {
@@ -44,8 +44,8 @@ export const TopFollowList = styled.div`
 export const WithoutFollow = styled.p`
     font-weight: 600;
     font-size: 1.4rem;
-    color: var(--grey-one);
-    border-top: 0.1rem solid var(--grey-four);
+    color: ${({ theme }) => theme.text.grey_100};
+    border-top: 0.1rem solid ${({ theme }) => theme.text.grey_400};
     margin: 0 2rem;
     width: 94%;
     padding-top: 1rem;

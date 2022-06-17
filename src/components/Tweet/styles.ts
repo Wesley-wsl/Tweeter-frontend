@@ -1,20 +1,20 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-    background-color: #fff;
+    background-color: ${({ theme }) => theme.background.container};
     padding: 2rem;
     margin-bottom: 3.5rem;
     border-radius: 2rem;
-    border: 0.1rem solid var(--border-one);
+    border: 0.1rem solid ${({ theme }) => theme.border.primary};
     position: relative;
 
     > p {
         max-width: 67rem;
         word-break: break-all;
         margin: 2rem 0;
-        color: var(--grey-two);
+        color: ${({ theme }) => theme.text.grey_200};
         font-size: 1.6rem;
-        font-family: var(--font-NotoSans);
+        font-family: ${({ theme }) => theme.fonts.secondary};
         text-align: justify;
         white-space: pre-line;
     }
@@ -29,7 +29,7 @@ export const Actions = styled.ul`
     justify-content: space-around;
     font-size: 1.4rem;
     font-weight: 500;
-    font-family: var(--font-NotoSans);
+    font-family: ${({ theme }) => theme.fonts.secondary};
     list-style: none;
     align-items: center;
     margin-bottom: 1rem;
@@ -38,8 +38,9 @@ export const Actions = styled.ul`
         align-items: center;
         cursor: pointer;
         padding: 1rem;
+        color: ${({ theme }) => theme.text.primary};
         &:hover {
-            background-color: var(--backgrond-color);
+            background-color: ${({ theme }) => theme.background.primary};
             border-radius: 0.2rem;
         }
     }
@@ -49,18 +50,18 @@ export const Actions = styled.ul`
     }
 
     .heart {
-        color: var(--red-one);
+        color: ${({ theme }) => theme.text.red};
     }
 
     .bookmark {
-        color: var(--blue-one);
+        color: ${({ theme }) => theme.button.primary};
     }
 `;
 
 export const Divider = styled.div`
     width: 100%;
     height: 0.1rem;
-    background-color: #000;
+    background-color: ${({ theme }) => theme.text.primary};
     opacity: 0.1;
     margin: 1rem 0;
 `;
@@ -76,13 +77,14 @@ export const TopInformations = styled.div`
         p:nth-child(1) {
             font-size: 1.6rem;
             font-weight: 500;
+            color: ${({ theme }) => theme.text.primary};
         }
 
         p:nth-child(2) {
             font-size: 1.2rem;
             font-weight: 500;
-            font-family: var(--font-NotoSans);
-            color: var(--grey-four);
+            font-family: ${({ theme }) => theme.fonts.secondary};
+            color: ${({ theme }) => theme.text.grey_400};
         }
     }
 `;
@@ -91,13 +93,13 @@ export const Status = styled.div`
     display: flex;
     justify-content: flex-end;
     gap: 2rem;
-    color: var(--grey-four);
+    color: ${({ theme }) => theme.text.grey_400};
     font-size: 1.2rem;
     margin: 1rem 0;
 `;
 
 export const LoadComment = styled.p`
-    color: var(--grey-two);
+    color: ${({ theme }) => theme.text.grey_200};
     text-align: center;
     font-weight: 700;
     font-size: 1.4rem;
@@ -111,10 +113,10 @@ export const DeleteTweet = styled.div`
     opacity: 0.5;
     cursor: pointer;
     transition: all 0.2s linear;
-    color: #000;
+    color: ${({ theme }) => theme.text.primary};
 
     &:hover {
         opacity: 1;
-        color: var(--red-one);
+        color: ${({ theme }) => theme.text.red};
     }
 `;

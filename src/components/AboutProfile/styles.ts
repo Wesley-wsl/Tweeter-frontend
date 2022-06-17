@@ -2,12 +2,12 @@ import styled from "styled-components";
 
 export const Container = styled.section`
     display: flex;
-    background-color: #fff;
+    background-color: ${({ theme }) => theme.background.container};
     max-width: 100rem;
     height: 15rem;
     margin: -5rem auto;
     border-radius: 1.2rem;
-    border: 0.1rem solid var(--border-one);
+    border: 0.1rem solid ${({ theme }) => theme.border.primary};
     position: relative;
 
     .avatar {
@@ -16,7 +16,7 @@ export const Container = styled.section`
         margin-left: 2rem;
         margin-right: 2rem;
         padding: 0.4rem;
-        background-color: #ffff;
+        background-color: ${({ theme }) => theme.border.thirdy};
         position: relative;
         img {
             border-radius: 0.8rem;
@@ -77,19 +77,19 @@ export const Informations = styled.div`
         h2 {
             font-size: 2.4rem;
             font-weight: 600;
-            color: var(--grey-one);
+            color: ${({ theme }) => theme.text.grey_100};
         }
 
         > p {
             font-size: 1.2rem;
             font-weight: 500;
-            color: var(--grey-three);
+            color: ${({ theme }) => theme.text.grey_300};
             cursor: pointer;
 
             span {
                 font-size: 1.2rem;
                 font-weight: 600;
-                color: var(--grey-one);
+                color: ${({ theme }) => theme.text.grey_100};
             }
         }
     }
@@ -97,20 +97,22 @@ export const Informations = styled.div`
 
 export const Description = styled.textarea`
     font-size: 1.7rem;
-    font-family: var(--font-NotoSans);
+    background-color: ${({ theme }) => theme.background.container};
+    font-family: ${({ theme }) => theme.fonts.secondary};
     font-weight: 500;
-    color: var(--grey-three);
+    color: ${({ theme }) => theme.text.grey_300};
     max-width: 50rem;
     resize: none;
     border: 0.1rem solid transparent;
     margin: -0.7rem;
     padding: 0.7rem;
-    transition: all 0.2s linear;
+    transition-property: border, border-radius, outline;
+    transition-duration: 0.2s;
+    transition-timing-function: linear;
 
     &:focus {
         outline: none;
-        box-shadow: 0rem 0rem 0.1rem 0.1rem var(--border-one);
-        border: 0.1rem solid var(--border-one);
+        border: 0.1rem solid ${({ theme }) => theme.text.grey_400};
         border-radius: 0.8rem;
     }
 `;

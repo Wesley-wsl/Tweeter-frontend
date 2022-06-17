@@ -8,6 +8,7 @@ export const Container = styled.div<IInputContainer>`
     position: relative;
 
     input {
+        background-color: ${({ theme }) => theme.background.input};
         padding: 1.5rem;
         width: 25rem;
         margin-bottom: ${({ margin }) => margin};
@@ -16,14 +17,15 @@ export const Container = styled.div<IInputContainer>`
         outline: none;
         transition: border 0.3s linear;
         border: 0.1rem solid transparent;
-        border-bottom: 0.1rem solid var(--blue-one);
+        border-bottom: 0.1rem solid ${({ theme }) => theme.button.primary};
+        color: ${({ theme }) => theme.text.primary};
 
         &::placeholder {
             letter-spacing: 0.13rem;
             font-family: var(--font-NotoSans);
         }
         &:focus {
-            border: 0.1rem solid var(--blue-one);
+            border: 0.1rem solid ${({ theme }) => theme.button.primary};
         }
     }
 

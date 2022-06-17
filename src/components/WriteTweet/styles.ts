@@ -2,19 +2,18 @@ import styled from "styled-components";
 
 export const Container = styled.div`
     padding: 2rem 2rem 1rem 2rem;
-    background-color: #fff;
+    background-color: ${({ theme }) => theme.background.container};
     border-radius: 2rem;
     margin: 2rem 0;
-    border: 0.1rem solid var(--border-one);
+    border: 0.1rem solid ${({ theme }) => theme.border.primary};
 
     > p {
         font-size: 1.2rem;
         font-weight: 600;
-        color: var(--grey-two);
-        border-bottom: 0.1rem solid var(--grey-five);
+        color: ${({ theme }) => theme.text.grey_200};
+        border-bottom: 0.1rem solid ${({ theme }) => theme.border.primary};
         padding-bottom: 1rem;
         margin-bottom: 1rem;
-        border-radius: 0.4rem;
     }
 `;
 
@@ -26,6 +25,8 @@ export const Write = styled.div`
     }
 
     textarea {
+        background-color: ${({ theme }) => theme.background.textArea};
+        padding: 1.3rem;
         margin-top: 1rem;
         margin-left: 2rem;
         outline: none;
@@ -34,9 +35,11 @@ export const Write = styled.div`
         height: 5rem;
         max-height: 50rem;
         max-height: 15rem;
+        border-radius: 1rem;
+        color: ${({ theme }) => theme.text.primary};
 
         &::placeholder {
-            color: var(--grey-four);
+            color: ${({ theme }) => theme.text.grey_400};
             font-weight: 500;
         }
     }

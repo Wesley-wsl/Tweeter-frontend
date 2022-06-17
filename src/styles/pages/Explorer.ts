@@ -22,16 +22,23 @@ export const TweetsContainer = styled.div`
     flex-direction: column;
     border-radius: 2rem;
     margin-bottom: 2rem;
+
+    h1 {
+        text-align: center;
+        color: ${({ theme }) => theme.text.grey_100};
+    }
 `;
 
 export const Search = styled.form`
     position: relative;
     margin-bottom: 2rem;
+    border: 0.1rem solid ${({ theme }) => theme.border.primary};
+    border-radius: 1rem;
 
     input {
         height: 5.4rem;
         width: 100%;
-        background-color: #fff;
+        background-color: ${({ theme }) => theme.background.thirdy};
         padding: 0 5rem;
         border-radius: 1rem;
         padding-right: 11rem;
@@ -40,16 +47,18 @@ export const Search = styled.form`
         border: 0.1rem solid transparent;
         font-size: 1.6rem;
         font-weight: 500;
-        font-family: var(--font-NotoSans);
+        font-family: ${({ theme }) => theme.text.grey_400};
+        color: ${({ theme }) => theme.text.primary};
+
         &:focus {
-            border: 0.1rem solid var(--blue-one);
+            border: 0.1rem solid ${({ theme }) => theme.button.primary};
         }
 
         &::placeholder {
-            color: var(--grey-four);
+            color: ${({ theme }) => theme.text.grey_400};
             font-size: 1.6rem;
             font-weight: 500;
-            font-family: var(--font-NotoSans);
+            font-family: ${({ theme }) => theme.fonts.secondary};
         }
     }
 
@@ -66,12 +75,13 @@ export const Search = styled.form`
         width: 8.5rem;
         height: 3.2rem;
         font-size: 1.2rem;
-        font-family: var(--font-NotoSans);
+        font-family: ${({ theme }) => theme.fonts.secondary};
+        background-color: ${({ theme }) => theme.button.primary};
     }
 `;
 
 export const Cards = styled.div`
-    background-color: #fff;
+    background-color: ${({ theme }) => theme.background.thirdy};
     border-radius: 0.8rem;
 
     div:nth-child(1) {

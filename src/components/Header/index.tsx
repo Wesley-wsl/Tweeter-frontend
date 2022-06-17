@@ -1,17 +1,24 @@
-import { CaretDownFill } from "@styled-icons/bootstrap";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { useContext } from "react";
 
+import { ThemeContext } from "../../contexts/Theme";
+import { ProfileWidget } from "../ProfileWidget";
 import * as S from "./styles";
 
 const Header: React.FC = () => {
     const { asPath } = useRouter();
+    const { lightMode } = useContext(ThemeContext);
 
     return (
         <S.Container>
             <Image
-                src={"/assets/tweeter.svg"}
+                src={
+                    lightMode
+                        ? "/assets/tweeter.svg"
+                        : "/assets/tweeter-light.svg"
+                }
                 width="120"
                 height="40"
                 alt="Logo"
@@ -31,15 +38,7 @@ const Header: React.FC = () => {
                 </ul>
             </nav>
 
-            <div>
-                <div />
-                <p>Jorkis</p>
-                <CaretDownFill
-                    width={7}
-                    height={30}
-                    aria-label="Icon arrow down that open profile menu"
-                />
-            </div>
+            <ProfileWidget />
         </S.Container>
     );
 };

@@ -11,11 +11,12 @@ export const Container = styled.div`
 
         p {
             font-size: var(--x-small);
+            color: ${({ theme }) => theme.text.grey_100};
+            font-weight: 500;
             margin-right: 1rem;
         }
 
         span {
-            background-color: #000;
             width: 3.2rem;
             height: 3.2rem;
             border-radius: 0.5rem;
@@ -39,9 +40,11 @@ export const Options = styled.ul`
     list-style: none;
     border-radius: 1rem;
     max-width: 20rem;
-    background-color: #ffff;
+    background-color: ${({ theme }) => theme.background.thirdy};
+    color: ${({ theme }) => theme.text.grey_200};
     padding: 1rem;
     font-size: var(--x-small);
+    border: 0.1rem solid ${({ theme }) => theme.border.primary};
 
     li {
         display: flex;
@@ -50,9 +53,12 @@ export const Options = styled.ul`
         border-radius: 1rem;
         transition: all 0.2s linear;
         cursor: pointer;
+        background-color: ${({ theme }) => theme.background.thirdy};
+        font-weight: 500;
+        color: ${({ theme }) => theme.text.grey_200};
 
         &:hover {
-            background-color: var(--background-color-two);
+            background-color: ${({ theme }) => theme.background.hover};
         }
 
         svg {
@@ -60,8 +66,16 @@ export const Options = styled.ul`
         }
     }
 
+    li > svg {
+        color: ${({ theme }) => theme.svg.primary};
+    }
+
+    li:nth-child(5) > svg {
+        color: red;
+    }
+
     hr {
-        background-color: var(--background-color-two);
+        background-color: ${({ theme }) => theme.background.hover};
         margin: 0 auto;
         width: 90%;
         height: 0.1rem;

@@ -19,6 +19,7 @@ export const Container = styled.div`
 export const Background = styled.div`
     background-color: #0008;
     position: fixed;
+    backdrop-filter: blur(0.2rem);
     top: 0;
     right: 0;
     bottom: 0;

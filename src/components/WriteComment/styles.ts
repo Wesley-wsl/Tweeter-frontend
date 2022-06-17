@@ -17,17 +17,19 @@ export const Container = styled.div`
             padding: 1.3rem;
             width: 97%;
             padding-right: 3rem;
-            background-color: var(--background-color);
+            background-color: ${({ theme }) => theme.background.textArea};
             border-bottom: 1rem;
             margin-left: 2rem;
             margin-right: 2rem;
             resize: vertical;
             height: 5rem;
             max-height: 8rem;
+            border-radius: 1rem;
+            color: ${({ theme }) => theme.text.primary};
         }
 
         button {
-            background-color: var(--blue-one);
+            background-color: ${({ theme }) => theme.button.thirdy};
             border-radius: 1rem;
             width: 7rem;
             height: 5rem;

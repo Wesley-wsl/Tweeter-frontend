@@ -4,10 +4,10 @@ export const FormContainer = styled.form`
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: var(--background-color);
+    background-color: ${({ theme }) => theme.background.hover};
     padding: 4rem 5rem;
     border-radius: 2rem;
-    box-shadow: 0rem 0rem 1rem var(--blue-one);
+    box-shadow: 0rem 0rem 1rem ${({ theme }) => theme.button.boxShadow};
     height: 43rem;
     margin: auto;
     justify-content: space-between;
@@ -20,8 +20,8 @@ export const FormContainer = styled.form`
         margin-top: 2rem;
         font-size: var(--x-small);
         font-weight: 400;
-        color: var(--blue-one);
-        font-family: var(--font-NotoSans);
+        color: ${({ theme }) => theme.button.primary};
+        font-family: ${({ theme }) => theme.fonts.secondary};
     }
 
     @media (max-width: 354px) {

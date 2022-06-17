@@ -4,8 +4,8 @@ export const Container = styled.ul`
     position: sticky;
     right: 0;
     left: 0;
-    top: 3rem;
-    background-color: #fff;
+    top: 7rem;
+    background-color: ${({ theme }) => theme.background.container};
     width: 20rem;
     height: 21rem;
     display: flex;
@@ -16,22 +16,22 @@ export const Container = styled.ul`
     justify-content: space-around;
     margin-right: 2.4rem;
     border-radius: 1.6rem;
-    border: 0.1rem solid var(--border-one);
+    border: 0.1rem solid ${({ theme }) => theme.border.primary};
     li {
-        color: var(--grey-three);
+        color: ${({ theme }) => theme.text.grey_300};
         margin-left: 2rem;
         cursor: pointer;
         max-width: fit-content;
 
         &.active {
-            color: var(--blue-one);
+            color: ${({ theme }) => theme.button.primary};
             position: relative;
 
             &::before {
                 content: "";
                 width: 0.3rem;
                 height: 3.2rem;
-                background-color: var(--blue-one);
+                background-color: ${({ theme }) => theme.button.primary};
                 position: absolute;
                 left: -2rem;
                 top: -0.5rem;

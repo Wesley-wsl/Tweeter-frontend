@@ -6,7 +6,7 @@ export const Container = styled.div`
     margin-left: 2rem;
     margin-right: 2rem;
     padding: 0.4rem;
-    background-color: #ffff;
+    background-color: ${({ theme }) => theme.background.thirdy};
     position: relative;
     img {
         border-radius: 0.8rem;

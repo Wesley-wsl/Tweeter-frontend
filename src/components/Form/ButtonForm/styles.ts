@@ -5,7 +5,7 @@ export const Button = styled.button`
     font-size: var(--x-small);
     font-weight: 600;
     margin-top: 1rem;
-    background-color: var(--blue-one);
+    background-color: ${({ theme }) => theme.button.thirdy};
     color: #fff;
     padding: 1.5rem 8.67rem;
     border-radius: 0.5rem;
@@ -17,7 +17,7 @@ export const Button = styled.button`
     height: 4.6rem;
 
     &:hover {
-        background-color: var(--blue-two);
+        background-color: ${({ theme }) => theme.button.hover};
         cursor: pointer;
     }
 

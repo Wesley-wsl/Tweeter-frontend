@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const Container = styled.div`
     margin: 0 2rem 2rem 2rem;
     padding-top: 2rem;
-    border-top: 0.1rem solid var(--grey-four);
+    border-top: 0.1rem solid ${({ theme }) => theme.text.grey_400};
 
     > div {
         display: flex;
@@ -12,8 +12,8 @@ export const Container = styled.div`
 
     > p {
         font-weight: 500;
-        font-family: var(--font-NotoSans);
-        color: var(--grey-three);
+        font-family: ${({ theme }) => theme.fonts.secondary};
+        color: ${({ theme }) => theme.text.grey_300};
         font-size: 1.4rem;
     }
 `;
@@ -22,11 +22,10 @@ export const TopCard = styled.div`
     display: flex;
 
     > span {
-        margin-right: -5rem;
         button {
             font-size: 1.2rem;
             width: 7.9rem;
-            height: 2.4rem;
+            height: 2.7rem;
             margin-right: 0;
             margin-left: 0;
         }
@@ -34,7 +33,7 @@ export const TopCard = styled.div`
 
     div {
         display: flex;
-        color: var(--grey-one);
+        color: ${({ theme }) => theme.text.grey_100};
         font-weight: 500;
         font-size: 1.2rem;
         margin-bottom: 0.5rem;
@@ -58,14 +57,14 @@ export const TopCard = styled.div`
             p:nth-child(1) {
                 font-size: 1.6rem;
                 font-weight: 500;
-                color: #000;
+                color: ${({ theme }) => theme.text.primary};
             }
 
             p:nth-child(2) {
                 font-weight: 500;
                 font-size: 1.2rem;
-                font-family: var(--font-NotoSans);
-                color: var(--grey-three);
+                font-family: ${({ theme }) => theme.fonts.secondary};
+                color: ${({ theme }) => theme.text.grey_300};
             }
         }
     }

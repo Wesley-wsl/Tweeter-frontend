@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Container = styled.div`
     padding-bottom: 2rem;
-    border-bottom: 0.1rem solid var(--grey-five);
+    border-bottom: 0.1rem solid ${({ theme }) => theme.border.primary};
 
     div {
         display: flex;
@@ -23,31 +23,32 @@ export const Container = styled.div`
             }
 
             p:nth-child(1) {
+                color: ${({ theme }) => theme.text.primary};
                 font-size: 1.6rem;
                 font-weight: 500;
             }
 
             p:nth-child(2) {
                 font-size: 1.2rem;
-                font-family: var(--font-NotoSans);
-                color: var(--grey-three);
+                font-family: ${({ theme }) => theme.fonts.secondary};
+                color: ${({ theme }) => theme.text.grey_300};
                 font-weight: 500;
             }
         }
 
         button {
             width: 7.9rem;
-            height: 2.6rem;
+            height: 2.9rem;
             font-size: 1.2rem;
             margin-left: 4rem;
         }
     }
 
     > p {
-        color: #828282;
+        color: ${({ theme }) => theme.text.grey_200};
         font-weight: 500;
         font-size: 1.4rem;
-        font-family: var(--font-NotoSans);
+        font-family: ${({ theme }) => theme.fonts.secondary};
         margin-bottom: 2rem;
     }
 

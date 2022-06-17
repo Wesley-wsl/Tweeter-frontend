@@ -16,11 +16,11 @@ export const Container = styled.div`
         width: 2rem;
         height: 2rem;
         margin: 0.2rem;
-        border: 0.2rem solid ${({ color }) => color};
+        border: 0.2rem solid ${({ theme }) => theme.text.primary};
         border-radius: 50%;
         animation: loading 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-        border-color: ${({ color }) => color} transparent transparent
-            transparent;
+        border-color: ${({ theme }) => theme.text.primary} transparent
+            transparent transparent;
     }
 
     div:nth-child(1) {

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Container = styled.main`
-    background-color: var(--background-color-two);
+    background-color: ${({ theme }) => theme.background.secondary};
     min-height: 90vh;
 `;
 

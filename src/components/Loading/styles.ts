@@ -1,7 +1,11 @@
 import styled from "styled-components";
 
-export const Loader = styled.div`
-    background-color: var(--background-color-two);
+export interface ILoader {
+    lightMode: boolean;
+}
+
+export const Loader = styled.div<ILoader>`
+    background-color: ${({ theme }) => theme.background.secondary};
     width: 100vw;
     height: 100vh;
     position: absolute;
@@ -34,7 +38,10 @@ export const Loader = styled.div`
         perspective-origin: 50% 50%;
         perspective: 340px;
         background-size: 15em 15em;
-        background-image: url("/background/effectDark.svg");
+        background-image: ${({ lightMode }) =>
+            lightMode
+                ? "url(/background/effectDark.svg)"
+                : "url(/background/effectLight.svg)"};
     }
 
     @keyframes rotateBefore {
