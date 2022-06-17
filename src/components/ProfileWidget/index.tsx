@@ -6,12 +6,19 @@ import { destroyCookie } from "nookies";
 import { useContext, useState } from "react";
 
 import { AuthContext } from "../../contexts/AuthContext";
+import { ThemeContext } from "../../contexts/Theme";
 import { API_BASE_URL } from "../../utils/constants";
 import * as S from "./styles";
 
 export const ProfileWidget: React.FC = () => {
     const [showProfile, setShowProfile] = useState(false);
     const { user } = useContext(AuthContext);
+    const { toggleTheme } = useContext(ThemeContext);
+
+    function handleTheme() {
+        toggleTheme();
+        setShowProfile(false);
+    }
 
     function handleLogout() {
         setShowProfile(false);
@@ -50,21 +57,16 @@ export const ProfileWidget: React.FC = () => {
                         aria-label="Icon arrow down that open profile menu"
                     />
                 </div>
-
                 {showProfile && (
                     <S.Options>
                         <li onClick={handleMyProfile}>
-                            <AccountCircle
-                                width={22}
-                                height={22}
-                                color="#111"
-                            />
+                            <AccountCircle width={22} height={22} />
                             My profile
                         </li>
 
                         <hr />
-                        <li>
-                            <DarkMode width={22} height={22} color="#111" />
+                        <li onClick={handleTheme}>
+                            <DarkMode width={22} height={22} />
                             Dark Mode
                         </li>
                         <hr />
