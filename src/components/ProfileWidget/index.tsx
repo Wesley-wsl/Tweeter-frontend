@@ -1,5 +1,6 @@
 import { CaretDownFill } from "@styled-icons/bootstrap";
 import { AccountCircle, ExitToApp, DarkMode } from "@styled-icons/material";
+import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 import Router from "next/router";
 import { destroyCookie } from "nookies";
@@ -8,6 +9,7 @@ import { useContext, useState } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
 import { ThemeContext } from "../../contexts/Theme";
 import { API_BASE_URL } from "../../utils/constants";
+import { widget } from "../../utils/variants";
 import * as S from "./styles";
 
 export const ProfileWidget: React.FC = () => {
@@ -57,25 +59,33 @@ export const ProfileWidget: React.FC = () => {
                         aria-label="Icon arrow down that open profile menu"
                     />
                 </div>
-                {showProfile && (
-                    <S.Options>
-                        <li onClick={handleMyProfile}>
-                            <AccountCircle width={22} height={22} />
-                            My profile
-                        </li>
 
-                        <hr />
-                        <li onClick={handleTheme}>
-                            <DarkMode width={22} height={22} />
-                            Dark Mode
-                        </li>
-                        <hr />
-                        <li onClick={handleLogout}>
-                            <ExitToApp width={22} height={22} color="red" />
-                            Logout
-                        </li>
-                    </S.Options>
-                )}
+                <AnimatePresence exitBeforeEnter>
+                    {showProfile && (
+                        <S.Options
+                            as={motion.ul}
+                            variants={widget}
+                            initial="hidden"
+                            animate="visible"
+                            exit="hidden"
+                        >
+                            <li onClick={handleMyProfile}>
+                                <AccountCircle width={22} height={22} />
+                                My profile
+                            </li>
+                            <hr />
+                            <li onClick={handleTheme}>
+                                <DarkMode width={22} height={22} />
+                                Dark Mode
+                            </li>
+                            <hr />
+                            <li onClick={handleLogout}>
+                                <ExitToApp width={22} height={22} color="red" />
+                                Logout
+                            </li>
+                        </S.Options>
+                    )}
+                </AnimatePresence>
             </S.Container>
             {showProfile && <S.Overlay onClick={() => setShowProfile(false)} />}
         </>
