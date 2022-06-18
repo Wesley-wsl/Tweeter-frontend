@@ -39,7 +39,7 @@ export const pageTransition = {
         y: 0,
         transition: { type: "linear", duration: 0.7 },
     },
-    exit: { opacity: 0, x: 0, y: -100 },
+    exit: { opacity: 0, x: 200, y: -20 },
 };
 
 export const fadeInUp = {
