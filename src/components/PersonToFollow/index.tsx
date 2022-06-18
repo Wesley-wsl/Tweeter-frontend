@@ -12,16 +12,18 @@ const PersonToFollow = ({ data }: IFollowCard) => {
         <S.Container>
             <div>
                 <div onClick={() => Router.push(`/profile/${data.id}`)}>
-                    <Image
-                        width="40"
-                        height="40"
-                        src={
-                            data.avatar
-                                ? `${API_BASE_URL}/files/${data.avatar}`
-                                : "/background/background.webp"
-                        }
-                        alt="Profile Avatar"
-                    />
+                    <span>
+                        <Image
+                            width="40"
+                            height="40"
+                            src={
+                                data.avatar
+                                    ? `${API_BASE_URL}/files/${data.avatar}`
+                                    : "/background/background.webp"
+                            }
+                            alt="Profile Avatar"
+                        />
+                    </span>
 
                     <div>
                         <p>{data.name}</p>
@@ -43,7 +45,11 @@ const PersonToFollow = ({ data }: IFollowCard) => {
                 <Image
                     width="330"
                     height="165"
-                    src={data.background ?? "/background/background.webp"}
+                    src={
+                        data.background
+                            ? `${API_BASE_URL}/files/${data.background}`
+                            : "/background/background.webp"
+                    }
                     alt="Background image"
                 />
             </span>
