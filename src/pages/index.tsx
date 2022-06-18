@@ -10,6 +10,7 @@ export default function SignIn() {
         <NextSEO
             title="Tweeter - Sign In"
             description="Sign In page for enter in tweeter with your account"
+            opacityTransition
         >
             <CustomBackground image={"/background/background.webp"}>
                 <SignInForm />

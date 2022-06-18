@@ -3,18 +3,24 @@ import { NextSeo } from "next-seo";
 import { useRouter } from "next/router";
 
 import { INextSEO } from "../../@types";
-import { pageTransition } from "../../utils/variants";
+import { overlay, pageTransition } from "../../utils/variants";
 
-const NextSEO: React.FC<INextSEO> = ({ title, description, children }) => {
+const NextSEO: React.FC<INextSEO> = ({
+    title,
+    description,
+    children,
+    opacityTransition,
+}) => {
     const { pathname } = useRouter();
     const url = `http://localhost:3000${pathname}`;
 
     return (
         <motion.div
-            variants={pageTransition}
+            variants={opacityTransition ? overlay : pageTransition}
             initial="hidden"
-            animate="enter"
-            exit="exit"
+            animate="visible"
+            exit={opacityTransition ? "hidden" : "exit"}
+            transition={{ type: "linear" }}
         >
             <NextSeo
                 title={title}
@@ -22,7 +28,6 @@ const NextSEO: React.FC<INextSEO> = ({ title, description, children }) => {
                 canonical={url}
                 openGraph={{ title, url }}
             />
-
             {children}
         </motion.div>
     );

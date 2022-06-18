@@ -10,6 +10,7 @@ export default function SignUp() {
         <NextSEO
             title="Tweeter - Sign Up"
             description="Page for register an account in Tweeter"
+            opacityTransition
         >
             <CustomBackground image={"/background/background.webp"}>
                 <SignUpForm />

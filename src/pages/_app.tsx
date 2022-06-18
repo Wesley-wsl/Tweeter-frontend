@@ -36,7 +36,7 @@ function MyApp({ Component, pageProps }: AppProps) {
                     {asPath === "/" || asPath === "/signup" ? (
                         <>
                             <AnimatePresence exitBeforeEnter>
-                                <Component {...pageProps} />
+                                <Component {...pageProps} key={asPath} />
                             </AnimatePresence>
                             <GlobalStyles />
                         </>
@@ -44,7 +44,7 @@ function MyApp({ Component, pageProps }: AppProps) {
                         <>
                             <Header />
                             <AnimatePresence exitBeforeEnter>
-                                <Component {...pageProps} />
+                                <Component {...pageProps} key={asPath} />
                             </AnimatePresence>
                             <ScrollToTop />
                             <GlobalStyles />
