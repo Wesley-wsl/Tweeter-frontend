@@ -30,3 +30,56 @@ export const widget = {
         scale: 0,
     },
 };
+
+export const pageTransition = {
+    hidden: { opacity: 0, x: -200, y: 0 },
+    enter: {
+        opacity: 1,
+        x: 0,
+        y: 0,
+        transition: { type: "linear", duration: 0.7 },
+    },
+    exit: { opacity: 0, x: 0, y: -100 },
+};
+
+export const fadeInUp = {
+    hidden: {
+        y: 60,
+        opacity: 0,
+    },
+    enter: {
+        y: 0,
+        opacity: 1,
+        transition: {
+            duration: 0.9,
+        },
+    },
+};
+
+export const fadeInLeft = {
+    hidden: {
+        x: 60,
+        opacity: 0,
+    },
+    enter: {
+        x: 0,
+        opacity: 1,
+        transition: {
+            duration: 1,
+        },
+    },
+};
+
+export const fadeInRight = {
+    hidden: {
+        x: -60,
+        opacity: 0,
+    },
+    enter: {
+        x: 0,
+        opacity: 1,
+        transition: {
+            duration: 1,
+        },
+    },
+};
