@@ -1,8 +1,10 @@
 import { Close } from "@styled-icons/material";
+import { motion } from "framer-motion";
 import React from "react";
 
 import { IShowTrend, ITrends } from "../../@types";
 import { useFetch } from "../../hooks/useFetch";
+import { fadeInLeft } from "../../utils/variants";
 import LittleLoading from "../LittleLoading";
 import * as S from "./styles";
 
@@ -11,7 +13,12 @@ const Trends = ({ handleSearch, search }: ITrends) => {
 
     return (
         <>
-            <S.Container>
+            <S.Container
+                as={motion.div}
+                variants={fadeInLeft}
+                initial="hidden"
+                animate="enter"
+            >
                 <p>Trends for you</p>
 
                 {trends ? (

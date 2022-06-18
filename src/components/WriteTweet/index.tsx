@@ -1,6 +1,7 @@
 import { Image as BootstrapImage } from "@styled-icons/bootstrap";
 import { Earth } from "@styled-icons/ionicons-sharp";
 import { People } from "@styled-icons/material-rounded";
+import { motion } from "framer-motion";
 import Image from "next/image";
 import { useContext, useState } from "react";
 import { toast } from "react-toastify";
@@ -9,6 +10,7 @@ import { ITweet, IWriteTweet } from "../../@types";
 import { AuthContext } from "../../contexts/AuthContext";
 import api from "../../services/api";
 import { API_BASE_URL } from "../../utils/constants";
+import { fadeInUp } from "../../utils/variants";
 import { Button } from "../Button";
 import WhoCanSee from "../WhoCanSee";
 import * as S from "./styles";
@@ -60,7 +62,12 @@ const WriteTweet = ({ setTweets }: IWriteTweet) => {
     }
 
     return (
-        <S.Container>
+        <S.Container
+            as={motion.div}
+            variants={fadeInUp}
+            initial="hidden"
+            animate="enter"
+        >
             <p>Tweet something</p>
             <S.Write>
                 <span>

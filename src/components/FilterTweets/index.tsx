@@ -1,6 +1,8 @@
+import { motion } from "framer-motion";
 import React from "react";
 
 import { IFilterTweets } from "../../@types";
+import { fadeInRight } from "../../utils/variants";
 import * as S from "./styles";
 
 const FilterTweets: React.FC<IFilterTweets> = ({
@@ -9,7 +11,12 @@ const FilterTweets: React.FC<IFilterTweets> = ({
     options,
 }) => {
     return (
-        <S.Container>
+        <S.Container
+            as={motion.ul}
+            variants={fadeInRight}
+            initial="hidden"
+            animate="enter"
+        >
             {options &&
                 options.map((element, index) => (
                     <li

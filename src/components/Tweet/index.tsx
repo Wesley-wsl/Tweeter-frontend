@@ -6,6 +6,7 @@ import {
 } from "@styled-icons/bootstrap";
 import { ModeComment } from "@styled-icons/material-outlined";
 import { Close } from "@styled-icons/material-rounded";
+import { motion } from "framer-motion";
 import Image from "next/image";
 import Router from "next/router";
 import React, { useState } from "react";
@@ -15,6 +16,7 @@ import { ITweet, ITweetComponent } from "../../@types";
 import { useTweetServices } from "../../hooks/useTweetServices";
 import api from "../../services/api";
 import { API_BASE_URL } from "../../utils/constants";
+import { fadeInUp } from "../../utils/variants";
 import { Comment } from "../Comment";
 import WriteComment from "../WriteComment";
 import * as S from "./styles";
@@ -57,7 +59,13 @@ const Tweet: React.FC<ITweetComponent> = ({ data, setTweets }) => {
     }
 
     return (
-        <S.Container>
+        <S.Container
+            as={motion.div}
+            variants={fadeInUp}
+            initial="hidden"
+            animate="enter"
+            exit="hidden"
+        >
             <S.TopInformations
                 onClick={() => Router.push(`/profile/${data.author.id}`)}
             >

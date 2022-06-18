@@ -1,3 +1,4 @@
+import { AnimatePresence } from "framer-motion";
 import { DefaultSeo } from "next-seo";
 import { AppProps } from "next/app";
 import { useRouter } from "next/router";
@@ -7,7 +8,9 @@ import "react-toastify/dist/ReactToastify.min.css";
 
 import SEO from "../../next-seo.config";
 import Header from "../components/Header";
+import ScrollToTop from "../components/ScrollToTop";
 import { AuthProvider } from "../contexts/AuthContext";
+import { ThemeContextProvider } from "../contexts/Theme";
 import GlobalStyles from "../styles/GlobalStyle";
 
 function MyApp({ Component, pageProps }: AppProps) {
@@ -16,7 +19,6 @@ function MyApp({ Component, pageProps }: AppProps) {
     return (
         <>
             <DefaultSeo {...SEO} />
-            <GlobalStyles />
             <ToastContainer
                 position="top-right"
                 autoClose={3000}
@@ -29,16 +31,27 @@ function MyApp({ Component, pageProps }: AppProps) {
                 theme="light"
             />
             <NextNProgress color="#2F80ED" startPosition={0.5} />
-            <AuthProvider>
-                {asPath === "/" || asPath === "/signup" ? (
-                    <Component {...pageProps} />
-                ) : (
-                    <>
-                        <Header />
-                        <Component {...pageProps} />{" "}
-                    </>
-                )}
-            </AuthProvider>
+            <ThemeContextProvider>
+                <AuthProvider>
+                    {asPath === "/" || asPath === "/signup" ? (
+                        <>
+                            <AnimatePresence exitBeforeEnter>
+                                <Component {...pageProps} />
+                            </AnimatePresence>
+                            <GlobalStyles />
+                        </>
+                    ) : (
+                        <>
+                            <Header />
+                            <AnimatePresence exitBeforeEnter>
+                                <Component {...pageProps} />
+                            </AnimatePresence>
+                            <ScrollToTop />
+                            <GlobalStyles />
+                        </>
+                    )}
+                </AuthProvider>
+            </ThemeContextProvider>
         </>
     );
 }
