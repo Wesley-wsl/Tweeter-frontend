@@ -1,10 +1,13 @@
 import {
     Dispatch,
+    FormEvent,
     InputHTMLAttributes,
     ReactNode,
     SetStateAction,
 } from "react";
 import { FieldError } from "react-hook-form";
+
+import { dark } from "../styles/themes";
 
 export interface INextSEO {
     title: string;
@@ -27,7 +30,7 @@ export interface ICustomBackground {
     image: string;
 }
 
-export interface IButton {
+export interface IButton extends InputHTMLAttributes<HTMLButtonElement> {
     title: string;
     iconLeft?: ReactNode;
     color: string;
@@ -47,11 +50,6 @@ export interface IHandleSignUp {
 export interface IHandleSignIn {
     email: string;
     password: string;
-}
-
-export interface IHeaderStyle {
-    opacity: number;
-    boxShadow: boolean;
 }
 
 export interface ISignInData {
@@ -121,6 +119,7 @@ export interface IUserData {
 
 export interface ITweetComponent {
     data: ITweet;
+    setTweets: Dispatch<SetStateAction<ITweet[]>>;
 }
 
 export interface IComment {
@@ -178,3 +177,67 @@ export interface IFollowButton {
 export interface IAboutProfile {
     userInformations: IAuthor;
 }
+
+export interface IFollowList {
+    showFollowing: boolean;
+    setShowFollowing: Dispatch<SetStateAction<boolean>>;
+    userId: string;
+    path: string;
+    owner: string;
+}
+
+export interface IFollowCard {
+    data: IAuthor;
+}
+
+export enum IFilterOptions {
+    TWEETS = "tweets",
+    LIKES = "likes",
+    MEDIA = "media",
+    PEOPLE = "people",
+    TOP = "top",
+    LATEST = "latest",
+}
+
+export interface IFilterTweets {
+    filter: string;
+    handleFilter: (filterName: string) => void;
+    options: IFilterOptions[];
+}
+
+export interface IWriteTweet {
+    setTweets: Dispatch<SetStateAction<ITweet[]>>;
+}
+
+export interface IWhoCanSee {
+    setTweetIsPublic: Dispatch<SetStateAction<string>>;
+}
+
+export interface IWriteComment {
+    setTweetComments: Dispatch<SetStateAction<IComment[]>>;
+    tweetId: string;
+}
+
+export interface ITrends {
+    handleSearch: (e: FormEvent, searchName: string) => void;
+    search: string;
+}
+
+export interface IShowTrend {
+    trend: string;
+    tweetsQuantity: number;
+}
+
+export interface IThemeContext {
+    setLightMode: Dispatch<SetStateAction<boolean>>;
+    lightMode: boolean;
+    toggleTheme: () => void;
+}
+
+export interface IChildren {
+    children: JSX.Element;
+}
+
+export type ITheme = {
+    theme: typeof dark;
+};
