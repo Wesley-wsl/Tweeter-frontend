@@ -68,6 +68,13 @@ export default function Profile() {
                         ))}
                         {!isEndPage && <div ref={ref} />}
                         {scrollLoading && <LittleLoading color="#000" />}
+                        {!isEndPage && (
+                            <div
+                                style={{
+                                    marginBottom: "50rem",
+                                }}
+                            />
+                        )}
                     </div>
                 </S.Tweets>
             </S.Container>

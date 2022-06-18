@@ -1,6 +1,7 @@
 import { Search } from "@styled-icons/material-outlined";
+import { motion } from "framer-motion";
 import { GetServerSideProps } from "next";
-import { useEffect, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 
 import { IAuthor, IFilterOptions, ITweet } from "../../@types";
 import { Button } from "../../components/Button";
@@ -13,6 +14,7 @@ import Tweet from "../../components/Tweet";
 import { useInfiniteScroll } from "../../hooks/useInfiniteScroll";
 import * as S from "../../styles/pages/Explorer";
 import { ensureAuthentication } from "../../utils/ensureAuthentication";
+import { fadeInUp } from "../../utils/variants";
 
 export default function Explorer() {
     const [search, setSearch] = useState("");
@@ -53,7 +55,15 @@ export default function Explorer() {
                 />
 
                 <S.TweetsContainer>
-                    <S.Search onSubmit={e => handleSearch(e, search)}>
+                    <S.Search
+                        onSubmit={(e: FormEvent<Element>) =>
+                            handleSearch(e, search)
+                        }
+                        as={motion.form}
+                        variants={fadeInUp}
+                        initial="hidden"
+                        animate="enter"
+                    >
                         <Search width={25} height={25} color="#BDBDBD" />
                         <input
                             type="text"
@@ -76,17 +86,28 @@ export default function Explorer() {
                             />
                         ))
                     ) : (
-                        <>
-                            <S.Cards>
-                                {users.map((data: IAuthor, index: number) => (
-                                    <FollowCard data={data} key={index} />
-                                ))}
-                            </S.Cards>
-                        </>
+                        <S.Cards
+                            as={motion.div}
+                            variants={fadeInUp}
+                            initial="hidden"
+                            animate="enter"
+                            exit="exit"
+                        >
+                            {users.map((data: IAuthor, index: number) => (
+                                <FollowCard data={data} key={index} />
+                            ))}
+                        </S.Cards>
                     )}
 
                     {!isEndPage && <div ref={ref} />}
                     {scrollLoading && <LittleLoading color="#000" />}
+                    {!isEndPage && (
+                        <div
+                            style={{
+                                marginBottom: "50rem",
+                            }}
+                        />
+                    )}
                 </S.TweetsContainer>
             </S.Container>
         </NextSEO>

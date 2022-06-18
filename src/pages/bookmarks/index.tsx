@@ -43,19 +43,23 @@ export default function Bookmarks() {
                 />
 
                 <S.TweetsContainer>
-                    {bookmarks.length !== 0 ? (
+                    {bookmarks.length !== 0 &&
                         bookmarks.map((data: ITweet, index: Key) => (
                             <Tweet
                                 data={data}
                                 key={index}
                                 setTweets={setTweets}
                             />
-                        ))
-                    ) : (
-                        <h1>Don&apos;t have nothing here.</h1>
-                    )}
+                        ))}
                     {!isEndPage && <div ref={ref} />}
                     {scrollLoading && <LittleLoading color="#000" />}
+                    {!isEndPage && (
+                        <div
+                            style={{
+                                marginBottom: "50rem",
+                            }}
+                        />
+                    )}
                 </S.TweetsContainer>
             </S.Container>
         </NextSEO>
