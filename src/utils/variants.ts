@@ -33,7 +33,7 @@ export const widget = {
 
 export const pageTransition = {
     hidden: { opacity: 0, x: -200, y: 0 },
-    enter: {
+    visible: {
         opacity: 1,
         x: 0,
         y: 0,
