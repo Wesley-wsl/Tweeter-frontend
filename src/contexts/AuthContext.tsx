@@ -48,8 +48,11 @@ export function AuthProvider({ children }: IChildren) {
                     avatar: `${response.data.data.user.avatar}`,
                     id: response.data.data.user.id,
                 });
+                api.defaults.headers[
+                    "Authorization"
+                ] = `Bearer ${response.data.data.token}`;
                 toast.success("User logged with success!");
-                Router.reload();
+                Router.push(`/profile/${response.data.data.user.id}`);
             })
             .catch(error =>
                 toast.error(
