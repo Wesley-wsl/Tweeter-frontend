@@ -56,6 +56,17 @@ export const fadeInUp = {
     },
 };
 
+export const fadeInScroll = {
+    hidden: {
+        y: 60,
+        opacity: 0,
+    },
+    enter: {
+        y: 0,
+        opacity: 1,
+    },
+};
+
 export const fadeInLeft = {
     hidden: {
         x: 60,
@@ -81,5 +92,31 @@ export const fadeInRight = {
         transition: {
             duration: 1,
         },
+    },
+};
+
+export const menuMobile = {
+    visible: {
+        opacity: 1,
+        scale: 1,
+        x: 0,
+    },
+    hidden: {
+        opacity: 1,
+        scale: 0,
+        x: "-100vh",
+    },
+};
+
+export const optionMobile = {
+    visible: {
+        opacity: 1,
+        scale: 1,
+        x: 0,
+    },
+    hidden: {
+        opacity: 1,
+        scale: 0,
+        x: "-100vh",
     },
 };
