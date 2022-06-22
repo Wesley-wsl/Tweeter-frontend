@@ -55,6 +55,7 @@ export const Filter = styled.div`
         display: flex;
         gap: 1rem;
         margin-left: 7rem;
+        align-items: center;
 
         svg {
             cursor: pointer;
@@ -74,6 +75,21 @@ export const Filter = styled.div`
 
         img {
             border-radius: 0.2rem;
+        }
+    }
+
+    @media (max-width: 450px) {
+        margin-left: -5rem;
+    }
+
+    @media (max-width: 350px) {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        justify-content: center;
+        align-items: center;
+        button {
+            margin-left: 6rem;
         }
     }
 `;

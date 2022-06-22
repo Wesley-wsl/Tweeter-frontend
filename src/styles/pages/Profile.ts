@@ -17,4 +17,13 @@ export const Tweets = styled.section`
     div {
         flex: 2;
     }
+
+    @media (max-width: 1040px) {
+        margin-right: 1.5rem;
+        margin-left: 1.5rem;
+    }
+
+    @media (max-width: 850px) {
+        flex-direction: column;
+    }
 `;

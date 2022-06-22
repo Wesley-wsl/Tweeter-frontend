@@ -10,42 +10,15 @@ export const Container = styled.section`
     border: 0.1rem solid ${({ theme }) => theme.border.primary};
     position: relative;
 
-    .avatar {
-        border-radius: 0.8rem;
-        margin-top: -3rem;
-        margin-left: 2rem;
-        margin-right: 2rem;
-        padding: 0.4rem;
-        background-color: ${({ theme }) => theme.border.thirdy};
-        position: relative;
-        img {
-            border-radius: 0.8rem;
-            filter: contrast(120%);
-        }
+    @media (max-width: 1040px) {
+        margin-right: 1.5rem;
+        margin-left: 1.5rem;
+    }
 
-        .changeImage {
-            transition: all 0.2s linear;
-            position: absolute;
-            cursor: pointer;
-            top: 0.5rem;
-            right: 0.5rem;
-            left: 0.5rem;
-            bottom: 4.2rem;
-            border-radius: 0.8rem;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: #0008;
-            svg {
-                z-index: 9999;
-                cursor: pointer;
-            }
-            opacity: 0;
-
-            &:hover {
-                opacity: 1;
-            }
-        }
+    @media (max-width: 700px) {
+        display: flex;
+        flex-direction: column;
+        height: 28rem;
     }
 `;
 
@@ -93,6 +66,26 @@ export const Informations = styled.div`
             }
         }
     }
+
+    @media (max-width: 700px) {
+        > div {
+            display: flex;
+            flex-direction: column;
+            gap: 0.7rem;
+
+            > div {
+                display: flex;
+                flex-direction: row;
+            }
+        }
+
+        .top-informations {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            margin-top: -1rem;
+        }
+    }
 `;
 
 export const Description = styled.textarea`
@@ -114,5 +107,13 @@ export const Description = styled.textarea`
         outline: none;
         border: 0.1rem solid ${({ theme }) => theme.text.grey_400};
         border-radius: 0.8rem;
+    }
+
+    @media (max-width: 840px) {
+        width: 80%;
+    }
+
+    @media (max-width: 700px) {
+        margin: 0 auto;
     }
 `;

@@ -12,7 +12,7 @@ export const Container = styled.header`
     padding: 0 5rem;
     height: 6rem;
     align-items: center;
-    z-index: 99;
+    z-index: 90;
 
     border-bottom: 0.1rem solid ${({ theme }) => theme.border.primary};
 
@@ -20,19 +20,25 @@ export const Container = styled.header`
         cursor: pointer;
     }
 
-    nav > ul {
-        display: flex;
-        gap: 8rem;
-        list-style: none;
-
-        li {
-            cursor: pointer;
-            position: relative;
-            padding: 1rem 0;
+    @media (max-width: 770px) {
+        > span {
+            display: none;
         }
     }
+`;
 
-    nav > ul > li {
+export const NavigationWeb = styled.ul`
+    display: flex;
+    gap: 8rem;
+    list-style: none;
+
+    li {
+        cursor: pointer;
+        position: relative;
+        padding: 1rem 0;
+    }
+
+    li {
         &:hover {
             transition: all 0.2s linear;
             a {
@@ -74,5 +80,9 @@ export const Container = styled.header`
             background-color: ${({ theme }) => theme.button.primary};
             border-radius: 0.8rem;
         }
+    }
+
+    @media (max-width: 770px) {
+        display: none;
     }
 `;

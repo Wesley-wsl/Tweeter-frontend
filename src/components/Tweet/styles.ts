@@ -56,6 +56,20 @@ export const Actions = styled.ul`
     .bookmark {
         color: ${({ theme }) => theme.button.primary};
     }
+
+    @media (max-width: 450px) {
+        li {
+            display: flex;
+            flex-direction: column;
+            gap: 0.7rem;
+            align-items: center;
+            text-align: center;
+
+            svg {
+                margin-right: 0;
+            }
+        }
+    }
 `;
 
 export const Divider = styled.div`

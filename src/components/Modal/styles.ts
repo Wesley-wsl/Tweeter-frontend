@@ -9,8 +9,8 @@ export const Container = styled.div`
     right: 0;
     bottom: 0;
     left: 0;
-    max-width: 60rem;
-    max-height: 60rem;
+    max-width: fit-content;
+    max-height: fit-content;
     margin: auto;
     overflow: hidden;
     z-index: 9999;

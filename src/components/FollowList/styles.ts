@@ -23,6 +23,11 @@ export const Container = styled.div`
         background-color: ${({ theme }) => theme.background.input};
         border-radius: 3rem;
     }
+
+    @media (max-width: 700px) {
+        width: 80vw;
+        height: 70vh;
+    }
 `;
 
 export const TopFollowList = styled.div`

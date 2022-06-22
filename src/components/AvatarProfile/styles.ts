@@ -36,4 +36,17 @@ export const Container = styled.div`
             opacity: 1;
         }
     }
+
+    @media (max-width: 700px) {
+        display: flex;
+        flex-direction: column;
+        margin: 0 auto;
+        width: 10rem;
+        height: 10rem;
+        margin-top: -5rem;
+
+        .changeImage {
+            bottom: 0.5rem;
+        }
+    }
 `;

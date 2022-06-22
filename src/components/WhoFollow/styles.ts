@@ -28,4 +28,10 @@ export const WhoFollow = styled.div`
         padding-bottom: 1rem;
         margin: 1rem 0;
     }
+
+    @media (max-width: 850px) {
+        > div {
+            margin: 0 auto;
+        }
+    }
 `;

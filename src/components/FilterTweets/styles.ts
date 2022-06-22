@@ -17,6 +17,7 @@ export const Container = styled.ul`
     margin-right: 2.4rem;
     border-radius: 1.6rem;
     border: 0.1rem solid ${({ theme }) => theme.border.primary};
+
     li {
         color: ${({ theme }) => theme.text.grey_300};
         margin-left: 2rem;
@@ -36,6 +37,46 @@ export const Container = styled.ul`
                 left: -2rem;
                 top: -0.5rem;
                 border-radius: 0.8rem;
+            }
+        }
+    }
+
+    @media (max-width: 850px) {
+        position: static;
+        flex-direction: row;
+        width: 100%;
+        margin-bottom: 3.5rem;
+
+        li {
+            padding: 2rem;
+
+            &.active {
+                &::before {
+                    width: 100%;
+                    height: 0.3rem;
+                    left: 0;
+                    right: 0;
+                    top: auto;
+                    bottom: 0;
+                }
+            }
+        }
+    }
+
+    @media (max-width: 410px) {
+        flex-direction: column;
+
+        li {
+            padding: 2rem 0;
+
+            &.active {
+                &::before {
+                    width: 0.3rem;
+                    height: 3.2rem;
+                    left: -2rem;
+                    top: 1.5rem;
+                    border-radius: 0.8rem;
+                }
             }
         }
     }

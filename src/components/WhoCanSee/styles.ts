@@ -63,4 +63,9 @@ export const WhoCanSeeOptions = styled.div`
             margin-right: 1rem;
         }
     }
+
+    @media (max-width: 450px) {
+        margin-left: -8rem;
+        width: 22rem;
+    }
 `;

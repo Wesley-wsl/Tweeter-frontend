@@ -42,4 +42,10 @@ export const Container = styled.div`
             }
         }
     }
+
+    @media (max-width: 450px) {
+        div > button > svg {
+            width: 2rem;
+        }
+    }
 `;

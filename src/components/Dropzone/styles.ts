@@ -44,4 +44,15 @@ export const Container = styled.div<IDropzoneStyle>`
         color: red;
         text-align: center;
     }
+
+    @media (max-width: 650px) {
+        width: 70vw;
+        height: 50vh;
+
+        p {
+            padding: 2rem;
+            text-align: center;
+            font-size: clamp(1.3rem, 2vw, 1.5rem);
+        }
+    }
 `;

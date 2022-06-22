@@ -16,6 +16,10 @@ export const Container = styled.div`
             align-items: center;
             cursor: pointer;
 
+            span {
+                width: 4rem;
+            }
+
             div {
                 display: flex;
                 flex-direction: column;
@@ -41,6 +45,10 @@ export const Container = styled.div`
             height: 2.9rem;
             font-size: 1.2rem;
             margin-left: 4rem;
+
+            @media (max-width: 325px) {
+                margin-left: 0rem;
+            }
         }
     }
 
