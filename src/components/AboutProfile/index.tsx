@@ -84,6 +84,7 @@ const AboutProfile: React.FC<IAboutProfile> = ({ userInformations }) => {
                     />
                 </div>
                 <S.Description
+                    data-testid="about_me"
                     maxLength={120}
                     rows={3}
                     disabled={userAuthenticated?.id !== userInformations.id}
