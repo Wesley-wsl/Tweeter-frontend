@@ -23,7 +23,12 @@ const Trends = ({ handleSearch, search }: ITrends) => {
 
                 {trends ? (
                     trends.data.map((trend: IShowTrend, index: number) => (
-                        <div
+                        <motion.div
+                            animate={
+                                trend.trend.slice(1) === search
+                                    ? { scale: 1.1, x: 10 }
+                                    : { scale: 1, x: 0 }
+                            }
                             onClick={e =>
                                 trend.trend.slice(1) !== search
                                     ? handleSearch(e, trend.trend.slice(1))
@@ -43,7 +48,7 @@ const Trends = ({ handleSearch, search }: ITrends) => {
                                     <Close width={16} height={16} />
                                 </S.CloseTrend>
                             )}
-                        </div>
+                        </motion.div>
                     ))
                 ) : (
                     <S.LoadingContainer>

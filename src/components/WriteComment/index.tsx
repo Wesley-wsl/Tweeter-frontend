@@ -1,4 +1,5 @@
 import { Send } from "@styled-icons/boxicons-regular";
+import { motion } from "framer-motion";
 import Image from "next/image";
 import React, { useContext, useState } from "react";
 import { toast } from "react-toastify";
@@ -63,9 +64,13 @@ const WriteComment = ({ setTweetComments, tweetId }: IWriteComment) => {
                     onChange={({ target }) => setComment(target.value)}
                     value={comment}
                 />
-                <button onClick={handleComment}>
+                <motion.button
+                    onClick={handleComment}
+                    whileTap={{ scale: 0.7 }}
+                    transition={{ duration: 0.05 }}
+                >
                     <Send color="#fff" width={25} />
-                </button>
+                </motion.button>
             </div>
         </S.Container>
     );
