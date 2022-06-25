@@ -1,10 +1,14 @@
+import { rest } from "msw";
+
 import { userJest } from "../../tests/mocks/constants";
 import {
     render,
     screen,
     fireEvent,
     authContextValue,
+    waitFor,
 } from "../../tests/mocks/setupProviders";
+import { baseURL, server } from "../../tests/mocks/setupServer";
 import AboutProfile from "./index";
 
 describe("#AboutProfile", () => {
@@ -12,7 +16,7 @@ describe("#AboutProfile", () => {
         render(<AboutProfile userInformations={userJest} />);
 
         const name = screen.getByText(userJest.name);
-        const about_me = screen.getByText(userJest.about_me);
+        const about_me = screen.getByRole("textbox");
         const followingCount = screen.getByText(userJest.followingCount);
         const followersCount = screen.getByText(userJest.followersCount);
 
@@ -23,9 +27,9 @@ describe("#AboutProfile", () => {
     });
 
     test("Should be able to edit your about_me.", () => {
-        render(<AboutProfile userInformations={userJest} />);
+        render(<AboutProfile userInformations={{ ...userJest, id: "2" }} />);
 
-        const about_me = screen.getByTestId("about_me") as HTMLInputElement;
+        const about_me = screen.getByRole("textbox") as HTMLInputElement;
 
         fireEvent.change(about_me, {
             target: {
@@ -40,7 +44,7 @@ describe("#AboutProfile", () => {
     test("Shouldn't be able to edit about_me if user authenticated is not own this profile.", () => {
         render(<AboutProfile userInformations={userJest} />);
 
-        const about_me = screen.getByTestId("about_me") as HTMLInputElement;
+        const about_me = screen.getByRole("textbox") as HTMLInputElement;
         expect(about_me).toBeDisabled();
     });
 
@@ -75,7 +79,6 @@ describe("#AboutProfile", () => {
 
     test("Should be able to open modal that list followers on click in followers.", () => {
         render(<AboutProfile userInformations={userJest} />);
-        screen.logTestingPlaygroundURL();
 
         const followers = screen.getByText(/followers/i);
         expect(followers).toBeInTheDocument();
@@ -102,5 +105,76 @@ describe("#AboutProfile", () => {
         );
         expect(followingModal).toBeInTheDocument();
         expect(screen.getByTestId("modal")).toBeInTheDocument();
+    });
+
+    test("Should be able to handle with errors about update about_me.", () => {
+        render(<AboutProfile userInformations={{ ...userJest, id: "2" }} />);
+
+        const about_me = screen.getByRole("textbox") as HTMLInputElement;
+
+        fireEvent.change(about_me, {
+            target: {
+                value: "This description changed.",
+            },
+        });
+        fireEvent.blur(about_me);
+
+        waitFor(() => {
+            const errorMessage = screen.getByText("Access denied.");
+            expect(errorMessage).toBeInTheDocument();
+        });
+
+        expect(about_me.value).toBe("This description changed.");
+    });
+
+    test("Should be able to handle error showing a default message.", () => {
+        server.use(
+            rest.put(`${baseURL}/user/*`, (req, res, ctx) => {
+                return res(ctx.status(500));
+            }),
+        );
+
+        render(<AboutProfile userInformations={{ ...userJest, id: "2" }} />);
+
+        const about_me = screen.getByRole("textbox") as HTMLInputElement;
+
+        fireEvent.change(about_me, {
+            target: {
+                value: "This description changed.",
+            },
+        });
+        fireEvent.blur(about_me);
+
+        waitFor(() => {
+            const errorMessage = screen.getByText(
+                "Something went wrong, please try again later.",
+            );
+            expect(errorMessage).toBeInTheDocument();
+        });
+
+        expect(about_me.value).toBe("This description changed.");
+    });
+
+    test("Shouldn't be able to update about_me if user authenticated is not own this profile.", () => {
+        server.use(
+            rest.put(`${baseURL}/user/*`, (req, res, ctx) => {
+                return res(ctx.status(500));
+            }),
+        );
+
+        render(<AboutProfile userInformations={{ ...userJest, id: "200" }} />);
+
+        const about_me = screen.getByRole("textbox") as HTMLInputElement;
+        fireEvent.blur(about_me);
+
+        waitFor(() => {
+            const accessDenied = screen.getByText("Access denied.");
+            const errorMessage = screen.getByText(
+                "Something went wrong, please try again later.",
+            );
+            expect(accessDenied).not.toBeInTheDocument();
+            expect(errorMessage).not.toBeInTheDocument();
+        });
+        expect(about_me).toBeInTheDocument();
     });
 });
