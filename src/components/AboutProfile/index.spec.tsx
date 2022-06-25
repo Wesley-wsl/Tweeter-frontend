@@ -32,6 +32,7 @@ describe("#AboutProfile", () => {
                 value: "This description changed.",
             },
         });
+        fireEvent.blur(about_me);
 
         expect(about_me.value).toBe("This description changed.");
     });
@@ -70,5 +71,36 @@ describe("#AboutProfile", () => {
 
         expect(button).toBeInTheDocument();
         expect(button).not.toBeDisabled();
+    });
+
+    test("Should be able to open modal that list followers on click in followers.", () => {
+        render(<AboutProfile userInformations={userJest} />);
+        screen.logTestingPlaygroundURL();
+
+        const followers = screen.getByText(/followers/i);
+        expect(followers).toBeInTheDocument();
+
+        fireEvent.click(followers);
+
+        const followersModal = screen.getByText(
+            `${userJest.name} is followers.`,
+        );
+        expect(followersModal).toBeInTheDocument();
+        expect(screen.getByTestId("modal")).toBeInTheDocument();
+    });
+
+    test("Should be able to open modal that list following on click in following.", () => {
+        render(<AboutProfile userInformations={userJest} />);
+
+        const following = screen.getByText(/following/i);
+        expect(following).toBeInTheDocument();
+
+        fireEvent.click(following);
+
+        const followingModal = screen.getByText(
+            `${userJest.name} is following.`,
+        );
+        expect(followingModal).toBeInTheDocument();
+        expect(screen.getByTestId("modal")).toBeInTheDocument();
     });
 });
