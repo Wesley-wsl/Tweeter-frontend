@@ -29,7 +29,12 @@ const AvatarProfile: React.FC<IAvatarProfile> = ({ avatar, userId }) => {
                 />
                 {userAuthenticated && userAuthenticated.id === userId && (
                     <div className="changeImage" onClick={handleShowModal}>
-                        <ImageAdd width={25} height={25} color={"#fff"} />
+                        <ImageAdd
+                            width={25}
+                            height={25}
+                            color={"#fff"}
+                            aria-label="A landscape icon to add an image."
+                        />
                     </div>
                 )}
             </S.Container>
