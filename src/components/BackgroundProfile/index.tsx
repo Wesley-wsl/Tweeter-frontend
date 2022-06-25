@@ -24,6 +24,7 @@ const BackgroundProfile: React.FC<IBackgroundProfile> = ({
                         ? `${API_BASE_URL}/files/${background}`
                         : "/background/background.webp"
                 }
+                data-testid="background profile"
             >
                 {userAuthenticated && userAuthenticated.id === userId && (
                     <div
@@ -32,7 +33,12 @@ const BackgroundProfile: React.FC<IBackgroundProfile> = ({
                             setShowBackgroundModal(!showBackgroundModal)
                         }
                     >
-                        <ImageAdd width={25} height={25} color={"#fff"} />
+                        <ImageAdd
+                            width={25}
+                            height={25}
+                            color={"#fff"}
+                            aria-label="A landscape icon to add an image."
+                        />
                     </div>
                 )}
             </S.Container>
