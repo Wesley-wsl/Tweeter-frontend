@@ -19,7 +19,6 @@ const AboutProfile: React.FC<IAboutProfile> = ({ userInformations }) => {
         if (
             aboutMe &&
             aboutMe !== userInformations.about_me &&
-            aboutMe !== "Nothing about me. :/" &&
             userAuthenticated?.id === userInformations.id
         ) {
             const formData = new FormData();
