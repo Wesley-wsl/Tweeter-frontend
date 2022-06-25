@@ -1,45 +1,20 @@
-import { render, screen, fireEvent } from "@testing-library/react";
-import { ThemeProvider } from "styled-components";
-
-import { AuthContext } from "../../contexts/AuthContext";
-import { dark } from "../../styles/themes";
+import { userJest } from "../../tests/mocks/constants";
+import {
+    render,
+    screen,
+    fireEvent,
+    authContextValue,
+} from "../../tests/mocks/setupProviders";
 import AboutProfile from "./index";
-
-const userInformationsBase = {
-    id: "1",
-    name: "Jorkis",
-    email: "jorkis@gmail.com",
-    avatar: null,
-    background: null,
-    followingCount: 1,
-    followersCount: 2,
-    followers_id: ["3"],
-    following_id: ["4"],
-    about_me: "About me",
-    liked_tweets_id: ["1"],
-    liked_comments_id: ["1"],
-    retweets_id: ["1"],
-    bookmarks_id: ["1"],
-    created_at: new Date(),
-    updated_at: new Date(),
-};
 
 describe("#AboutProfile", () => {
     test("Should render informations about user.", () => {
-        render(
-            <ThemeProvider theme={dark}>
-                <AboutProfile userInformations={userInformationsBase} />
-            </ThemeProvider>,
-        );
+        render(<AboutProfile userInformations={userJest} />);
 
-        const name = screen.getByText(userInformationsBase.name);
-        const about_me = screen.getByText(userInformationsBase.about_me);
-        const followingCount = screen.getByText(
-            userInformationsBase.followingCount,
-        );
-        const followersCount = screen.getByText(
-            userInformationsBase.followersCount,
-        );
+        const name = screen.getByText(userJest.name);
+        const about_me = screen.getByText(userJest.about_me);
+        const followingCount = screen.getByText(userJest.followingCount);
+        const followersCount = screen.getByText(userJest.followersCount);
 
         expect(name).toBeInTheDocument();
         expect(about_me).toBeInTheDocument();
@@ -48,11 +23,7 @@ describe("#AboutProfile", () => {
     });
 
     test("Should be able to edit your about_me.", () => {
-        render(
-            <ThemeProvider theme={dark}>
-                <AboutProfile userInformations={userInformationsBase} />
-            </ThemeProvider>,
-        );
+        render(<AboutProfile userInformations={userJest} />);
 
         const about_me = screen.getByTestId("about_me") as HTMLInputElement;
 
@@ -65,41 +36,15 @@ describe("#AboutProfile", () => {
         expect(about_me.value).toBe("This description changed.");
     });
 
-    test("Shouldn't be able to edit abot_me if user authenticated is not own this profile.", () => {
-        render(
-            <ThemeProvider theme={dark}>
-                <AuthContext.Provider
-                    value={{
-                        user: { name: "None", avatar: "something", id: "2" },
-                        setUser: jest.fn(),
-                        loadingSignIn: false,
-                        signIn: jest.fn(),
-                    }}
-                >
-                    <AboutProfile userInformations={userInformationsBase} />
-                </AuthContext.Provider>
-            </ThemeProvider>,
-        );
+    test("Shouldn't be able to edit about_me if user authenticated is not own this profile.", () => {
+        render(<AboutProfile userInformations={userJest} />);
 
         const about_me = screen.getByTestId("about_me") as HTMLInputElement;
         expect(about_me).toBeDisabled();
     });
 
     test("Should render button to follow if user authenticated don't follow this profile.", () => {
-        render(
-            <ThemeProvider theme={dark}>
-                <AuthContext.Provider
-                    value={{
-                        user: { name: "None", avatar: "something", id: "2" },
-                        setUser: jest.fn(),
-                        loadingSignIn: false,
-                        signIn: jest.fn(),
-                    }}
-                >
-                    <AboutProfile userInformations={userInformationsBase} />
-                </AuthContext.Provider>
-            </ThemeProvider>,
-        );
+        render(<AboutProfile userInformations={userJest} />);
 
         const button = screen.getByRole("button", {
             name: "Button for follow user.",
@@ -111,18 +56,12 @@ describe("#AboutProfile", () => {
 
     test("Should render button to unfollow if user authenticated already follow this profile.", () => {
         render(
-            <ThemeProvider theme={dark}>
-                <AuthContext.Provider
-                    value={{
-                        user: { name: "None", avatar: "something", id: "3" },
-                        setUser: jest.fn(),
-                        loadingSignIn: false,
-                        signIn: jest.fn(),
-                    }}
-                >
-                    <AboutProfile userInformations={userInformationsBase} />
-                </AuthContext.Provider>
-            </ThemeProvider>,
+            <AboutProfile
+                userInformations={{
+                    ...userJest,
+                    followers_id: [authContextValue.user?.id as string],
+                }}
+            />,
         );
 
         const button = screen.getByRole("button", {
