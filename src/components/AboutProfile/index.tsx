@@ -88,11 +88,7 @@ const AboutProfile: React.FC<IAboutProfile> = ({ userInformations }) => {
                     maxLength={120}
                     rows={3}
                     disabled={userAuthenticated?.id !== userInformations.id}
-                    defaultValue={
-                        userInformations.about_me.length !== 0
-                            ? userInformations.about_me.trim()
-                            : "Nothing about me. :/"
-                    }
+                    defaultValue={userInformations.about_me.trim()}
                     onBlur={onEditAboutMe}
                     onChange={({ target }) => setAboutMe(target.value)}
                 />
