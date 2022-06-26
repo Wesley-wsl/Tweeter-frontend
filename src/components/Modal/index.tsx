@@ -17,7 +17,7 @@ const Modal: React.FC<IModal> = ({ children, isActive, setIsActive }) => {
                         animate="visible"
                         exit="hidden"
                     >
-                        <div>{children}</div>
+                        <div data-testid="modal">{children}</div>
                     </S.Container>
                     <S.Background
                         as={motion.div}
@@ -25,6 +25,7 @@ const Modal: React.FC<IModal> = ({ children, isActive, setIsActive }) => {
                         initial="hidden"
                         animate="visible"
                         exit="hidden"
+                        data-testid="modal-overlay"
                         onClick={() => setIsActive(!isActive)}
                     />
                 </>
