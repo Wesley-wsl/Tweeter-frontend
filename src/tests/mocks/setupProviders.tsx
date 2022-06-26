@@ -1,5 +1,6 @@
 import { render, RenderOptions } from "@testing-library/react";
 import React, { FC, ReactElement } from "react";
+import { ToastContainer, Zoom } from "react-toastify";
 import { ThemeProvider } from "styled-components";
 
 import { IAuthContext } from "../../@types";
@@ -15,11 +16,24 @@ export const authContextValue: IAuthContext = {
 
 const AllTheProviders: FC<{ children: React.ReactNode }> = ({ children }) => {
     return (
-        <ThemeProvider theme={dark}>
-            <AuthContext.Provider value={authContextValue}>
-                {children}
-            </AuthContext.Provider>
-        </ThemeProvider>
+        <>
+            <ToastContainer
+                position="top-right"
+                autoClose={3000}
+                newestOnTop
+                closeOnClick
+                rtl={false}
+                draggable={true}
+                pauseOnHover
+                transition={Zoom}
+                theme="light"
+            />
+            <ThemeProvider theme={dark}>
+                <AuthContext.Provider value={authContextValue}>
+                    {children}
+                </AuthContext.Provider>
+            </ThemeProvider>
+        </>
     );
 };
 
