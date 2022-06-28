@@ -13,6 +13,34 @@ const handlers = [
     rest.delete(`${baseURL}/comment/*/like`, (req, res, ctx) => {
         return res(ctx.status(200));
     }),
+    rest.put(`${baseURL}/comment/1/like`, (req, res, ctx) => {
+        return res(ctx.status(500));
+    }),
+    rest.delete(`${baseURL}/comment/*/like`, (req, res, ctx) => {
+        return res(ctx.status(200));
+    }),
+    rest.put(`${baseURL}/user/follower/*`, (req, res, ctx) => {
+        return res(ctx.status(200));
+    }),
+    rest.delete(`${baseURL}/user/unfollow/*`, (req, res, ctx) => {
+        return res(ctx.status(200));
+    }),
+    rest.get(`${baseURL}/user/me/whofollow`, (req, res, ctx) => {
+        return res(
+            ctx.status(200),
+            ctx.json({
+                data: [{ ...userJest }, { ...userJest, name: "Second User" }],
+            }),
+        );
+    }),
+    rest.get(`${baseURL}/user/me/verify`, (req, res, ctx) => {
+        return res(
+            ctx.status(200),
+            ctx.json({
+                id: "2",
+            }),
+        );
+    }),
     rest.put(`${baseURL}/user/*`, (req, res, ctx) => {
         return res(
             ctx.status(404),
@@ -27,25 +55,6 @@ const handlers = [
             }),
         );
     }),
-    rest.put(`${baseURL}/comment/1/like`, (req, res, ctx) => {
-        return res(ctx.status(500));
-    }),
-    rest.delete(`${baseURL}/comment/*/like`, (req, res, ctx) => {
-        return res(ctx.status(200));
-    }),
-    rest.put(`/user/follower/*`, (req, res, ctx) => {
-        return res(ctx.status(200));
-    }),
-    rest.delete(`/user/unfollow/*`, (req, res, ctx) => {
-        return res(ctx.status(200));
-    }),
-    rest.get("/user/me/whofollow", (req, res, ctx) => {
-        return res(
-            ctx.status(200),
-            ctx.json({
-                data: [{ ...userJest }, { ...userJest, name: "Second User" }],
-            }),
-        );
-    }),
 ];
+
 export const server = setupServer(...handlers);
