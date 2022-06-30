@@ -10,7 +10,7 @@ describe("#AvatarProfile component.", () => {
     });
 
     test("Should be able to open modal to edit avatar if user authenticated is own this profile.", () => {
-        render(<AvatarProfile avatar={null} userId="2" />);
+        render(<AvatarProfile avatar={"random.png"} userId="2" />);
 
         const changeImage = screen.getByLabelText(
             "A landscape icon to add an image.",

@@ -13,7 +13,7 @@ describe("#BackgroundProfile component.", () => {
     });
 
     test("Should be able to open modal to edit background if user authenticated is own this profile.", () => {
-        render(<BackgroundProfile background={null} userId="2" />);
+        render(<BackgroundProfile background={"nothing.png"} userId="2" />);
 
         const modal = screen.queryByTestId("modal");
         const changeImage = screen.getByLabelText(
