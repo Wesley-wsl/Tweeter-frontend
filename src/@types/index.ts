@@ -13,6 +13,7 @@ export interface INextSEO {
     title: string;
     description: string;
     children: JSX.Element;
+    opacityTransition?: boolean;
 }
 
 export interface IButtonForm {
@@ -137,6 +138,7 @@ export interface IComment {
 
 export interface ICommentData {
     data: IComment;
+    setTweetComments: Dispatch<SetStateAction<IComment[]>>;
 }
 
 export interface ILittleLoading {
@@ -188,6 +190,7 @@ export interface IFollowList {
 
 export interface IFollowCard {
     data: IAuthor;
+    setShowFollowing?: Dispatch<SetStateAction<boolean>>;
 }
 
 export enum IFilterOptions {
