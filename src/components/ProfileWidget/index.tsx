@@ -70,24 +70,42 @@ export const ProfileWidget: React.FC = () => {
                             exit="hidden"
                         >
                             <li onClick={handleMyProfile}>
-                                <AccountCircle width={22} height={22} />
+                                <AccountCircle
+                                    width={22}
+                                    height={22}
+                                    aria-label="Account circle icon to go to my profile"
+                                />
                                 My profile
                             </li>
                             <hr />
                             <li onClick={handleTheme}>
-                                <DarkMode width={22} height={22} />
+                                <DarkMode
+                                    width={22}
+                                    height={22}
+                                    aria-label="Moon icon to change theme"
+                                />
                                 Dark Mode
                             </li>
                             <hr />
                             <li onClick={handleLogout}>
-                                <ExitToApp width={22} height={22} color="red" />
+                                <ExitToApp
+                                    width={22}
+                                    height={22}
+                                    color="red"
+                                    aria-label="Logout icon to exit your account."
+                                />
                                 Logout
                             </li>
                         </S.Options>
                     )}
                 </AnimatePresence>
             </S.Container>
-            {showProfile && <S.Overlay onClick={() => setShowProfile(false)} />}
+            {showProfile && (
+                <S.Overlay
+                    onClick={() => setShowProfile(false)}
+                    data-testid="overlay"
+                />
+            )}
         </>
     );
 };
