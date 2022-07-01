@@ -2,6 +2,7 @@ import { render, RenderOptions } from "@testing-library/react";
 import React, { FC, ReactElement } from "react";
 import { ToastContainer, Zoom } from "react-toastify";
 import { ThemeProvider } from "styled-components";
+import { SWRConfig } from "swr";
 
 import { IAuthContext } from "../../@types";
 import { AuthContext } from "../../contexts/AuthContext";
@@ -30,7 +31,9 @@ const AllTheProviders: FC<{ children: React.ReactNode }> = ({ children }) => {
             />
             <ThemeProvider theme={dark}>
                 <AuthContext.Provider value={authContextValue}>
-                    {children}
+                    <SWRConfig value={{ dedupingInterval: 0 }}>
+                        {children}
+                    </SWRConfig>
                 </AuthContext.Provider>
             </ThemeProvider>
         </>
