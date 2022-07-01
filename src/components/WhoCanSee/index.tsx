@@ -39,18 +39,32 @@ const WhoCanSee = ({ setTweetIsPublic }: IWhoCanSee) => {
                         <p>Choose who can see this Tweet.</p>
                         <ul>
                             <li onClick={handleIsPublic}>
-                                <Earth size={20} color="#000" /> Everyone
+                                <Earth
+                                    size={20}
+                                    color="#000"
+                                    aria-label="Earth icon to make this tweet public"
+                                />
+                                Everyone
                             </li>
                             <li onClick={handleIsPrivate}>
-                                <People size={20} color="#000" /> People that
-                                follow you
+                                <People
+                                    size={20}
+                                    color="#000"
+                                    aria-label="People icon to make this tweet private"
+                                />
+                                People that follow you
                             </li>
                         </ul>
                     </S.WhoCanSeeOptions>
                 )}
             </AnimatePresence>
 
-            {tweetOptions && <Overlay onClick={() => setTweetOptions(false)} />}
+            {tweetOptions && (
+                <Overlay
+                    onClick={() => setTweetOptions(false)}
+                    data-testid="overlay"
+                />
+            )}
         </S.Container>
     );
 };
