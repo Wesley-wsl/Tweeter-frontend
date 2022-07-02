@@ -67,7 +67,7 @@ const SignUpForm: React.FC = () => {
                     <PersonFill
                         width="20"
                         color={"#2F80ED"}
-                        aria-label="Person Icon"
+                        aria-label="Person icon for field name"
                         className="formIcon"
                     />
                 }
@@ -82,7 +82,7 @@ const SignUpForm: React.FC = () => {
                     <PersonFill
                         width="20"
                         color={"#2F80ED"}
-                        aria-label="Person Icon"
+                        aria-label="Person icon for field email"
                         className="formIcon"
                     />
                 }
@@ -99,7 +99,7 @@ const SignUpForm: React.FC = () => {
                         <ViewShow
                             width="20"
                             color={"#2F80ED"}
-                            aria-label="View Show Icon"
+                            aria-label="View Show Icon that indicate password hide"
                             className="formIcon"
                             onClick={changePasswordMode}
                         />
@@ -107,7 +107,7 @@ const SignUpForm: React.FC = () => {
                         <ViewHide
                             width="20"
                             color={"#2F80ED"}
-                            aria-label="View Show Icon"
+                            aria-label="View Hide Icon that indicate password not hide"
                             className="formIcon"
                             onClick={changePasswordMode}
                         />
