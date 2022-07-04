@@ -40,12 +40,17 @@ const Trends = ({ handleSearch, search }: ITrends) => {
                                     ? "trendActive"
                                     : ""
                             }
+                            data-testid="trend"
                         >
                             <p>{trend.trend}</p>
                             <p>{trend.tweetsQuantity} Tweets</p>
                             {trend.trend.slice(1) === search && (
                                 <S.CloseTrend>
-                                    <Close width={16} height={16} />
+                                    <Close
+                                        width={16}
+                                        height={16}
+                                        aria-label="Close icon to deselect trend."
+                                    />
                                 </S.CloseTrend>
                             )}
                         </motion.div>
