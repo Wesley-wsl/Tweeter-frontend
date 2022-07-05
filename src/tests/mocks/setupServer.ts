@@ -8,16 +8,26 @@ export const baseURL =
 
 const handlers = [
     rest.put(`${baseURL}/comment/*/like`, (req, res, ctx) => {
-        return res(ctx.status(200));
+        return res(
+            ctx.status(200),
+            ctx.json({
+                validation: {
+                    body: {
+                        message: "Access denied.",
+                    },
+                },
+            }),
+        );
     }),
     rest.delete(`${baseURL}/comment/*/like`, (req, res, ctx) => {
-        return res(ctx.status(200));
-    }),
-    rest.put(`${baseURL}/comment/1/like`, (req, res, ctx) => {
-        return res(ctx.status(500));
-    }),
-    rest.delete(`${baseURL}/comment/*/like`, (req, res, ctx) => {
-        return res(ctx.status(200));
+        return res(
+            ctx.status(400),
+            ctx.json({
+                validation: {
+                    body: {},
+                },
+            }),
+        );
     }),
     rest.put(`${baseURL}/user/follower/*`, (req, res, ctx) => {
         return res(ctx.status(200));
@@ -52,6 +62,59 @@ const handlers = [
                         },
                     },
                 },
+            }),
+        );
+    }),
+    rest.get(`${baseURL}/tweet/me/trends`, (req, res, ctx) => {
+        return res(
+            ctx.status(200),
+            ctx.json({
+                data: [
+                    {
+                        trend: "#backend",
+                        tweetsQuantity: 10,
+                    },
+                ],
+            }),
+        );
+    }),
+    rest.get(`${baseURL}/user/*/following`, (req, res, ctx) => {
+        return res(
+            ctx.status(200),
+            ctx.json({
+                data: [
+                    {
+                        id: "2",
+                        name: "Second User",
+                        followers_id: ["100"],
+                        avatar: "/png.png",
+                        about_me: "About me.",
+                    },
+                ],
+            }),
+        );
+    }),
+    rest.get(`${baseURL}/user/*/followers`, (req, res, ctx) => {
+        return res(
+            ctx.status(200),
+            ctx.json({
+                data: [
+                    {
+                        id: "2",
+                        name: "Second User",
+                        followers_id: ["100"],
+                        avatar: "/png.png",
+                        about_me: "About me.",
+                    },
+                ],
+            }),
+        );
+    }),
+    rest.get(`${baseURL}/user/*`, (req, res, ctx) => {
+        return res(
+            ctx.status(200),
+            ctx.json({
+                data: userJest,
             }),
         );
     }),
