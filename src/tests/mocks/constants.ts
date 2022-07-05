@@ -31,3 +31,21 @@ export const commentJest: IComment = {
     image: "/kkk",
     created_at: new Date(),
 };
+
+export const tweetMocked: ITweet = {
+    id: "1",
+    author_id: "3",
+    likes: 2,
+    liked_users_id: ["1", "4"],
+    retweets_id: [],
+    tweet_id: null,
+    image: "/files/image.jpg",
+    content: "This is a content.",
+    comments_id: ["2", "5", "7"],
+    isPublic: "true",
+    users_saved_id: [],
+    author: userJest,
+    comments: [commentJest] as IComment[],
+    created_at: new Date(),
+    updated_at: new Date(),
+};
