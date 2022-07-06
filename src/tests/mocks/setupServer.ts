@@ -1,7 +1,7 @@
 import { rest } from "msw";
 import { setupServer } from "msw/node";
 
-import { userJest } from "./constants";
+import { tweetMocked, userJest } from "./constants";
 
 export const baseURL =
     process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:3333";
@@ -115,6 +115,14 @@ const handlers = [
             ctx.status(200),
             ctx.json({
                 data: userJest,
+            }),
+        );
+    }),
+    rest.post(`${baseURL}/tweet`, (req, res, ctx) => {
+        return res(
+            ctx.status(200),
+            ctx.json({
+                data: tweetMocked,
             }),
         );
     }),
