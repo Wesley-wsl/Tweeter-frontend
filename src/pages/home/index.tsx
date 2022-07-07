@@ -3,7 +3,6 @@ import { useEffect } from "react";
 
 import { ITweet } from "../../@types";
 import LittleLoading from "../../components/LittleLoading";
-import { Loading } from "../../components/Loading";
 import NextSEO from "../../components/NextSEO";
 import Trends from "../../components/Trends";
 import Tweet from "../../components/Tweet";
@@ -28,8 +27,6 @@ export default function Home() {
     useEffect(() => {
         handleFilter("latest");
     }, []);
-
-    if (!tweets) return <Loading />;
 
     return (
         <NextSEO

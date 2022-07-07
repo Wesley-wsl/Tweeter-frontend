@@ -8,7 +8,6 @@ import { Button } from "../../components/Button";
 import FilterTweets from "../../components/FilterTweets";
 import FollowCard from "../../components/FollowCard";
 import LittleLoading from "../../components/LittleLoading";
-import { Loading } from "../../components/Loading";
 import NextSEO from "../../components/NextSEO";
 import Tweet from "../../components/Tweet";
 import { useInfiniteScroll } from "../../hooks/useInfiniteScroll";
@@ -38,8 +37,6 @@ export default function Explorer() {
         setSearch("");
     }, [filter]);
 
-    if (!tweets) return <Loading />;
-
     return (
         <NextSEO title="Tweeter - Explore" description="Explore tweets">
             <S.Container>
@@ -64,7 +61,12 @@ export default function Explorer() {
                         initial="hidden"
                         animate="enter"
                     >
-                        <Search width={25} height={25} color="#BDBDBD" />
+                        <Search
+                            width={25}
+                            height={25}
+                            color="#BDBDBD"
+                            aria-label="A search icon to search for a tweet."
+                        />
                         <input
                             type="text"
                             placeholder="Search"

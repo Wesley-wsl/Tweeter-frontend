@@ -4,7 +4,6 @@ import { Key, useContext } from "react";
 import { IFilterOptions, ITweet } from "../../@types";
 import FilterTweets from "../../components/FilterTweets";
 import LittleLoading from "../../components/LittleLoading";
-import { Loading } from "../../components/Loading";
 import NextSEO from "../../components/NextSEO";
 import Tweet from "../../components/Tweet";
 import { AuthContext } from "../../contexts/AuthContext";
@@ -23,8 +22,6 @@ export default function Bookmarks() {
         isEndPage,
         scrollLoading,
     } = useInfiniteScroll(`user/${user?.id}/bookmarks`);
-
-    if (!bookmarks) return <Loading />;
 
     return (
         <NextSEO

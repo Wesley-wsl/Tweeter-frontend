@@ -34,7 +34,7 @@ export default function Profile() {
         handleReset();
     }, [id]);
 
-    if (!user || !tweets) return <Loading />;
+    if (!user) return <Loading />;
 
     return (
         <NextSEO
