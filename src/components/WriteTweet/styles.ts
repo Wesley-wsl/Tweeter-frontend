@@ -22,6 +22,7 @@ export const Write = styled.div`
 
     img {
         border-radius: 2rem;
+        filter: contrast(115%);
     }
 
     textarea {
