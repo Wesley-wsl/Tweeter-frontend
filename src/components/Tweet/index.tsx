@@ -107,7 +107,11 @@ const Tweet: React.FC<ITweetComponent> = ({ data, setTweets }) => {
             <S.Actions>
                 <label htmlFor={`comment-${data.id}`}>
                     <li>
-                        <ModeComment size={18} /> Comment
+                        <ModeComment
+                            size={18}
+                            aria-label="Comment icon for go to make a comment."
+                        />
+                        Comment
                     </li>
                 </label>
                 <li
@@ -115,9 +119,17 @@ const Tweet: React.FC<ITweetComponent> = ({ data, setTweets }) => {
                     onClick={alreadyLiked ? handleUnlikeTweet : handleLikeTweet}
                 >
                     {alreadyLiked ? (
-                        <HeartFill size={18} color="#EB5757" />
+                        <HeartFill
+                            size={18}
+                            color="#EB5757"
+                            aria-label="Heart fill icon to remove your like on click."
+                        />
                     ) : (
-                        <Heart size={18} color="#EB5757" />
+                        <Heart
+                            size={18}
+                            color="#EB5757"
+                            aria-label="Heart icon to give like on click."
+                        />
                     )}
                     Likes
                 </li>
@@ -126,9 +138,17 @@ const Tweet: React.FC<ITweetComponent> = ({ data, setTweets }) => {
                     onClick={alreadySaved ? handleUnsaveTweet : handleSaveTweet}
                 >
                     {alreadySaved ? (
-                        <BookmarkFill size={18} color="#2D9CDB" />
+                        <BookmarkFill
+                            size={18}
+                            color="#2D9CDB"
+                            aria-label="Bookmark fill icon to remove this tweet from bookmarks on click."
+                        />
                     ) : (
-                        <Bookmark size={18} color="#2D9CDB" />
+                        <Bookmark
+                            size={18}
+                            color="#2D9CDB"
+                            aria-label="Bookmark icon to add this tweet in bookmarks on click."
+                        />
                     )}
                     Saved
                 </li>
@@ -145,7 +165,11 @@ const Tweet: React.FC<ITweetComponent> = ({ data, setTweets }) => {
                 {tweetComments
                     ?.slice(0, commentsQuantity)
                     .map((data, index) => (
-                        <Comment data={data} key={index} />
+                        <Comment
+                            data={data}
+                            key={index}
+                            setTweetComments={setTweetComments}
+                        />
                     ))}
 
                 {commentsQuantity < tweetComments?.length && (
@@ -157,7 +181,12 @@ const Tweet: React.FC<ITweetComponent> = ({ data, setTweets }) => {
 
             {data.author_id === user?.id && (
                 <S.DeleteTweet>
-                    <Close width={18} height={18} onClick={handleDeleteTweet} />
+                    <Close
+                        width={18}
+                        height={18}
+                        onClick={handleDeleteTweet}
+                        aria-label="Icon close to delete this comment on click."
+                    />
                 </S.DeleteTweet>
             )}
         </S.Container>

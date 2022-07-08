@@ -75,7 +75,7 @@ const WriteTweet = ({ setTweets }: IWriteTweet) => {
                         width="45"
                         height="45"
                         src={
-                            user
+                            user && user.avatar != "null"
                                 ? `${API_BASE_URL}/files/${user.avatar}`
                                 : "/background/background.webp"
                         }
@@ -97,6 +97,7 @@ const WriteTweet = ({ setTweets }: IWriteTweet) => {
                         id="tweet-file"
                         type="file"
                         accept="image/png, image/jpg, image/jpeg"
+                        data-testid="tweet-file"
                         onChange={({ target }) =>
                             setTweetImage(
                                 target.files ? target.files[0] : undefined,
@@ -116,14 +117,23 @@ const WriteTweet = ({ setTweets }: IWriteTweet) => {
                                 size={20}
                                 height={20}
                                 color="#2F80ED"
+                                aria-label="Landscape icon to upload image."
                             />
                         )}
                     </label>
 
                     {tweetIsPublic === "true" ? (
-                        <Earth size={20} color="#2F80ED" />
+                        <Earth
+                            size={20}
+                            color="#2F80ED"
+                            aria-label="Earth icon that indicate that this tweet is public."
+                        />
                     ) : (
-                        <People size={20} color="#2F80ED" />
+                        <People
+                            size={20}
+                            color="#2F80ED"
+                            aria-label="People icon that indicate that this tweet is private."
+                        />
                     )}
 
                     <WhoCanSee setTweetIsPublic={setTweetIsPublic} />

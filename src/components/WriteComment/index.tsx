@@ -69,7 +69,11 @@ const WriteComment = ({ setTweetComments, tweetId }: IWriteComment) => {
                     whileTap={{ scale: 0.7 }}
                     transition={{ duration: 0.05 }}
                 >
-                    <Send color="#fff" width={25} />
+                    <Send
+                        color="#fff"
+                        width={25}
+                        aria-label="Icon send to send comment."
+                    />
                 </motion.button>
             </div>
         </S.Container>
