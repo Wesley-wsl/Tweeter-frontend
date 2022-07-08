@@ -59,7 +59,7 @@ const Dropzone: React.FC<IDropzone> = ({ imageName, setIsActive }) => {
                 isDragReject={isDragReject}
             >
                 <div className="dropzone__container">
-                    <input {...getInputProps()} />
+                    <input {...getInputProps()} data-testid="input-file" />
 
                     {isDragReject ? (
                         <p className="error">
