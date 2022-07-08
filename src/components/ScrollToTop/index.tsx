@@ -37,7 +37,11 @@ const ScrollToTop = () => {
                     whileTap={{ scale: 0.7 }}
                     transition={{ type: "spring", duration: 0.4 }}
                 >
-                    <ArrowUpCircleFill width={45} height={45} />
+                    <ArrowUpCircleFill
+                        width={45}
+                        height={45}
+                        aria-label="Arrow up icon to scroll up page."
+                    />
                 </S.Container>
             )}
         </AnimatePresence>
