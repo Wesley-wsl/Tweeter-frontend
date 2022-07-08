@@ -17,15 +17,13 @@ const WhoFollow: React.FC = () => {
         >
             <p>Who to follow</p>
             <S.WhoFollow>
-                {whoFollow && whoFollow.data[0] && (
+                {whoFollow?.data[0] && (
                     <PersonToFollow data={whoFollow.data[0]} />
                 )}
-                {whoFollow && whoFollow.data[1] && (
+                {whoFollow?.data[1] && (
                     <PersonToFollow data={whoFollow.data[1]} />
                 )}
-                {whoFollow && whoFollow.data.length === 0 && (
-                    <p>Nobody to indicate</p>
-                )}
+                {whoFollow?.data.length === 0 && <p>Nobody to indicate</p>}
             </S.WhoFollow>
         </S.Container>
     );
