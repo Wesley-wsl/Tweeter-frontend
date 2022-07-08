@@ -3,11 +3,12 @@ import { PersonFill } from "@styled-icons/bootstrap";
 import { ViewHide, ViewShow } from "@styled-icons/zondicons";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { toast } from "react-toastify";
 
 import { IHandleSignUp } from "../../../@types";
+import { ThemeContext } from "../../../contexts/Theme";
 import signUpFormSchema from "../../../schemas/signUp";
 import api from "../../../services/api";
 import ButtonForm from "../ButtonForm";
@@ -17,6 +18,7 @@ import * as S from "../shared";
 const SignUpForm: React.FC = () => {
     const [hidePassword, setHidePassword] = useState(true);
     const [loading, setLoading] = useState(false);
+    const { lightMode } = useContext(ThemeContext);
 
     const {
         register,
@@ -50,7 +52,11 @@ const SignUpForm: React.FC = () => {
         <S.FormContainer onSubmit={handleSubmit(handleSignUp)}>
             <span>
                 <Image
-                    src={"/assets/tweeter.svg"}
+                    src={
+                        lightMode
+                            ? "/assets/tweeter.svg"
+                            : "/assets/tweeter-light.svg"
+                    }
                     width="200"
                     height="45"
                     alt="Logo"
