@@ -56,19 +56,21 @@ const FollowButton: React.FC<IFollowButton> = ({
     return (
         <>
             {userToFollowId === user?.id ? (
-                <Button
-                    title="Follow"
-                    color="#2F80ED"
-                    disabled={true}
-                    aria-label="Button for follow user."
-                    iconLeft={
-                        <PersonAdd
-                            width={12}
-                            height={12}
-                            aria-label="Person add icon"
-                        />
-                    }
-                />
+                <span>
+                    <Button
+                        title="Follow"
+                        color="#2F80ED"
+                        disabled={true}
+                        aria-label="Button for follow user."
+                        iconLeft={
+                            <PersonAdd
+                                width={12}
+                                height={12}
+                                aria-label="Person add icon"
+                            />
+                        }
+                    />
+                </span>
             ) : (
                 <>
                     {!isFollow ? (
