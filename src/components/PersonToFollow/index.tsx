@@ -36,11 +36,7 @@ const PersonToFollow = ({ data }: IFollowCard) => {
                     userToFollowId={data.id}
                 />
             </div>
-            <p>
-                {data.about_me.length !== 0
-                    ? data.about_me
-                    : "Nothing about me. :/"}
-            </p>
+            <p>{data.about_me}</p>
             <span className="background_profile">
                 <Image
                     width="330"
