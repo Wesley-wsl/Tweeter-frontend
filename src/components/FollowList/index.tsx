@@ -27,12 +27,17 @@ const FollowList: React.FC<IFollowList> = ({
                         height={24}
                         color="#4F4F4F"
                         onClick={() => setShowFollowing(false)}
+                        aria-label="Close icon to close modal."
                     />
                 </S.TopFollowList>
 
                 {data &&
                     data.data.map((user: IAuthor, index: number) => (
-                        <FollowCard data={user} key={index} />
+                        <FollowCard
+                            data={user}
+                            key={index}
+                            setShowFollowing={setShowFollowing}
+                        />
                     ))}
 
                 {data && data.data.length === 0 && (
