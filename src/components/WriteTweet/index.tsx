@@ -86,6 +86,7 @@ const WriteTweet = ({ setTweets }: IWriteTweet) => {
                 <textarea
                     placeholder="What's happening?"
                     maxLength={1400}
+                    data-cy="write-tweet-textarea"
                     onChange={({ target }) => setTweetContent(target.value)}
                     value={tweetContent}
                 />
@@ -139,7 +140,12 @@ const WriteTweet = ({ setTweets }: IWriteTweet) => {
                     <WhoCanSee setTweetIsPublic={setTweetIsPublic} />
                 </div>
 
-                <Button title="Tweet" color={"#2F80ED"} onClick={onSendTweet} />
+                <Button
+                    title="Tweet"
+                    color={"#2F80ED"}
+                    onClick={onSendTweet}
+                    data-cy="write-tweet-button"
+                />
             </S.Filter>
         </S.Container>
     );

@@ -85,6 +85,7 @@ const AboutProfile: React.FC<IAboutProfile> = ({ userInformations }) => {
                 <S.Description
                     maxLength={120}
                     rows={3}
+                    data-cy="about-me"
                     disabled={userAuthenticated?.id !== userInformations.id}
                     defaultValue={userInformations.about_me.trim()}
                     onBlur={onEditAboutMe}

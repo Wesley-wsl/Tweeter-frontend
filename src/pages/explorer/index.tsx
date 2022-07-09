@@ -77,6 +77,7 @@ export default function Explorer() {
                             title="Search"
                             color={"#2D9CDB"}
                             type="submit"
+                            data-cy="search-button"
                         />
                     </S.Search>
                     {filter !== "people" ? (
