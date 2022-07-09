@@ -1,20 +1,26 @@
-// ***********************************************************
-// This example support/index.js is processed and
-// loaded automatically before your test files.
-//
-// This is a great place to put global configuration and
-// behavior that modifies Cypress.
-//
-// You can change the location of this file or turn off
-// automatically serving support files with the
-// 'supportFile' configuration option.
-//
-// You can read more here:
-// https://on.cypress.io/configuration
-// ***********************************************************
+/* eslint-disable @typescript-eslint/naming-convention */
+/* eslint-disable @typescript-eslint/no-namespace */
 
-// Import commands.js using ES2015 syntax:
 import "./commands";
 
-// Alternatively you can use CommonJS syntax:
-// require('./commands')
+declare global {
+    namespace Cypress {
+        interface Chainable {
+            login(): Chainable;
+        }
+    }
+}
+
+Cypress.Commands.add("login", () => {
+    cy.visit("/");
+    cy.intercept("http://localhost:3333/api/v1/user/login").as("signIn");
+    cy.get("input[type=email]").clear().type(Cypress.env("email"));
+    cy.get("input[type=password]").clear().type(Cypress.env("password"));
+    cy.contains("Sign In").click();
+    cy.wait("@signIn").its("response.statusCode").should("eq", 200);
+    cy.contains("Email/password incorrect").should("not.exist");
+    cy.contains("Email is required!").should("not.exist");
+    cy.contains("Password is required!").should("not.exist");
+    cy.wait(2000);
+    cy.url().should("contain", "/profile");
+});
