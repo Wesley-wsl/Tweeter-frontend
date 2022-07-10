@@ -1,0 +1,40 @@
+{
+    "data": [
+        {
+            "id": "1",
+            "name": "Shino Aki",
+            "about_me": "This is a section for write about me.",
+            "avatar": null,
+            "background": null,
+            "bookmarks_id": [],
+            "email": "shinoaki@gmail.com",
+            "followersCount": 2,
+            "followers_id": [],
+            "followingCount": 0,
+            "following_id": [],
+            "liked_comments_id": [],
+            "liked_tweets_id": [],
+            "retweets_id": [],
+            "updated_at": "2022-07-04T18:20:31.134Z",
+            "created_at": "2022-05-12T23:41:01.788Z"
+        },
+        {
+            "id": "2",
+            "name": "Houtarou Oreki",
+            "about_me": "This is a section for write about me.",
+            "avatar": null,
+            "background": null,
+            "bookmarks_id": [],
+            "email": "oreki@gmail.com",
+            "followersCount": 2,
+            "followers_id": [],
+            "followingCount": 0,
+            "following_id": [],
+            "liked_comments_id": [],
+            "liked_tweets_id": [],
+            "retweets_id": [],
+            "updated_at": "2022-07-04T18:20:31.134Z",
+            "created_at": "2022-05-12T23:41:01.788Z"
+        }
+    ]
+}

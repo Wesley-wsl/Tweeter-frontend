@@ -1,0 +1,46 @@
+{
+    "data": [
+        {
+            "author": {
+                "name": "Jorkis",
+                "id": "0",
+                "about_me": "Nothing.",
+                "avatar": null,
+                "background": null,
+                "bookmarks_id": [],
+                "created_at": "2022-05-15T18:20:47.213Z",
+                "email": "jorkis@gmail.com",
+                "followersCount": 0,
+                "followers_id": [],
+                "followingCount": 0,
+                "following_id": [],
+                "liked_comments_id": [],
+                "liked_tweets_id": [],
+                "retweets_id": [],
+                "updated_at": "2022-07-08T19:02:09.751Z"
+            },
+            "author_id": "0",
+            "comments": [],
+            "comments_id": [],
+            "content": "This is my first tweet here and I'm like all this.",
+            "created_at": "2022-05-15T18:21:03.778Z",
+            "id": "0",
+            "image": null,
+            "isPublic": "false",
+            "liked_users_id": [],
+            "likes": 0,
+            "retweets_id": [],
+            "tweet_id": null,
+            "updated_at": "2022-05-15T18:21:03.955Z",
+            "users_saved_id": []
+        }
+    ],
+    "elements": 1,
+    "elementsPerPage": 10,
+    "firstPage": true,
+    "lastPage": true,
+    "page": 0,
+    "success": true,
+    "totalElements": 1,
+    "totalPages": 1
+}
