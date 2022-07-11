@@ -10,7 +10,7 @@
         "test:watch": "jest --watch",
         "test:coverage": "jest --coverage",
         "cypress": "cypress open",
-        "storybook": "start-storybook -s ./public -p 6006",
+        "storybook": "start-storybook -p 6006",
         "build-storybook": "build-storybook"
     },
     "dependencies": {
@@ -45,6 +45,8 @@
         "@storybook/addon-essentials": "^6.5.9",
         "@storybook/addon-interactions": "^6.5.9",
         "@storybook/addon-links": "^6.5.9",
+        "@storybook/builder-webpack5": "^6.5.9",
+        "@storybook/manager-webpack5": "^6.5.9",
         "@storybook/react": "^6.5.9",
         "@storybook/testing-library": "^0.0.13",
         "@styled-icons/ionicons-sharp": "^10.34.0",
