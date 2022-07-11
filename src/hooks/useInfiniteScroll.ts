@@ -1,4 +1,4 @@
-import { FormEvent, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
 
 import { IAuthor, ITweet } from "../@types";
@@ -14,31 +14,10 @@ export const useInfiniteScroll = (url: string) => {
     const [search, setSearch] = useState("");
     const { ref, inView } = useInView();
 
-    function handleFilter(filterName: string) {
-        if (filter !== filterName) {
-            setCurrentPage(0);
-            setFilter(filterName);
-            setIsEndPage(false);
-            setTweets([]);
-            setUsers([]);
-        }
-    }
-
-    function handleSearch(e: FormEvent, searchName: string) {
-        e.preventDefault();
-        if (search !== searchName) {
-            setCurrentPage(0);
-            setSearch(searchName);
-            setIsEndPage(false);
-            setTweets([]);
-            setUsers([]);
-        }
-    }
-
-    function handleReset() {
+    function handleReset(searchName: string, filterName: string) {
+        if (filter !== filterName) setFilter(filterName);
+        if (search !== searchName) setSearch(searchName);
         setCurrentPage(0);
-        setFilter("");
-        setSearch("");
         setIsEndPage(false);
         setTweets([]);
         setUsers([]);
@@ -75,8 +54,8 @@ export const useInfiniteScroll = (url: string) => {
     }
 
     useEffect(() => {
-        if (inView && filter !== "people") getTweets();
         if (inView && filter === "people") getUsers();
+        if (inView && filter !== "people") getTweets();
     }, [inView, filter]);
 
     useEffect(() => {
@@ -89,12 +68,10 @@ export const useInfiniteScroll = (url: string) => {
         isEndPage,
         tweets,
         users,
-        handleFilter,
         setUsers,
         search,
         filter,
         handleReset,
-        handleSearch,
         setTweets,
     };
 };
