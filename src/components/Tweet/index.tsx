@@ -23,7 +23,7 @@ import * as S from "./styles";
 
 const Tweet: React.FC<ITweetComponent> = ({ data, setTweets }) => {
     const [commentsQuantity, setCommentsQuantity] = useState(3);
-    const [tweetComments, setTweetComments] = useState(data.comments);
+    const [tweetComments, setTweetComments] = useState(data.comments ?? []);
     const createdAt = new Date(data.created_at).toLocaleDateString();
 
     const showMoreComments = () => setCommentsQuantity(current => current + 3);
@@ -52,7 +52,7 @@ const Tweet: React.FC<ITweetComponent> = ({ data, setTweets }) => {
             })
             .catch(error =>
                 toast.error(
-                    error.response?.data.validation.body.message ??
+                    error.response?.data.error ??
                         "Something went wrong, please try again later.",
                 ),
             );
@@ -97,7 +97,7 @@ const Tweet: React.FC<ITweetComponent> = ({ data, setTweets }) => {
             )}
 
             <S.Status>
-                <p>{data.comments_id.length} Comments</p>
+                <p>{tweetComments.length} Comments</p>
                 <p>{savedCount} Saved</p>
                 <p>{likedCount} Likes</p>
             </S.Status>

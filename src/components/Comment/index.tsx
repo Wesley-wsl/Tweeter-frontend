@@ -27,7 +27,7 @@ export const Comment: React.FC<ICommentData> = ({ data, setTweetComments }) => {
             })
             .catch(error =>
                 toast.error(
-                    error.response.data.validation.body.message ??
+                    error.response?.data.error ??
                         "Something went wrong, please try again later.",
                 ),
             );
@@ -42,7 +42,7 @@ export const Comment: React.FC<ICommentData> = ({ data, setTweetComments }) => {
             })
             .catch(error =>
                 toast.error(
-                    error.response?.data.validation.body.message ??
+                    error.response?.data.error ??
                         "Something went wrong, please try again later.",
                 ),
             );
@@ -61,7 +61,7 @@ export const Comment: React.FC<ICommentData> = ({ data, setTweetComments }) => {
             })
             .catch(error =>
                 toast.error(
-                    error.response?.data.validation.body.message ??
+                    error.response?.data.error ??
                         "Something went wrong, please try again later.",
                 ),
             );
