@@ -1,6 +1,5 @@
 import {
     Dispatch,
-    FormEvent,
     InputHTMLAttributes,
     ReactNode,
     SetStateAction,
@@ -204,12 +203,12 @@ export enum IFilterOptions {
 
 export interface IFilterTweets {
     filter: string;
-    handleFilter: (filterName: string) => void;
+    handleReset: (search: string, filter: string) => void;
     options: IFilterOptions[];
 }
 
 export interface IWriteTweet {
-    setTweets: Dispatch<SetStateAction<ITweet[]>>;
+    handleReset: (search: string, filter: string) => void;
 }
 
 export interface IWhoCanSee {
@@ -222,7 +221,7 @@ export interface IWriteComment {
 }
 
 export interface ITrends {
-    handleSearch: (e: FormEvent, searchName: string) => void;
+    handleReset: (search: string, filter: string) => void;
     search: string;
 }
 
@@ -241,6 +240,4 @@ export interface IChildren {
     children: JSX.Element;
 }
 
-export type ITheme = {
-    theme: typeof dark;
-};
+export type ITheme = typeof dark;
