@@ -1,15 +1,15 @@
 import { rest } from "msw";
 
 import WriteComment from ".";
-import { IAuthContext } from "../../@types";
-import { AuthContext } from "../../contexts/AuthContext";
+import { IAuthContext } from "../../../@types";
+import { AuthContext } from "../../../contexts/AuthContext";
 import {
     screen,
     fireEvent,
     render,
     waitFor,
-} from "../../tests/mocks/setupProviders";
-import { baseURL, server } from "../../tests/mocks/setupServer";
+} from "../../../tests/mocks/setupProviders";
+import { baseURL, server } from "../../../tests/mocks/setupServer";
 
 const setTweetCommentsMocked = jest.fn();
 

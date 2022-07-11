@@ -3,15 +3,15 @@ import Router from "next/router";
 import React from "react";
 
 import { Comment } from ".";
-import { IAuthor } from "../../@types";
-import { commentJest } from "../../tests/mocks/constants";
+import { IAuthor } from "../../../@types";
+import { commentJest } from "../../../tests/mocks/constants";
 import {
     render,
     screen,
     fireEvent,
     waitFor,
-} from "../../tests/mocks/setupProviders";
-import { baseURL, server } from "../../tests/mocks/setupServer";
+} from "../../../tests/mocks/setupProviders";
+import { baseURL, server } from "../../../tests/mocks/setupServer";
 
 jest.mock("next/router");
 

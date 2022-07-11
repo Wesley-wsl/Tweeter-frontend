@@ -4,10 +4,10 @@ import Image from "next/image";
 import React, { useContext, useState } from "react";
 import { toast } from "react-toastify";
 
-import { IWriteComment } from "../../@types";
-import { AuthContext } from "../../contexts/AuthContext";
-import api from "../../services/api";
-import { API_BASE_URL } from "../../utils/constants";
+import { IWriteComment } from "../../../@types";
+import { AuthContext } from "../../../contexts/AuthContext";
+import api from "../../../services/api";
+import { API_BASE_URL } from "../../../utils/constants";
 import * as S from "./styles";
 
 const WriteComment = ({ setTweetComments, tweetId }: IWriteComment) => {

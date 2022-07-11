@@ -2,11 +2,11 @@ import { ImageAdd } from "@styled-icons/boxicons-regular";
 import Image from "next/image";
 import React, { useContext, useState } from "react";
 
-import { IAvatarProfile } from "../../@types";
-import { AuthContext } from "../../contexts/AuthContext";
-import { API_BASE_URL } from "../../utils/constants";
-import Dropzone from "../Dropzone";
-import Modal from "../Modal";
+import { IAvatarProfile } from "../../../@types";
+import { AuthContext } from "../../../contexts/AuthContext";
+import { API_BASE_URL } from "../../../utils/constants";
+import Dropzone from "../../Dropzone";
+import Modal from "../../Modal";
 import * as S from "./styles";
 
 const AvatarProfile: React.FC<IAvatarProfile> = ({ avatar, userId }) => {

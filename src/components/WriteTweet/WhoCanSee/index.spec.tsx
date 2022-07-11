@@ -4,7 +4,7 @@ import {
     render,
     fireEvent,
     waitFor,
-} from "../../tests/mocks/setupProviders";
+} from "../../../tests/mocks/setupProviders";
 
 const setTweetIsPublicMocked = jest.fn();
 

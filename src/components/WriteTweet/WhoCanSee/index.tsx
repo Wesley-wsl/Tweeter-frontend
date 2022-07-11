@@ -3,9 +3,9 @@ import { People } from "@styled-icons/material-rounded";
 import { AnimatePresence, motion } from "framer-motion";
 import React, { useState } from "react";
 
-import { IWhoCanSee } from "../../@types";
-import { widget } from "../../utils/variants";
-import { Overlay } from "../ProfileWidget/styles";
+import { IWhoCanSee } from "../../../@types";
+import { widget } from "../../../utils/variants";
+import { Overlay } from "../../Header/ProfileWidget/styles";
 import * as S from "./styles";
 
 const WhoCanSee = ({ setTweetIsPublic }: IWhoCanSee) => {

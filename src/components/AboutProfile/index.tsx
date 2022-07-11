@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 import { IAboutProfile } from "../../@types";
 import { AuthContext } from "../../contexts/AuthContext";
 import api from "../../services/api";
-import AvatarProfile from "../AvatarProfile";
+import AvatarProfile from "./AvatarProfile";
 import FollowButton from "../FollowButton";
 import FollowList from "../FollowList";
 import * as S from "./styles";

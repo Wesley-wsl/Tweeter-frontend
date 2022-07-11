@@ -1,15 +1,15 @@
 import Router from "next/router";
 
 import { ProfileWidget } from ".";
-import { IAuthContext } from "../../@types";
-import { AuthContext } from "../../contexts/AuthContext";
-import { ThemeContext } from "../../contexts/Theme";
+import { IAuthContext } from "../../../@types";
+import { AuthContext } from "../../../contexts/AuthContext";
+import { ThemeContext } from "../../../contexts/Theme";
 import {
     screen,
     render,
     fireEvent,
     waitFor,
-} from "../../tests/mocks/setupProviders";
+} from "../../../tests/mocks/setupProviders";
 
 jest.mock("next/router");
 

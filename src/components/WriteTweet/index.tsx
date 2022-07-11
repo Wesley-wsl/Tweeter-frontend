@@ -12,7 +12,7 @@ import api from "../../services/api";
 import { API_BASE_URL } from "../../utils/constants";
 import { fadeInUp } from "../../utils/variants";
 import { Button } from "../Button";
-import WhoCanSee from "../WhoCanSee";
+import WhoCanSee from "./WhoCanSee";
 import * as S from "./styles";
 
 const WriteTweet = ({ handleReset }: IWriteTweet) => {

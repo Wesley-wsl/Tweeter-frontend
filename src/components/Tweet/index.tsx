@@ -17,8 +17,8 @@ import { useTweetServices } from "../../hooks/useTweetServices";
 import api from "../../services/api";
 import { API_BASE_URL } from "../../utils/constants";
 import { fadeInUp } from "../../utils/variants";
-import { Comment } from "../Comment";
-import WriteComment from "../WriteComment";
+import { Comment } from "./Comment";
+import WriteComment from "./WriteComment";
 import * as S from "./styles";
 
 const Tweet: React.FC<ITweetComponent> = ({ data, setTweets }) => {

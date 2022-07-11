@@ -6,10 +6,10 @@ import Router from "next/router";
 import { destroyCookie } from "nookies";
 import { useContext, useState } from "react";
 
-import { AuthContext } from "../../contexts/AuthContext";
-import { ThemeContext } from "../../contexts/Theme";
-import { API_BASE_URL } from "../../utils/constants";
-import { widget } from "../../utils/variants";
+import { AuthContext } from "../../../contexts/AuthContext";
+import { ThemeContext } from "../../../contexts/Theme";
+import { API_BASE_URL } from "../../../utils/constants";
+import { widget } from "../../../utils/variants";
 import * as S from "./styles";
 
 export const ProfileWidget: React.FC = () => {

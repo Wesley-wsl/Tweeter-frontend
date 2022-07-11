@@ -1,5 +1,5 @@
 import AvatarProfile from ".";
-import { fireEvent, render, screen } from "../../tests/mocks/setupProviders";
+import { fireEvent, render, screen } from "../../../tests/mocks/setupProviders";
 
 describe("#AvatarProfile component.", () => {
     test("Should render user's avatar profile.", () => {

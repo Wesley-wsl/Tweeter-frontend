@@ -5,11 +5,11 @@ import Router from "next/router";
 import { useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
-import { IComment, ICommentData } from "../../@types";
-import { AuthContext } from "../../contexts/AuthContext";
-import api from "../../services/api";
-import { API_BASE_URL } from "../../utils/constants";
-import { DeleteTweet } from "../Tweet/styles";
+import { IComment, ICommentData } from "../../../@types";
+import { AuthContext } from "../../../contexts/AuthContext";
+import api from "../../../services/api";
+import { API_BASE_URL } from "../../../utils/constants";
+import { DeleteTweet } from "../styles";
 import * as S from "./styles";
 
 export const Comment: React.FC<ICommentData> = ({ data, setTweetComments }) => {

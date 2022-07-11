@@ -6,7 +6,7 @@ import { useContext } from "react";
 
 import { ThemeContext } from "../../contexts/Theme";
 import { headerNav } from "../../utils/constants";
-import { ProfileWidget } from "../ProfileWidget";
+import { ProfileWidget } from "./ProfileWidget";
 import MenuMobile from "./MenuMobile";
 import * as S from "./styles";
 
