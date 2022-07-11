@@ -1,8 +1,6 @@
 import { createGlobalStyle } from "styled-components";
 
-import { ITheme } from "../@types";
-
-const GlobalStyles = createGlobalStyle<ITheme>`
+const GlobalStyles = createGlobalStyle`
 
 :root {
     --x-small: 1.4rem;
