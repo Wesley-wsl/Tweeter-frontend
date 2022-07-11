@@ -42,7 +42,7 @@ export const ProfileWidget: React.FC = () => {
                     <span>
                         <Image
                             src={
-                                user && user.avatar != "null"
+                                user && user.avatar
                                     ? `${API_BASE_URL}/files/${user.avatar}`
                                     : "/background/background.webp"
                             }

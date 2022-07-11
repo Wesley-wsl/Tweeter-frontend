@@ -27,6 +27,7 @@ const WriteComment = ({ setTweetComments, tweetId }: IWriteComment) => {
                 setTweetComments(current => {
                     const newComment = Object.assign(response.data.data, {
                         author: {
+                            id: user?.id,
                             avatar: user?.avatar,
                             name: user?.name,
                         },
@@ -49,7 +50,7 @@ const WriteComment = ({ setTweetComments, tweetId }: IWriteComment) => {
                 width="50"
                 height="50"
                 src={
-                    user && user.avatar != "null"
+                    user && user.avatar
                         ? `${API_BASE_URL}/files/${user.avatar}`
                         : "/background/background.webp"
                 }
