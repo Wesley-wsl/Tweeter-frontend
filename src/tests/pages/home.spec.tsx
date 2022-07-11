@@ -60,7 +60,7 @@ jest.mock("../../hooks/useInfiniteScroll", () => {
                 handleFilter: jest.fn(),
                 setTweets: jest.fn(),
                 search: "",
-                handleSearch: jest.fn(),
+                handleReset: jest.fn(),
             };
         },
     };

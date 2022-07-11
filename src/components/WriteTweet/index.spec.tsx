@@ -10,13 +10,13 @@ import {
 } from "../../tests/mocks/setupProviders";
 import { baseURL, server } from "../../tests/mocks/setupServer";
 
-const setTweetsMocked = jest.fn();
+const handleResetMocked = jest.fn();
 
 global.URL.createObjectURL = jest.fn().mockReturnValue("/image.png");
 
 describe("#WriteTweet component.", () => {
     test("Should be able to render correctly.", () => {
-        render(<WriteTweet setTweets={setTweetsMocked} />);
+        render(<WriteTweet handleReset={handleResetMocked} />);
 
         const profileAvatar = screen.getByAltText("Profile Avatar");
         const textArea = screen.getByPlaceholderText("What's happening?");
@@ -37,7 +37,7 @@ describe("#WriteTweet component.", () => {
         const tweetText =
             "This is a tweet. This is a tweet. This is a tweet. This is a tweet.";
 
-        render(<WriteTweet setTweets={setTweetsMocked} />);
+        render(<WriteTweet handleReset={handleResetMocked} />);
 
         const textArea = screen.getByPlaceholderText(
             "What's happening?",
@@ -72,11 +72,11 @@ describe("#WriteTweet component.", () => {
         );
         expect(errorMessageOne).not.toBeInTheDocument();
         expect(errorMessageTwo).not.toBeInTheDocument();
-        await waitFor(() => expect(setTweetsMocked).toHaveBeenCalled());
+        await waitFor(() => expect(handleResetMocked).toHaveBeenCalled());
     });
 
     test("Should be able to change visilibity to private.", async () => {
-        render(<WriteTweet setTweets={setTweetsMocked} />);
+        render(<WriteTweet handleReset={handleResetMocked} />);
 
         const changeVisbility = screen.getByText("Everyone can see?");
 
@@ -119,7 +119,7 @@ describe("#WriteTweet component.", () => {
                     setUser: jest.fn(),
                 }}
             >
-                <WriteTweet setTweets={setTweetsMocked} />
+                <WriteTweet handleReset={handleResetMocked} />
             </AuthContext.Provider>,
         );
 
@@ -158,7 +158,7 @@ describe("#WriteTweet component.", () => {
         const tweetText =
             "This is a tweet. This is a tweet. This is a tweet. This is a tweet.";
 
-        render(<WriteTweet setTweets={setTweetsMocked} />);
+        render(<WriteTweet handleReset={handleResetMocked} />);
 
         const textArea = screen.getByPlaceholderText(
             "What's happening?",
@@ -218,7 +218,7 @@ describe("#WriteTweet component.", () => {
         const tweetText =
             "This is a tweet. This is a tweet. This is a tweet. This is a tweet.";
 
-        render(<WriteTweet setTweets={setTweetsMocked} />);
+        render(<WriteTweet handleReset={handleResetMocked} />);
 
         const textArea = screen.getByPlaceholderText(
             "What's happening?",

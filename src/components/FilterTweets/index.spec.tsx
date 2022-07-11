@@ -7,7 +7,7 @@ import {
     waitFor,
 } from "../../tests/mocks/setupProviders";
 
-const handleFilterMocked = jest.fn();
+const handleResetMocked = jest.fn();
 
 describe("#FilterTweets component.", () => {
     test("Should be able to render options for filter with a class active if is actived.", () => {
@@ -15,7 +15,7 @@ describe("#FilterTweets component.", () => {
             <FilterTweets
                 options={[IFilterOptions.TWEETS, IFilterOptions.LATEST]}
                 filter="tweets"
-                handleFilter={jest.fn()}
+                handleReset={jest.fn()}
             />,
         );
 
@@ -32,7 +32,7 @@ describe("#FilterTweets component.", () => {
             <FilterTweets
                 options={[IFilterOptions.TWEETS, IFilterOptions.LATEST]}
                 filter="tweets"
-                handleFilter={handleFilterMocked}
+                handleReset={handleResetMocked}
             />,
         );
 
@@ -45,7 +45,7 @@ describe("#FilterTweets component.", () => {
 
         fireEvent.click(latestOption);
 
-        expect(handleFilterMocked).toHaveBeenCalled();
+        expect(handleResetMocked).toHaveBeenCalled();
         waitFor(() => {
             expect(screen.getByText("Latest")).toHaveClass("active");
             expect(screen.getByText("Tweets")).not.toHaveClass("active");

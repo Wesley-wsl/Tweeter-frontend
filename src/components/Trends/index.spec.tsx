@@ -1,5 +1,4 @@
 import { rest } from "msw";
-import { FormEvent } from "react";
 
 import Trends from ".";
 import {
@@ -10,7 +9,7 @@ import {
 } from "../../tests/mocks/setupProviders";
 import { baseURL, server } from "../../tests/mocks/setupServer";
 
-const handleSearchMocked = jest.fn();
+const handleResetMocked = jest.fn();
 
 describe("#Trends component.", () => {
     test("Should be able to render a loading if no trends are found.", () => {
@@ -19,13 +18,13 @@ describe("#Trends component.", () => {
                 return res(ctx.status(400));
             }),
         );
-        render(<Trends handleSearch={handleSearchMocked} search="frontend" />);
+        render(<Trends handleReset={handleResetMocked} search="frontend" />);
 
         expect(screen.getByTestId("little-loading")).toBeInTheDocument();
     });
 
     test("Should be able to render trends.", async () => {
-        render(<Trends handleSearch={handleSearchMocked} search="frontend" />);
+        render(<Trends handleReset={handleResetMocked} search="frontend" />);
 
         const trend = await screen.findAllByTestId("trend");
         expect(trend[0]).toBeInTheDocument();
@@ -38,11 +37,11 @@ describe("#Trends component.", () => {
     test("Should be able to select a trend.", async () => {
         let search = "frontend";
 
-        function handleSearch(e: FormEvent, searchName: string) {
+        function handleResetMock(searchName: string, filterName: string) {
             search = searchName;
         }
 
-        render(<Trends handleSearch={handleSearch} search={search} />);
+        render(<Trends handleReset={handleResetMock} search={search} />);
 
         const trend = await screen.findAllByTestId("trend");
         expect(trend[0]).toBeInTheDocument();
@@ -63,7 +62,7 @@ describe("#Trends component.", () => {
     });
 
     test("Should be able to render close icon to deselect trend if selected.", async () => {
-        render(<Trends handleSearch={handleSearchMocked} search="backend" />);
+        render(<Trends handleReset={handleResetMocked} search="backend" />);
 
         expect(
             await screen.findByLabelText("Close icon to deselect trend."),

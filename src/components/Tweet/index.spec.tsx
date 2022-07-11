@@ -24,7 +24,7 @@ describe("#Tweet component.", () => {
         const content = screen.getByText(tweetMocked.content);
         const image = screen.getByAltText("Image tweet");
         const comments = screen.getByText(
-            `${tweetMocked.comments_id.length} Comments`,
+            `${tweetMocked.comments.length} Comments`,
         );
         const saved = screen.getByText(
             `${tweetMocked.users_saved_id.length} Saved`,

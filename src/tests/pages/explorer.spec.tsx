@@ -25,7 +25,7 @@ window.IntersectionObserver = jest
     .fn()
     .mockImplementation(intersectionObserverMock);
 
-const mockHandleSearch = jest.fn();
+const mockHandleReset = jest.fn();
 const mockFilter = jest
     .fn()
     .mockReturnValue("")
@@ -77,11 +77,10 @@ jest.mock("../../hooks/useInfiniteScroll", () => {
                     },
                 ],
                 handleFilter: jest.fn(),
-                handleReset: jest.fn(),
+                handleReset: mockHandleReset,
                 setTweets: jest.fn(),
                 search: "",
                 filter: mockFilter(),
-                handleSearch: mockHandleSearch,
             };
         },
     };
@@ -128,7 +127,7 @@ describe("#Explorer Page", () => {
 
         fireEvent.submit(screen.getByText("Search"));
 
-        expect(mockHandleSearch).toHaveBeenCalled();
+        expect(mockHandleReset).toHaveBeenCalled();
     });
 
     test("getServerSideProps should be able to return a redirect if user isn't authenticated.", async () => {
