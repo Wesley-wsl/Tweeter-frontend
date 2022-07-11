@@ -11,13 +11,8 @@ import * as S from "./styles";
 const WhoCanSee = ({ setTweetIsPublic }: IWhoCanSee) => {
     const [tweetOptions, setTweetOptions] = useState(false);
 
-    function handleIsPublic() {
-        setTweetIsPublic("true");
-        setTweetOptions(!tweetOptions);
-    }
-
-    function handleIsPrivate() {
-        setTweetIsPublic("false");
+    function handleRestriction(isPublic: boolean) {
+        setTweetIsPublic(isPublic ? "true" : "false");
         setTweetOptions(!tweetOptions);
     }
 
@@ -38,7 +33,7 @@ const WhoCanSee = ({ setTweetIsPublic }: IWhoCanSee) => {
                         <p>Who can see?</p>
                         <p>Choose who can see this Tweet.</p>
                         <ul>
-                            <li onClick={handleIsPublic}>
+                            <li onClick={() => handleRestriction(true)}>
                                 <Earth
                                     size={20}
                                     color="#000"
@@ -46,7 +41,7 @@ const WhoCanSee = ({ setTweetIsPublic }: IWhoCanSee) => {
                                 />
                                 Everyone
                             </li>
-                            <li onClick={handleIsPrivate}>
+                            <li onClick={() => handleRestriction(false)}>
                                 <People
                                     size={20}
                                     color="#000"
