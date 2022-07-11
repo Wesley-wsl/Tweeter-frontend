@@ -22,15 +22,19 @@ export default function Explorer() {
         ref,
         scrollLoading,
         tweets,
-        handleFilter,
         setTweets,
         filter,
         users,
-        handleSearch,
+        handleReset,
     } = useInfiniteScroll(`/tweet`);
 
+    const handleSearch = (e: FormEvent) => {
+        e.preventDefault();
+        handleReset(search, filter);
+    };
+
     useEffect(() => {
-        handleFilter("top");
+        handleReset("", "top");
     }, []);
 
     useEffect(() => {
@@ -42,7 +46,7 @@ export default function Explorer() {
             <S.Container>
                 <FilterTweets
                     filter={filter}
-                    handleFilter={handleFilter}
+                    handleReset={handleReset}
                     options={[
                         IFilterOptions.TOP,
                         IFilterOptions.LATEST,
@@ -53,9 +57,7 @@ export default function Explorer() {
 
                 <S.TweetsContainer>
                     <S.Search
-                        onSubmit={(e: FormEvent<Element>) =>
-                            handleSearch(e, search)
-                        }
+                        onSubmit={(e: FormEvent<Element>) => handleSearch(e)}
                         as={motion.form}
                         variants={fadeInUp}
                         initial="hidden"

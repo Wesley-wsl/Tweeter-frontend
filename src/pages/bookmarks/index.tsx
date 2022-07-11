@@ -16,7 +16,7 @@ export default function Bookmarks() {
     const {
         tweets: bookmarks,
         filter,
-        handleFilter,
+        handleReset,
         setTweets,
         ref,
         isEndPage,
@@ -31,7 +31,7 @@ export default function Bookmarks() {
             <S.Container>
                 <FilterTweets
                     filter={filter}
-                    handleFilter={handleFilter}
+                    handleReset={handleReset}
                     options={[
                         IFilterOptions.TWEETS,
                         IFilterOptions.MEDIA,
@@ -53,7 +53,7 @@ export default function Bookmarks() {
                     {!isEndPage && (
                         <div
                             style={{
-                                marginBottom: "50rem",
+                                marginBottom: "57rem",
                             }}
                         />
                     )}

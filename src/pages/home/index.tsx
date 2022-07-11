@@ -18,14 +18,13 @@ export default function Home() {
         ref,
         scrollLoading,
         tweets,
-        handleFilter,
+        handleReset,
         setTweets,
         search,
-        handleSearch,
     } = useInfiniteScroll(`/tweet`);
 
     useEffect(() => {
-        handleFilter("latest");
+        handleReset("", "latest");
     }, []);
 
     return (
@@ -35,7 +34,7 @@ export default function Home() {
         >
             <S.Container>
                 <S.Tweets>
-                    <WriteTweet setTweets={setTweets} />
+                    <WriteTweet handleReset={handleReset} />
                     <div>
                         {tweets.map((data: ITweet, index: number) => (
                             <Tweet
@@ -50,7 +49,7 @@ export default function Home() {
                 </S.Tweets>
 
                 <S.Aside>
-                    <Trends handleSearch={handleSearch} search={search} />
+                    <Trends handleReset={handleReset} search={search} />
                     <WhoFollow />
                 </S.Aside>
             </S.Container>

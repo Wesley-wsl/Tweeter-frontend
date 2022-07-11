@@ -24,14 +24,13 @@ export default function Profile() {
         ref,
         scrollLoading,
         tweets,
-        handleFilter,
         filter,
         setTweets,
         handleReset,
     } = useInfiniteScroll(`/tweet/${id}`);
 
     useEffect(() => {
-        handleReset();
+        handleReset("", "");
     }, [id]);
 
     if (!user) return <Loading />;
@@ -50,7 +49,7 @@ export default function Profile() {
                 <S.Tweets>
                     <FilterTweets
                         filter={filter}
-                        handleFilter={handleFilter}
+                        handleReset={handleReset}
                         options={[
                             IFilterOptions.TWEETS,
                             IFilterOptions.MEDIA,
