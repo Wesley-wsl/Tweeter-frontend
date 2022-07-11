@@ -7,11 +7,16 @@ import { API_BASE_URL } from "../../utils/constants";
 import FollowButton from "../FollowButton";
 import * as S from "./styles";
 
-const FollowCard: React.FC<IFollowCard> = ({ data }) => {
+const FollowCard: React.FC<IFollowCard> = ({ data, setShowFollowing }) => {
+    function goToProfile() {
+        if (setShowFollowing) setShowFollowing(current => !current);
+        Router.push(`/profile/${data.id}`);
+    }
+
     return (
         <S.Container>
             <S.TopCard>
-                <div onClick={() => Router.push(`/profile/${data.id}`)}>
+                <div onClick={goToProfile}>
                     <span>
                         <Image
                             width="50"
@@ -37,11 +42,7 @@ const FollowCard: React.FC<IFollowCard> = ({ data }) => {
                 />
             </S.TopCard>
 
-            <p>
-                {data.about_me.length !== 0
-                    ? data.about_me
-                    : "Nothing about me. :/"}
-            </p>
+            <p>{data.about_me}</p>
         </S.Container>
     );
 };
