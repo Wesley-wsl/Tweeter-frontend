@@ -18,8 +18,8 @@
     "exclude": ["node_modules", "./cypress/plugins/index.ts", "**/*.spec.ts"],
     "include": [
         "next-env.d.ts",
-        "**/*.ts",
-        "**/*.tsx",
+        "src/**/*",
+        "src/**/*.tsx",
         "src/pages/_app.tsx",
         "next.config.js",
         "cypress/support/index.ts",
