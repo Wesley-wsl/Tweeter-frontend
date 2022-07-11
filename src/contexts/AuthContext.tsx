@@ -16,13 +16,9 @@ export function AuthProvider({ children }: IChildren) {
         const { "tweeter.data": userData } = parseCookies();
 
         if (userData) {
-            const data = userData.split("\n");
-            setUser({
-                name: data[1],
-                avatar: data[2],
-                id: data[3],
-            });
-            api.defaults.headers["Authorization"] = `Bearer ${data[0]}`;
+            const { user, token } = JSON.parse(userData);
+            setUser(user);
+            api.defaults.headers["Authorization"] = `Bearer ${token}`;
             return;
         }
 
@@ -34,29 +30,28 @@ export function AuthProvider({ children }: IChildren) {
         await api
             .post("/user/login", data)
             .then(response => {
-                setCookie(
-                    undefined,
-                    "tweeter.data",
-                    `${response.data.data.token}\n${response.data.data.user.name}\n${response.data.data.user.avatar}\n${response.data.data.user.id}`,
-                    {
-                        maxAge: 60 * 60 * 1, // 1 hour
-                        path: "/",
+                const { token, user } = response.data.data;
+                const userData = {
+                    token,
+                    user: {
+                        id: user.id,
+                        name: user.name,
+                        avatar: user.avatar,
                     },
-                );
-                setUser({
-                    name: response.data.data.user.name,
-                    avatar: `${response.data.data.user.avatar}`,
-                    id: response.data.data.user.id,
+                };
+
+                setCookie(undefined, "tweeter.data", JSON.stringify(userData), {
+                    maxAge: 60 * 60 * 24, // 24 hours
+                    path: "/",
                 });
-                api.defaults.headers[
-                    "Authorization"
-                ] = `Bearer ${response.data.data.token}`;
+                setUser(userData.user);
+                api.defaults.headers["Authorization"] = `Bearer ${token}`;
                 toast.success("User logged with success!");
-                Router.push(`/profile/${response.data.data.user.id}`);
+                Router.push(`/profile/${user.id}`);
             })
             .catch(error =>
                 toast.error(
-                    error.response.data.error ??
+                    error.response?.data.error ??
                         "Something went wrong, please try again later.",
                 ),
             );

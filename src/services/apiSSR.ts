@@ -14,8 +14,8 @@ export function getApiClient(ctx?: GetServerSidePropsContext) {
     });
 
     if (user) {
-        const data = user.split("\n");
-        api.defaults.headers.Authorization = `Bearer ${data[0]}`;
+        const { token } = JSON.parse(user);
+        api.defaults.headers.Authorization = `Bearer ${token}`;
     }
 
     return api;
