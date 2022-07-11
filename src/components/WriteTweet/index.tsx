@@ -6,7 +6,7 @@ import Image from "next/image";
 import { useContext, useState } from "react";
 import { toast } from "react-toastify";
 
-import { ITweet, IWriteTweet } from "../../@types";
+import { IWriteTweet } from "../../@types";
 import { AuthContext } from "../../contexts/AuthContext";
 import api from "../../services/api";
 import { API_BASE_URL } from "../../utils/constants";
@@ -15,7 +15,7 @@ import { Button } from "../Button";
 import WhoCanSee from "../WhoCanSee";
 import * as S from "./styles";
 
-const WriteTweet = ({ setTweets }: IWriteTweet) => {
+const WriteTweet = ({ handleReset }: IWriteTweet) => {
     const [tweetImage, setTweetImage] = useState<File | undefined>(undefined);
     const [tweetContent, setTweetContent] = useState("");
     const [tweetIsPublic, setTweetIsPublic] = useState("true");
@@ -26,39 +26,27 @@ const WriteTweet = ({ setTweets }: IWriteTweet) => {
         formData.append("content", tweetContent.trim());
         formData.append("isPublic", tweetIsPublic);
 
-        if (tweetImage !== undefined) {
-            formData.append("image", tweetImage);
-        }
-
-        if (tweetContent.trim().length > 50) {
-            await api
-                .post("/tweet", formData, {
-                    headers: {
-                        "Content-Type": "multipart/form-data",
-                    },
-                })
-                .then(response => {
-                    setTweetContent("");
-                    setTweets((currentValue: ITweet[]) => {
-                        const newTweet = Object.assign(response.data.data, {
-                            author: {
-                                avatar: user?.avatar,
-                                name: user?.name,
-                            },
-                        });
-                        return [newTweet, ...currentValue];
-                    });
-                })
-                .catch(error =>
-                    toast.error(
-                        error.response?.data.validation.body.message ??
-                            "Something went wrong, please try again later.",
-                    ),
-                );
-        }
+        if (tweetImage !== undefined) formData.append("image", tweetImage);
 
         if (tweetContent.trim().length < 50)
-            toast.error("Must have at least 50 characters in a tweet.");
+            return toast.error("Must have at least 50 characters in a tweet.");
+
+        await api
+            .post("/tweet", formData, {
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                },
+            })
+            .then(() => {
+                setTweetContent("");
+                handleReset("", "latest");
+            })
+            .catch(error =>
+                toast.error(
+                    error.response?.data.validation.body.message ??
+                        "Something went wrong, please try again later.",
+                ),
+            );
     }
 
     return (
@@ -75,7 +63,7 @@ const WriteTweet = ({ setTweets }: IWriteTweet) => {
                         width="45"
                         height="45"
                         src={
-                            user && user.avatar != "null"
+                            user && user.avatar
                                 ? `${API_BASE_URL}/files/${user.avatar}`
                                 : "/background/background.webp"
                         }

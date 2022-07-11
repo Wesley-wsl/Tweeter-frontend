@@ -1,6 +1,6 @@
 import { Close } from "@styled-icons/material";
 import { motion } from "framer-motion";
-import React from "react";
+import React, { FormEvent } from "react";
 
 import { IShowTrend, ITrends } from "../../@types";
 import { useFetch } from "../../hooks/useFetch";
@@ -8,8 +8,15 @@ import { fadeInLeft } from "../../utils/variants";
 import LittleLoading from "../LittleLoading";
 import * as S from "./styles";
 
-const Trends = ({ handleSearch, search }: ITrends) => {
+const Trends = ({ handleReset, search }: ITrends) => {
     const { data: trends } = useFetch("/tweet/me/trends");
+
+    const onChangeTrend = (e: FormEvent, trend: IShowTrend) => {
+        e.preventDefault();
+        trend.trend.slice(1) !== search
+            ? handleReset("backend", "latest")
+            : handleReset("", "latest");
+    };
 
     return (
         <>
@@ -29,11 +36,7 @@ const Trends = ({ handleSearch, search }: ITrends) => {
                                     ? { scale: 1.1, x: 10 }
                                     : { scale: 1, x: 0 }
                             }
-                            onClick={e =>
-                                trend.trend.slice(1) !== search
-                                    ? handleSearch(e, trend.trend.slice(1))
-                                    : handleSearch(e, "")
-                            }
+                            onClick={e => onChangeTrend(e, trend)}
                             key={index}
                             className={
                                 trend.trend.slice(1) === search
@@ -59,6 +62,9 @@ const Trends = ({ handleSearch, search }: ITrends) => {
                     <S.LoadingContainer>
                         <LittleLoading color="#000" />
                     </S.LoadingContainer>
+                )}
+                {trends?.data.length === 0 && (
+                    <p>Don&apos;t have trends for you yet.</p>
                 )}
             </S.Container>
         </>

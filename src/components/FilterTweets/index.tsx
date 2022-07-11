@@ -7,9 +7,13 @@ import * as S from "./styles";
 
 const FilterTweets: React.FC<IFilterTweets> = ({
     filter,
-    handleFilter,
+    handleReset,
     options,
 }) => {
+    const onChangeFilter = (element: string) => {
+        if (element !== filter) handleReset("", element);
+    };
+
     return (
         <S.Container
             as={motion.ul}
@@ -26,7 +30,7 @@ const FilterTweets: React.FC<IFilterTweets> = ({
                                 ? "active"
                                 : ""
                         }`}
-                        onClick={() => handleFilter(element)}
+                        onClick={() => onChangeFilter(element)}
                         key={index}
                     >
                         {element.replace(/(^\w{1})|(\s+\w{1})/g, letter =>
