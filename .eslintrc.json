@@ -34,7 +34,6 @@
         "react",
         "@typescript-eslint",
         "eslint-plugin-import-helpers",
-        // "@next/eslint-plugin-next",
         "prettier"
     ],
     "rules": {
