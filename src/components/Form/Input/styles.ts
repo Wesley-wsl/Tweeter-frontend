@@ -4,7 +4,13 @@ interface IInputContainer {
     margin: string;
 }
 
-export const Container = styled.div<IInputContainer>`
+export const Container = styled.div`
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+`;
+
+export const InputArea = styled.div<IInputContainer>`
     position: relative;
 
     input {
@@ -39,6 +45,7 @@ export const Container = styled.div<IInputContainer>`
 
 export const ErrorMessage = styled.p`
     color: red;
+    margin-top: 0.2rem;
     font-size: 1.2rem;
     font-weight: 500;
     font-family: var(--font-NotoSans);

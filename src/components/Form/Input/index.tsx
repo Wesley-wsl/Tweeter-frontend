@@ -8,13 +8,13 @@ const InputBase: ForwardRefRenderFunction<HTMLInputElement, IInput> = (
     ref,
 ) => {
     return (
-        <>
-            <S.Container margin={!error ? "17px" : "0"}>
+        <S.Container>
+            <S.InputArea margin={!error ? "17px" : "0"}>
                 <input {...rest} ref={ref} />
                 {IconRight}
-            </S.Container>
+            </S.InputArea>
             {!!error && <S.ErrorMessage>{error.message}</S.ErrorMessage>}
-        </>
+        </S.Container>
     );
 };
 
