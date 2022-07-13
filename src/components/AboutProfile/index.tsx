@@ -4,9 +4,9 @@ import { toast } from "react-toastify";
 import { IAboutProfile } from "../../@types";
 import { AuthContext } from "../../contexts/AuthContext";
 import api from "../../services/api";
-import AvatarProfile from "./AvatarProfile";
 import FollowButton from "../FollowButton";
 import FollowList from "../FollowList";
+import AvatarProfile from "./AvatarProfile";
 import * as S from "./styles";
 
 const AboutProfile: React.FC<IAboutProfile> = ({ userInformations }) => {
