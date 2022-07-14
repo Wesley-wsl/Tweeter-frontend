@@ -35,7 +35,7 @@ export const Informations = styled.div`
         align-items: center;
         width: 100%;
 
-        button {
+        > span > button {
             margin-left: 5rem;
             margin-right: 5rem;
         }

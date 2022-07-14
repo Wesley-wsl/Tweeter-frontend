@@ -22,13 +22,11 @@ export const TopCard = styled.div`
     display: flex;
 
     > span {
-        margin-right: -5rem;
+        /* margin-right: -5rem; */
         button {
             font-size: 1.2rem;
             width: 7.9rem;
             height: 2.7rem;
-            margin-right: 0;
-            margin-left: 0;
         }
 
         @media (max-width: 385px) {
