@@ -3,7 +3,8 @@ import styled from "styled-components";
 export const Container = styled.button`
     width: 10rem;
     height: 3rem;
-    background-color: ${({ theme }) => theme.button.thirdy};
+    background-color: ${({ theme, color }) =>
+        color === "#e20008" ? color : theme.button.thirdy};
     border-radius: 0.4rem;
     color: #fff;
     cursor: ${({ disabled }) => !disabled && "pointer"};

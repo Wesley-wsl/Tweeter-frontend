@@ -1,11 +1,10 @@
-import { Meta } from "@storybook/react";
+import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { PersonAdd } from "@styled-icons/ionicons-sharp";
 
-import { IButton } from "../../@types";
 import { Button } from "./index";
 
 export default {
-    title: "Button",
+    title: "Global/Button",
     component: Button,
     argTypes: {
         title: {
@@ -16,12 +15,23 @@ export default {
         iconLeft: {
             control: "none",
         },
+        disabled: {
+            control: "boolean",
+        },
+        color: {
+            control: "select",
+            options: ["#0050bc", "#e20008"],
+            defaultValue: "#0050bc",
+        },
+        onClick: { action: "onClick" },
     },
-} as Meta;
+} as ComponentMeta<typeof Button>;
 
-export const Primary = (args: IButton) => <Button {...args} />;
+const Template: ComponentStory<typeof Button> = args => <Button {...args} />;
 
-export const WithLeftIcon = (args: IButton) => <Button {...args} />;
+export const Primary = Template.bind({});
+
+export const WithLeftIcon = Template.bind({});
 WithLeftIcon.args = {
     title: "Follow",
     iconLeft: <PersonAdd width={12} height={12} aria-label="Person add icon" />,
