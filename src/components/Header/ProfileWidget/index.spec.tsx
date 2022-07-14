@@ -24,7 +24,7 @@ describe("#ProfileWidget component.", () => {
                         user: {
                             id: "2",
                             name: "None",
-                            avatar: "null",
+                            avatar: null,
                         },
                     } as IAuthContext
                 }
