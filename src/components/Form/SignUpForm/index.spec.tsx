@@ -1,6 +1,7 @@
 import { rest } from "msw";
 
 import SignUpForm from ".";
+import { ThemeContext } from "../../../contexts/Theme";
 import {
     fireEvent,
     render,
@@ -13,7 +14,17 @@ const signUpMocked = jest.fn();
 
 describe("#SignUpForm component", () => {
     test("Should be able to toggle between view password and hide password.", async () => {
-        render(<SignUpForm />);
+        render(
+            <ThemeContext.Provider
+                value={{
+                    lightMode: true,
+                    setLightMode: jest.fn(),
+                    toggleTheme: jest.fn(),
+                }}
+            >
+                <SignUpForm />
+            </ThemeContext.Provider>,
+        );
 
         const viewPassword = screen.getByLabelText(
             "View Show Icon that indicate password hide",
