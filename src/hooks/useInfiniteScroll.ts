@@ -1,11 +1,13 @@
+import Router from "next/router";
 import { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
+import { toast } from "react-toastify";
+import useSWRInfinite from "swr/infinite";
 
 import { IAuthor, ITweet } from "../@types";
 import api from "../services/api";
 
 export const useInfiniteScroll = (url: string) => {
-    const [tweets, setTweets] = useState<ITweet[]>([]);
     const [users, setUsers] = useState<IAuthor[]>([]);
     const [currentPage, setCurrentPage] = useState(0);
     const [isEndPage, setIsEndPage] = useState(false);
@@ -18,25 +20,51 @@ export const useInfiniteScroll = (url: string) => {
         if (filter !== filterName) setFilter(filterName);
         if (search !== searchName) setSearch(searchName);
         setCurrentPage(0);
+        setSize(0);
         setIsEndPage(false);
-        setTweets([]);
         setUsers([]);
     }
 
-    async function getTweets() {
-        setScrollLoading(true);
-        await api
-            .get(`${url}?page=${currentPage}&filter=${filter}&search=${search}`)
-            .then(response => {
-                setTweets((currentTweet: ITweet[]) => [
-                    ...currentTweet,
-                    ...response.data.data,
-                ]);
-                setCurrentPage(currentPage + 1);
-                setIsEndPage(response.data.lastPage);
-            });
-        setScrollLoading(false);
-    }
+    const getKey = (pageIndex: number, previousPageData: ITweet[]) => {
+        if (previousPageData && !previousPageData.length && isEndPage)
+            return null;
+        return `${url}?page=${pageIndex}&filter=${filter}&search=${search}`;
+    };
+
+    const {
+        data: tweets,
+        mutate: mutateTweets,
+        size,
+        setSize,
+        isValidating,
+    } = useSWRInfinite(
+        getKey,
+        async url => {
+            setScrollLoading(true);
+            const response = await api
+                .get(url)
+                .then(response => {
+                    setIsEndPage(response.data.lastPage);
+                    setScrollLoading(false);
+                    return response.data.data;
+                })
+                .catch(error => {
+                    const invalidToken = "JWT Token is invalid!";
+                    if (error.response?.data.error === invalidToken)
+                        Router.push("/");
+                    toast.error(
+                        error.response?.data.error ??
+                            "Something went wrong, please try again later.",
+                    );
+                    return [];
+                });
+            return response;
+        },
+        {
+            initialSize: 0,
+            revalidateAll: true,
+        },
+    );
 
     async function getUsers() {
         setScrollLoading(true);
@@ -55,8 +83,10 @@ export const useInfiniteScroll = (url: string) => {
 
     useEffect(() => {
         if (inView && filter === "people") getUsers();
-        if (inView && filter !== "people") getTweets();
-    }, [inView, filter]);
+        if (inView && filter !== "people" && !isEndPage && !isValidating) {
+            setSize(size + 1);
+        }
+    }, [inView, filter, isValidating]);
 
     useEffect(() => {
         setSearch("");
@@ -66,12 +96,12 @@ export const useInfiniteScroll = (url: string) => {
         ref,
         scrollLoading,
         isEndPage,
-        tweets,
         users,
         setUsers,
+        tweets,
+        mutateTweets,
         search,
         filter,
         handleReset,
-        setTweets,
     };
 };
