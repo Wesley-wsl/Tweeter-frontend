@@ -23,7 +23,7 @@ const WhoFollow: React.FC = () => {
                 {whoFollow?.data[1] && (
                     <PersonToFollow data={whoFollow.data[1]} />
                 )}
-                {whoFollow?.data.length === 0 && <p>Nobody to indicate</p>}
+                {!whoFollow?.data[0] && <p>Nobody to indicate</p>}
             </S.WhoFollow>
         </S.Container>
     );
