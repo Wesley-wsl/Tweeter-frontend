@@ -25,37 +25,45 @@ window.IntersectionObserver = jest
     .fn()
     .mockImplementation(intersectionObserverMock);
 
+const mockScrollLoading = jest
+    .fn()
+    .mockReturnValue(true)
+    .mockReturnValueOnce(false);
+
 jest.mock("../../hooks/useInfiniteScroll", () => {
     return {
         useInfiniteScroll() {
             return {
                 isEndPage: false,
                 ref: null,
-                scrollLoading: true,
+                scrollLoading: mockScrollLoading(),
                 tweets: [
-                    {
-                        id: "1",
-                        author_id: "3",
-                        likes: 2,
-                        liked_users_id: ["1", "4"],
-                        retweets_id: [],
-                        tweet_id: null,
-                        image: "/files/image.jpg",
-                        content: "This is a content.",
-                        isPublic: "true",
-                        users_saved_id: [],
-                        comments_id: [],
-                        author: {
+                    [
+                        {
                             id: "1",
-                            name: "Jorkis",
-                            email: "jorkis@gmail.com",
-                            avatar: null,
-                            background: null,
-                            about_me: "About me",
+                            author_id: "3",
+                            likes: 2,
+                            liked_users_id: ["1", "4"],
+                            retweets_id: [],
+                            tweet_id: null,
+                            image: "/files/image.jpg",
+                            content: "This is a content.",
+                            isPublic: "true",
+                            users_saved_id: [],
+                            comments_id: [],
+                            comments: [],
+                            author: {
+                                id: "1",
+                                name: "Jorkis",
+                                email: "jorkis@gmail.com",
+                                avatar: null,
+                                background: null,
+                                about_me: "About me",
+                                created_at: new Date(),
+                            },
                             created_at: new Date(),
                         },
-                        created_at: new Date(),
-                    },
+                    ],
                 ],
                 handleFilter: jest.fn(),
                 handleReset: jest.fn(),
@@ -78,6 +86,12 @@ describe("#Bookmarks Page", () => {
         expect(tweet).toBeInTheDocument();
         expect(tweetsOption).toBeInTheDocument();
         expect(mediaOption).toBeInTheDocument();
+    });
+
+    test("Should be able to render a loading.", async () => {
+        render(<Bookmarks />);
+
+        expect(await screen.findByTestId("little-loading")).toBeInTheDocument();
     });
 
     test("getServerSideProps should be able to return a redirect if user isn't authenticated.", async () => {
