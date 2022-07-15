@@ -5,6 +5,7 @@ import {
     SetStateAction,
 } from "react";
 import { FieldError } from "react-hook-form";
+import { KeyedMutator } from "swr";
 
 import { dark } from "../styles/themes";
 
@@ -70,7 +71,7 @@ export interface IChildren {
 
 export interface IUser {
     name: string;
-    avatar: string;
+    avatar: string | null;
     id: string;
 }
 export interface ITweet {
@@ -78,8 +79,6 @@ export interface ITweet {
     author_id: string;
     likes: number;
     liked_users_id: string[];
-    retweets_id: string[];
-    tweet_id: string | null;
     image: string | null;
     content: string;
     comments_id: string[];
@@ -104,7 +103,6 @@ export interface IAuthor {
     about_me: string;
     liked_tweets_id: string[];
     liked_comments_id: string[];
-    retweets_id: string[];
     bookmarks_id: string[];
     created_at: Date;
     updated_at: Date;
@@ -119,7 +117,7 @@ export interface IUserData {
 
 export interface ITweetComponent {
     data: ITweet;
-    setTweets: Dispatch<SetStateAction<ITweet[]>>;
+    mutateTweets: KeyedMutator<ITweet[]>;
 }
 
 export interface IComment {
@@ -137,11 +135,7 @@ export interface IComment {
 
 export interface ICommentData {
     data: IComment;
-    setTweetComments: Dispatch<SetStateAction<IComment[]>>;
-}
-
-export interface ILittleLoading {
-    color: string;
+    mutateTweets: KeyedMutator<ITweet[]>;
 }
 
 export interface IAvatarProfile {
@@ -209,6 +203,7 @@ export interface IFilterTweets {
 
 export interface IWriteTweet {
     handleReset: (search: string, filter: string) => void;
+    mutateTweets: KeyedMutator<ITweet[]>;
 }
 
 export interface IWhoCanSee {
@@ -216,7 +211,7 @@ export interface IWhoCanSee {
 }
 
 export interface IWriteComment {
-    setTweetComments: Dispatch<SetStateAction<IComment[]>>;
+    mutateTweets: KeyedMutator<ITweet[]>;
     tweetId: string;
 }
 
