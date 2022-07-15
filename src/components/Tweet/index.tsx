@@ -12,18 +12,17 @@ import Router from "next/router";
 import React, { useState } from "react";
 import { toast } from "react-toastify";
 
-import { ITweet, ITweetComponent } from "../../@types";
+import { ITweetComponent } from "../../@types";
 import { useTweetServices } from "../../hooks/useTweetServices";
 import api from "../../services/api";
 import { API_BASE_URL } from "../../utils/constants";
 import { fadeInUp } from "../../utils/variants";
 import { Comment } from "./Comment";
-import WriteComment from "./WriteComment";
 import * as S from "./styles";
+import WriteComment from "./WriteComment";
 
-const Tweet: React.FC<ITweetComponent> = ({ data, setTweets }) => {
+const Tweet: React.FC<ITweetComponent> = ({ data, mutateTweets }) => {
     const [commentsQuantity, setCommentsQuantity] = useState(3);
-    const [tweetComments, setTweetComments] = useState(data.comments ?? []);
     const createdAt = new Date(data.created_at).toLocaleDateString();
 
     const showMoreComments = () => setCommentsQuantity(current => current + 3);
@@ -43,12 +42,7 @@ const Tweet: React.FC<ITweetComponent> = ({ data, setTweets }) => {
         await api
             .delete(`/tweet/${data.id}`)
             .then(() => {
-                setTweets((tweets): ITweet[] => {
-                    const tweetsFiltered = tweets.filter(
-                        tweet => tweet.id !== data.id,
-                    );
-                    return tweetsFiltered;
-                });
+                mutateTweets();
             })
             .catch(error =>
                 toast.error(
@@ -97,7 +91,7 @@ const Tweet: React.FC<ITweetComponent> = ({ data, setTweets }) => {
             )}
 
             <S.Status>
-                <p>{tweetComments.length} Comments</p>
+                <p>{data.comments.length} Comments</p>
                 <p>{savedCount} Saved</p>
                 <p>{likedCount} Likes</p>
             </S.Status>
@@ -156,23 +150,20 @@ const Tweet: React.FC<ITweetComponent> = ({ data, setTweets }) => {
 
             <S.Divider />
 
-            <WriteComment
-                setTweetComments={setTweetComments}
-                tweetId={data.id}
-            />
+            <WriteComment mutateTweets={mutateTweets} tweetId={data.id} />
 
             <div>
-                {tweetComments
+                {data.comments
                     ?.slice(0, commentsQuantity)
                     .map((data, index) => (
                         <Comment
                             data={data}
                             key={index}
-                            setTweetComments={setTweetComments}
+                            mutateTweets={mutateTweets}
                         />
                     ))}
 
-                {commentsQuantity < tweetComments?.length && (
+                {commentsQuantity < data.comments?.length && (
                     <S.LoadComment onClick={showMoreComments}>
                         Load more.
                     </S.LoadComment>

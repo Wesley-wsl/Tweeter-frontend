@@ -5,14 +5,14 @@ import Router from "next/router";
 import { useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
-import { IComment, ICommentData } from "../../../@types";
+import { ICommentData } from "../../../@types";
 import { AuthContext } from "../../../contexts/AuthContext";
 import api from "../../../services/api";
 import { API_BASE_URL } from "../../../utils/constants";
 import { DeleteTweet } from "../styles";
 import * as S from "./styles";
 
-export const Comment: React.FC<ICommentData> = ({ data, setTweetComments }) => {
+export const Comment: React.FC<ICommentData> = ({ data, mutateTweets }) => {
     const [alreadyLiked, setAlreadyLiked] = useState(Boolean);
     const [likedCount, setLikedCount] = useState(Number);
     const { user } = useContext(AuthContext);
@@ -23,7 +23,7 @@ export const Comment: React.FC<ICommentData> = ({ data, setTweetComments }) => {
             .put(`/comment/${data.id}/like`)
             .then(() => {
                 setAlreadyLiked(true);
-                setLikedCount(current => current + 1);
+                setLikedCount(likedCount + 1);
             })
             .catch(error =>
                 toast.error(
@@ -38,7 +38,7 @@ export const Comment: React.FC<ICommentData> = ({ data, setTweetComments }) => {
             .delete(`/comment/${data.id}/like`)
             .then(() => {
                 setAlreadyLiked(false);
-                setLikedCount(current => current - 1);
+                setLikedCount(likedCount - 1);
             })
             .catch(error =>
                 toast.error(
@@ -52,12 +52,7 @@ export const Comment: React.FC<ICommentData> = ({ data, setTweetComments }) => {
         await api
             .delete(`/comment/${data.id}`)
             .then(() => {
-                setTweetComments((comment): IComment[] => {
-                    const commentsFiltered = comment.filter(
-                        comment => comment.id !== data.id,
-                    );
-                    return commentsFiltered;
-                });
+                mutateTweets();
             })
             .catch(error =>
                 toast.error(

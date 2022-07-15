@@ -10,7 +10,7 @@ import api from "../../../services/api";
 import { API_BASE_URL } from "../../../utils/constants";
 import * as S from "./styles";
 
-const WriteComment = ({ setTweetComments, tweetId }: IWriteComment) => {
+const WriteComment = ({ mutateTweets, tweetId }: IWriteComment) => {
     const [comment, setComment] = useState("");
     const { user } = useContext(AuthContext);
 
@@ -23,22 +23,13 @@ const WriteComment = ({ setTweetComments, tweetId }: IWriteComment) => {
             .post(`/comment/${tweetId}`, {
                 comment,
             })
-            .then(response => {
-                setTweetComments(current => {
-                    const newComment = Object.assign(response.data.data, {
-                        author: {
-                            id: user?.id,
-                            avatar: user?.avatar,
-                            name: user?.name,
-                        },
-                    });
-                    return [newComment, ...current];
-                });
+            .then(() => {
+                mutateTweets();
                 setComment("");
             })
             .catch(error =>
                 toast.error(
-                    error.response?.data.validation.body.message ??
+                    error.response?.data.error ??
                         "Something went wrong, please try again later.",
                 ),
             );
