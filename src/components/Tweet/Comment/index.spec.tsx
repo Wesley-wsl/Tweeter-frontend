@@ -16,6 +16,7 @@ import { baseURL, server } from "../../../tests/mocks/setupServer";
 jest.mock("next/router");
 
 const routerMocked = jest.mocked(Router);
+const mutateTweetsMocked = jest.fn();
 
 describe("#Comment component.", () => {
     test("Should be able to handle error about like comment with a default message.", async () => {
@@ -39,7 +40,7 @@ describe("#Comment component.", () => {
                     liked_users_id: ["1"],
                     likes: 1,
                 }}
-                setTweetComments={jest.fn()}
+                mutateTweets={mutateTweetsMocked}
             />,
         );
 
@@ -56,7 +57,9 @@ describe("#Comment component.", () => {
     });
 
     test("Should be able to render all informations about comment.", () => {
-        render(<Comment data={commentJest} setTweetComments={jest.fn()} />);
+        render(
+            <Comment data={commentJest} mutateTweets={mutateTweetsMocked} />,
+        );
         const authorName = screen.getByText(commentJest.author.name);
         const profileAvatar = screen.getByAltText("Profile Avatar");
         const comment = screen.getByText(commentJest.comment);
@@ -69,7 +72,9 @@ describe("#Comment component.", () => {
     });
 
     test("Should be able to redirect user to another page.", () => {
-        render(<Comment data={commentJest} setTweetComments={jest.fn()} />);
+        render(
+            <Comment data={commentJest} mutateTweets={mutateTweetsMocked} />,
+        );
 
         const authorName = screen.getByText(commentJest.author.name);
         expect(authorName).toBeInTheDocument();
@@ -87,7 +92,7 @@ describe("#Comment component.", () => {
                     liked_users_id: ["2"],
                     author: { avatar: "random.png" } as IAuthor,
                 }}
-                setTweetComments={jest.fn()}
+                mutateTweets={mutateTweetsMocked}
             />,
         );
 
@@ -102,7 +107,7 @@ describe("#Comment component.", () => {
         render(
             <Comment
                 data={{ ...commentJest, liked_users_id: ["5"] }}
-                setTweetComments={jest.fn()}
+                mutateTweets={mutateTweetsMocked}
             />,
         );
 
@@ -123,7 +128,7 @@ describe("#Comment component.", () => {
         render(
             <Comment
                 data={{ ...commentJest, author_id: "2" }}
-                setTweetComments={jest.fn()}
+                mutateTweets={mutateTweetsMocked}
             />,
         );
         const closeIcon = screen.getByLabelText("Close icon - delete comment.");
@@ -135,7 +140,7 @@ describe("#Comment component.", () => {
         render(
             <Comment
                 data={{ ...commentJest, author_id: "3" }}
-                setTweetComments={jest.fn()}
+                mutateTweets={mutateTweetsMocked}
             />,
         );
         const closeIcon = screen.queryByLabelText(
@@ -162,7 +167,7 @@ describe("#Comment component.", () => {
         render(
             <Comment
                 data={{ ...commentJest, author_id: "2" }}
-                setTweetComments={jest.fn()}
+                mutateTweets={mutateTweetsMocked}
             />,
         );
         const closeIcon = screen.getByLabelText("Close icon - delete comment.");
@@ -186,7 +191,7 @@ describe("#Comment component.", () => {
         render(
             <Comment
                 data={{ ...commentJest, liked_users_id: ["4"] }}
-                setTweetComments={jest.fn()}
+                mutateTweets={mutateTweetsMocked}
             />,
         );
 
@@ -210,7 +215,7 @@ describe("#Comment component.", () => {
         render(
             <Comment
                 data={{ ...commentJest, liked_users_id: ["4"] }}
-                setTweetComments={jest.fn()}
+                mutateTweets={mutateTweetsMocked}
             />,
         );
 
@@ -250,7 +255,7 @@ describe("#Comment component.", () => {
         render(
             <Comment
                 data={{ ...commentJest, liked_users_id: ["4"] }}
-                setTweetComments={jest.fn()}
+                mutateTweets={mutateTweetsMocked}
             />,
         );
 
@@ -279,7 +284,7 @@ describe("#Comment component.", () => {
                     liked_users_id: ["2"],
                     likes: 1,
                 }}
-                setTweetComments={jest.fn()}
+                mutateTweets={mutateTweetsMocked}
             />,
         );
 
@@ -322,7 +327,7 @@ describe("#Comment component.", () => {
                     liked_users_id: ["2"],
                     likes: 1,
                 }}
-                setTweetComments={jest.fn()}
+                mutateTweets={mutateTweetsMocked}
             />,
         );
 
@@ -357,7 +362,7 @@ describe("#Comment component.", () => {
                     liked_users_id: ["2"],
                     likes: 1,
                 }}
-                setTweetComments={jest.fn()}
+                mutateTweets={mutateTweetsMocked}
             />,
         );
 

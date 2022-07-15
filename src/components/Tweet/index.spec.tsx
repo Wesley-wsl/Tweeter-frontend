@@ -14,10 +14,11 @@ import { baseURL, server } from "../../tests/mocks/setupServer";
 jest.mock("next/router");
 
 const routerMocked = jest.mocked(Router);
+const mutateTweetsMocked = jest.fn();
 
 describe("#Tweet component.", () => {
     test("Should be able to render informations correctly.", () => {
-        render(<Tweet data={tweetMocked} setTweets={jest.fn()} />);
+        render(<Tweet data={tweetMocked} mutateTweets={mutateTweetsMocked} />);
 
         const profileAvatar = screen.getAllByAltText("Profile Avatar");
         const name = screen.getByText(tweetMocked.author.name);
@@ -60,7 +61,7 @@ describe("#Tweet component.", () => {
                         avatar: "/avatar.jpg",
                     },
                 }}
-                setTweets={jest.fn()}
+                mutateTweets={mutateTweetsMocked}
             />,
         );
 
@@ -73,7 +74,7 @@ describe("#Tweet component.", () => {
     });
 
     test("Should be able to render comments correctly.", () => {
-        render(<Tweet data={tweetMocked} setTweets={jest.fn()} />);
+        render(<Tweet data={tweetMocked} mutateTweets={mutateTweetsMocked} />);
 
         expect(
             screen.getByText(tweetMocked.comments[0].comment),
@@ -95,7 +96,7 @@ describe("#Tweet component.", () => {
                         },
                     ],
                 }}
-                setTweets={jest.fn()}
+                mutateTweets={mutateTweetsMocked}
             />,
         );
 
@@ -115,7 +116,7 @@ describe("#Tweet component.", () => {
             }),
         );
 
-        render(<Tweet data={tweetMocked} setTweets={jest.fn()} />);
+        render(<Tweet data={tweetMocked} mutateTweets={mutateTweetsMocked} />);
 
         const heart = screen.getByLabelText(
             "Heart icon to give like on click.",
@@ -145,7 +146,7 @@ describe("#Tweet component.", () => {
         render(
             <Tweet
                 data={{ ...tweetMocked, liked_users_id: ["2", "3"] }}
-                setTweets={jest.fn()}
+                mutateTweets={mutateTweetsMocked}
             />,
         );
 
@@ -175,7 +176,7 @@ describe("#Tweet component.", () => {
         render(
             <Tweet
                 data={{ ...tweetMocked, users_saved_id: [] }}
-                setTweets={jest.fn()}
+                mutateTweets={mutateTweetsMocked}
             />,
         );
 
@@ -207,7 +208,7 @@ describe("#Tweet component.", () => {
         render(
             <Tweet
                 data={{ ...tweetMocked, users_saved_id: ["2"] }}
-                setTweets={jest.fn()}
+                mutateTweets={mutateTweetsMocked}
             />,
         );
 
@@ -239,7 +240,7 @@ describe("#Tweet component.", () => {
         render(
             <Tweet
                 data={{ ...tweetMocked, author_id: "2" }}
-                setTweets={jest.fn()}
+                mutateTweets={mutateTweetsMocked}
             />,
         );
 
@@ -277,7 +278,7 @@ describe("#Tweet component.", () => {
         render(
             <Tweet
                 data={{ ...tweetMocked, author_id: "2" }}
-                setTweets={jest.fn()}
+                mutateTweets={mutateTweetsMocked}
             />,
         );
 

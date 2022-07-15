@@ -11,7 +11,7 @@ import {
 } from "../../../tests/mocks/setupProviders";
 import { baseURL, server } from "../../../tests/mocks/setupServer";
 
-const setTweetCommentsMocked = jest.fn();
+const mutateTweetsMocked = jest.fn();
 
 describe("#WriteComment component.", () => {
     afterEach(() => {
@@ -19,7 +19,7 @@ describe("#WriteComment component.", () => {
     });
 
     test("Should be able to render correctly.", () => {
-        render(<WriteComment setTweetComments={jest.fn()} tweetId="1" />);
+        render(<WriteComment mutateTweets={mutateTweetsMocked} tweetId="1" />);
 
         const sendIcon = screen.getByLabelText("Icon send to send comment.");
         const commentArea = screen.getByPlaceholderText("Make a comment.");
@@ -40,15 +40,12 @@ describe("#WriteComment component.", () => {
                 value={
                     {
                         user: {
-                            avatar: "null",
+                            avatar: null,
                         },
                     } as IAuthContext
                 }
             >
-                <WriteComment
-                    setTweetComments={setTweetCommentsMocked}
-                    tweetId="1"
-                />
+                <WriteComment mutateTweets={mutateTweetsMocked} tweetId="1" />
             </AuthContext.Provider>,
         );
 
@@ -69,7 +66,7 @@ describe("#WriteComment component.", () => {
 
         fireEvent.click(sendIcon);
 
-        waitFor(() => expect(setTweetCommentsMocked).toHaveBeenCalledTimes(1));
+        waitFor(() => expect(mutateTweetsMocked).toHaveBeenCalledTimes(1));
     });
 
     test("Should be able to handle with error about write comment with a default message.", async () => {
@@ -86,12 +83,7 @@ describe("#WriteComment component.", () => {
             }),
         );
 
-        render(
-            <WriteComment
-                setTweetComments={setTweetCommentsMocked}
-                tweetId="1"
-            />,
-        );
+        render(<WriteComment mutateTweets={mutateTweetsMocked} tweetId="1" />);
 
         const commentArea = screen.getByPlaceholderText(
             "Make a comment.",
@@ -123,12 +115,7 @@ describe("#WriteComment component.", () => {
         const areaText =
             "This is a comment that have more that 250 characteres. This is a comment that have more that 250 characteres. This is a comment that have more that 250 characteres. This is a comment that have more that 250 characteres. This is a comment that have more that 250 characteres. This is a comment that have more that 250 characteres.";
 
-        render(
-            <WriteComment
-                setTweetComments={setTweetCommentsMocked}
-                tweetId="1"
-            />,
-        );
+        render(<WriteComment mutateTweets={mutateTweetsMocked} tweetId="1" />);
 
         const commentArea = screen.getByPlaceholderText(
             "Make a comment.",
@@ -155,12 +142,7 @@ describe("#WriteComment component.", () => {
     });
 
     test("Should be able to make nothing if comment is empty.", () => {
-        render(
-            <WriteComment
-                setTweetComments={setTweetCommentsMocked}
-                tweetId="1"
-            />,
-        );
+        render(<WriteComment mutateTweets={mutateTweetsMocked} tweetId="1" />);
 
         const commentArea = screen.getByPlaceholderText(
             "Make a comment.",
@@ -179,6 +161,6 @@ describe("#WriteComment component.", () => {
 
         fireEvent.click(sendIcon);
 
-        expect(setTweetCommentsMocked).not.toHaveBeenCalled();
+        expect(mutateTweetsMocked).not.toHaveBeenCalled();
     });
 });
