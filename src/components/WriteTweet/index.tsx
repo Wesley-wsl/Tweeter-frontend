@@ -12,10 +12,10 @@ import api from "../../services/api";
 import { API_BASE_URL } from "../../utils/constants";
 import { fadeInUp } from "../../utils/variants";
 import { Button } from "../Button";
-import WhoCanSee from "./WhoCanSee";
 import * as S from "./styles";
+import WhoCanSee from "./WhoCanSee";
 
-const WriteTweet = ({ handleReset }: IWriteTweet) => {
+const WriteTweet = ({ handleReset, mutateTweets }: IWriteTweet) => {
     const [tweetImage, setTweetImage] = useState<File | undefined>(undefined);
     const [tweetContent, setTweetContent] = useState("");
     const [tweetIsPublic, setTweetIsPublic] = useState("true");
@@ -40,6 +40,7 @@ const WriteTweet = ({ handleReset }: IWriteTweet) => {
             .then(() => {
                 setTweetContent("");
                 handleReset("", "latest");
+                mutateTweets();
             })
             .catch(error =>
                 toast.error(
