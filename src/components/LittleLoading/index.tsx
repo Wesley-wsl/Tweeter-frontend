@@ -1,11 +1,10 @@
 import React from "react";
 
-import { ILittleLoading } from "../../@types";
 import * as S from "./styles";
 
-const LittleLoading: React.FC<ILittleLoading> = ({ color }) => {
+const LittleLoading: React.FC = () => {
     return (
-        <S.Container color={color} data-testid="little-loading">
+        <S.Container data-testid="little-loading">
             <div></div>
             <div></div>
             <div></div>
