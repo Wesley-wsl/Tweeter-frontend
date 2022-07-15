@@ -60,12 +60,10 @@ const Trends = ({ handleReset, search }: ITrends) => {
                     ))
                 ) : (
                     <S.LoadingContainer>
-                        <LittleLoading color="#000" />
+                        <LittleLoading />
                     </S.LoadingContainer>
                 )}
-                {trends?.data.length === 0 && (
-                    <p>Don&apos;t have trends for you yet.</p>
-                )}
+                {!trends?.data[0] && <p>Don&apos;t have trends for you yet.</p>}
             </S.Container>
         </>
     );
