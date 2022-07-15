@@ -61,6 +61,28 @@ describe("#Trends component.", () => {
         });
     });
 
+    test("Should be able to show a default message if don't have trends.", async () => {
+        server.use(
+            rest.get(`${baseURL}/tweet/me/trends`, (req, res, ctx) => {
+                return res(
+                    ctx.status(200),
+                    ctx.json({
+                        data: [],
+                    }),
+                );
+            }),
+        );
+
+        render(<Trends handleReset={handleResetMocked} search="backend" />);
+
+        waitFor(async () => {
+            const message = await screen.findByText(
+                "Don't have trends for you yet.",
+            );
+            expect(message).toBeInTheDocument();
+        });
+    });
+
     test("Should be able to render close icon to deselect trend if selected.", async () => {
         render(<Trends handleReset={handleResetMocked} search="backend" />);
 
