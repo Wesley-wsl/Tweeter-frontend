@@ -22,7 +22,7 @@ export default function Explorer() {
         ref,
         scrollLoading,
         tweets,
-        setTweets,
+        mutateTweets,
         filter,
         users,
         handleReset,
@@ -83,13 +83,15 @@ export default function Explorer() {
                         />
                     </S.Search>
                     {filter !== "people" ? (
-                        tweets.map((data: ITweet, index: number) => (
-                            <Tweet
-                                data={data}
-                                key={index}
-                                setTweets={setTweets}
-                            />
-                        ))
+                        tweets?.map((data: ITweet[]) => {
+                            return data.map((tweet: ITweet, index: number) => (
+                                <Tweet
+                                    data={tweet}
+                                    key={index}
+                                    mutateTweets={mutateTweets}
+                                />
+                            ));
+                        })
                     ) : (
                         <S.Cards
                             as={motion.div}
@@ -104,8 +106,8 @@ export default function Explorer() {
                         </S.Cards>
                     )}
 
-                    {!isEndPage && <div ref={ref} />}
-                    {scrollLoading && <LittleLoading color="#000" />}
+                    {!isEndPage && !scrollLoading && <div ref={ref} />}
+                    {scrollLoading && <LittleLoading />}
                     {!isEndPage && (
                         <div
                             style={{

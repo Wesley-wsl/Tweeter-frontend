@@ -1,5 +1,5 @@
 import { GetServerSideProps } from "next";
-import { Key, useContext } from "react";
+import { useContext } from "react";
 
 import { IFilterOptions, ITweet } from "../../@types";
 import FilterTweets from "../../components/FilterTweets";
@@ -17,7 +17,7 @@ export default function Bookmarks() {
         tweets: bookmarks,
         filter,
         handleReset,
-        setTweets,
+        mutateTweets,
         ref,
         isEndPage,
         scrollLoading,
@@ -40,16 +40,17 @@ export default function Bookmarks() {
                 />
 
                 <S.TweetsContainer>
-                    {bookmarks.length !== 0 &&
-                        bookmarks.map((data: ITweet, index: Key) => (
+                    {bookmarks?.map((data: ITweet[]) => {
+                        return data.map((bookmark, index: number) => (
                             <Tweet
-                                data={data}
+                                data={bookmark}
                                 key={index}
-                                setTweets={setTweets}
+                                mutateTweets={mutateTweets}
                             />
-                        ))}
-                    {!isEndPage && <div ref={ref} />}
-                    {scrollLoading && <LittleLoading color="#000" />}
+                        ));
+                    })}
+                    {!isEndPage && !scrollLoading && <div ref={ref} />}
+                    {scrollLoading && <LittleLoading />}
                     {!isEndPage && (
                         <div
                             style={{

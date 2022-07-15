@@ -24,8 +24,8 @@ export default function Profile() {
         ref,
         scrollLoading,
         tweets,
+        mutateTweets,
         filter,
-        setTweets,
         handleReset,
     } = useInfiniteScroll(`/tweet/${id}`);
 
@@ -58,15 +58,17 @@ export default function Profile() {
                     />
 
                     <div>
-                        {tweets.map((data: ITweet, index: number) => (
-                            <Tweet
-                                data={data}
-                                key={index}
-                                setTweets={setTweets}
-                            />
-                        ))}
-                        {!isEndPage && <div ref={ref} />}
-                        {scrollLoading && <LittleLoading color="#000" />}
+                        {tweets?.map((data: ITweet[]) => {
+                            return data.map((tweet: ITweet, index: number) => (
+                                <Tweet
+                                    data={tweet}
+                                    key={index}
+                                    mutateTweets={mutateTweets}
+                                />
+                            ));
+                        })}
+                        {!isEndPage && !scrollLoading && <div ref={ref} />}
+                        {scrollLoading && <LittleLoading />}
                         {!isEndPage && (
                             <div
                                 style={{

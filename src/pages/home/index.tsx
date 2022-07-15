@@ -19,7 +19,7 @@ export default function Home() {
         scrollLoading,
         tweets,
         handleReset,
-        setTweets,
+        mutateTweets,
         search,
     } = useInfiniteScroll(`/tweet`);
 
@@ -34,17 +34,22 @@ export default function Home() {
         >
             <S.Container>
                 <S.Tweets>
-                    <WriteTweet handleReset={handleReset} />
+                    <WriteTweet
+                        handleReset={handleReset}
+                        mutateTweets={mutateTweets}
+                    />
                     <div>
-                        {tweets.map((data: ITweet, index: number) => (
-                            <Tweet
-                                data={data}
-                                key={index}
-                                setTweets={setTweets}
-                            />
-                        ))}
-                        {!isEndPage && <div ref={ref} />}
-                        {scrollLoading && <LittleLoading color="#000" />}
+                        {tweets?.map((data: ITweet[]) => {
+                            return data.map((tweet: ITweet, index) => (
+                                <Tweet
+                                    data={tweet}
+                                    key={index}
+                                    mutateTweets={mutateTweets}
+                                />
+                            ));
+                        })}
+                        {!isEndPage && !scrollLoading && <div ref={ref} />}
+                        {scrollLoading && <LittleLoading />}
                     </div>
                 </S.Tweets>
 
