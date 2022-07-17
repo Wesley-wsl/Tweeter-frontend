@@ -60,6 +60,9 @@ class MyDocument extends Document {
                         href="/assets/tweeter-small.svg"
                         type="image/svg"
                     />
+                    <link rel="manifest" href="/manifest.json" />
+                    <link rel="apple-touch-icon" href="/icon.png" />
+                    <meta name="theme-color" content="#2F80ED" />
                 </Head>
                 <body>
                     <Main />
