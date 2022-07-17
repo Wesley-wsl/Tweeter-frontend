@@ -24,6 +24,7 @@
         "axios": "^0.26.1",
         "framer-motion": "^6.3.3",
         "next": "12.1.5",
+        "next-pwa": "^5.5.4",
         "next-seo": "^5.4.0",
         "nextjs-progressbar": "^0.0.14",
         "nookies": "^2.5.2",
