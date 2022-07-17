@@ -36,6 +36,7 @@ export interface IButton extends InputHTMLAttributes<HTMLButtonElement> {
     iconLeft?: ReactNode;
     color: string;
     disabled?: boolean;
+    loading?: boolean;
 }
 
 export interface IImage {
@@ -236,3 +237,7 @@ export interface IChildren {
 }
 
 export type ITheme = typeof dark;
+
+export interface ILittleLoading {
+    color?: string;
+}
