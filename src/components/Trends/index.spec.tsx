@@ -12,17 +12,6 @@ import { baseURL, server } from "../../tests/mocks/setupServer";
 const handleResetMocked = jest.fn();
 
 describe("#Trends component.", () => {
-    test("Should be able to render a loading if no trends are found.", () => {
-        server.use(
-            rest.get(`${baseURL}/tweet/me/trends`, (req, res, ctx) => {
-                return res(ctx.status(400));
-            }),
-        );
-        render(<Trends handleReset={handleResetMocked} search="frontend" />);
-
-        expect(screen.getByTestId("little-loading")).toBeInTheDocument();
-    });
-
     test("Should be able to render trends.", async () => {
         render(<Trends handleReset={handleResetMocked} search="frontend" />);
 

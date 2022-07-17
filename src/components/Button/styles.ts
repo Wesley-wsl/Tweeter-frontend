@@ -18,6 +18,12 @@ export const Container = styled.button`
         margin-right: 0.5rem;
     }
 
+    > div {
+        margin-bottom: 0.4rem;
+        width: 1.8rem;
+        height: 1.8rem;
+    }
+
     &:hover {
         opacity: ${({ disabled }) => !disabled && 0.8};
     }

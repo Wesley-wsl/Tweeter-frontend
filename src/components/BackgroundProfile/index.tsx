@@ -6,7 +6,7 @@ import { IBackgroundProfile } from "../../@types";
 import Dropzone from "../../components/Dropzone";
 import Modal from "../../components/Modal";
 import { AuthContext } from "../../contexts/AuthContext";
-import { API_BASE_URL } from "../../utils/constants";
+import { CLOUDINARY_URL } from "../../utils/constants";
 import * as S from "./styles";
 
 const BackgroundProfile: React.FC<IBackgroundProfile> = ({
@@ -21,7 +21,7 @@ const BackgroundProfile: React.FC<IBackgroundProfile> = ({
             <S.Container
                 image={
                     background
-                        ? `${API_BASE_URL}/files/${background}`
+                        ? `${CLOUDINARY_URL}/${background}`
                         : "/background/background.webp"
                 }
                 data-testid="background profile"

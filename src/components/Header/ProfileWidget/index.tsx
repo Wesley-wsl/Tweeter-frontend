@@ -8,7 +8,7 @@ import { useContext, useState } from "react";
 
 import { AuthContext } from "../../../contexts/AuthContext";
 import { ThemeContext } from "../../../contexts/Theme";
-import { API_BASE_URL } from "../../../utils/constants";
+import { CLOUDINARY_URL } from "../../../utils/constants";
 import { widget } from "../../../utils/variants";
 import * as S from "./styles";
 
@@ -43,7 +43,7 @@ export const ProfileWidget: React.FC = () => {
                         <Image
                             src={
                                 user && user.avatar
-                                    ? `${API_BASE_URL}/files/${user.avatar}`
+                                    ? `${CLOUDINARY_URL}/${user.avatar}`
                                     : "/background/background.webp"
                             }
                             width="34"

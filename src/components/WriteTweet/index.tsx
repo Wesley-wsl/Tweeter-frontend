@@ -9,7 +9,7 @@ import { toast } from "react-toastify";
 import { IWriteTweet } from "../../@types";
 import { AuthContext } from "../../contexts/AuthContext";
 import api from "../../services/api";
-import { API_BASE_URL } from "../../utils/constants";
+import { CLOUDINARY_URL } from "../../utils/constants";
 import { fadeInUp } from "../../utils/variants";
 import { Button } from "../Button";
 import * as S from "./styles";
@@ -19,6 +19,7 @@ const WriteTweet = ({ handleReset, mutateTweets }: IWriteTweet) => {
     const [tweetImage, setTweetImage] = useState<File | undefined>(undefined);
     const [tweetContent, setTweetContent] = useState("");
     const [tweetIsPublic, setTweetIsPublic] = useState("true");
+    const [onLoadingSendTweet, setOnLoadingSendTweet] = useState(false);
     const { user } = useContext(AuthContext);
 
     async function onSendTweet() {
@@ -30,7 +31,7 @@ const WriteTweet = ({ handleReset, mutateTweets }: IWriteTweet) => {
 
         if (tweetContent.trim().length < 50)
             return toast.error("Must have at least 50 characters in a tweet.");
-
+        setOnLoadingSendTweet(true);
         await api
             .post("/tweet", formData, {
                 headers: {
@@ -40,6 +41,7 @@ const WriteTweet = ({ handleReset, mutateTweets }: IWriteTweet) => {
             .then(() => {
                 setTweetContent("");
                 handleReset("", "latest");
+                setTweetImage(undefined);
                 mutateTweets();
             })
             .catch(error =>
@@ -48,6 +50,7 @@ const WriteTweet = ({ handleReset, mutateTweets }: IWriteTweet) => {
                         "Something went wrong, please try again later.",
                 ),
             );
+        setOnLoadingSendTweet(false);
     }
 
     return (
@@ -65,7 +68,7 @@ const WriteTweet = ({ handleReset, mutateTweets }: IWriteTweet) => {
                         height="45"
                         src={
                             user && user.avatar
-                                ? `${API_BASE_URL}/files/${user.avatar}`
+                                ? `${CLOUDINARY_URL}/${user.avatar}`
                                 : "/background/background.webp"
                         }
                         alt="Profile Avatar"
@@ -133,6 +136,8 @@ const WriteTweet = ({ handleReset, mutateTweets }: IWriteTweet) => {
                     title="Tweet"
                     color={"#2F80ED"}
                     onClick={onSendTweet}
+                    loading={onLoadingSendTweet}
+                    disabled={onLoadingSendTweet}
                     data-cy="write-tweet-button"
                 />
             </S.Filter>

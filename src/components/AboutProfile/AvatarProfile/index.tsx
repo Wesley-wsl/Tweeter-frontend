@@ -4,7 +4,7 @@ import React, { useContext, useState } from "react";
 
 import { IAvatarProfile } from "../../../@types";
 import { AuthContext } from "../../../contexts/AuthContext";
-import { API_BASE_URL } from "../../../utils/constants";
+import { CLOUDINARY_URL } from "../../../utils/constants";
 import Dropzone from "../../Dropzone";
 import Modal from "../../Modal";
 import * as S from "./styles";
@@ -22,7 +22,7 @@ const AvatarProfile: React.FC<IAvatarProfile> = ({ avatar, userId }) => {
                     height="160"
                     src={
                         avatar
-                            ? `${API_BASE_URL}/files/${avatar}`
+                            ? `${CLOUDINARY_URL}/${avatar}`
                             : "/background/background.webp"
                     }
                     alt="Profile Avatar"

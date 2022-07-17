@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 import { IWriteComment } from "../../../@types";
 import { AuthContext } from "../../../contexts/AuthContext";
 import api from "../../../services/api";
-import { API_BASE_URL } from "../../../utils/constants";
+import { CLOUDINARY_URL } from "../../../utils/constants";
 import * as S from "./styles";
 
 const WriteComment = ({ mutateTweets, tweetId }: IWriteComment) => {
@@ -42,7 +42,7 @@ const WriteComment = ({ mutateTweets, tweetId }: IWriteComment) => {
                 height="50"
                 src={
                     user && user.avatar
-                        ? `${API_BASE_URL}/files/${user.avatar}`
+                        ? `${CLOUDINARY_URL}/${user.avatar}`
                         : "/background/background.webp"
                 }
                 alt="Profile Avatar"

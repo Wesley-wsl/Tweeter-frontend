@@ -27,8 +27,8 @@ jest.mock("next/router", () => {
 
 const mockScrollLoading = jest
     .fn()
-    .mockReturnValue(true)
-    .mockReturnValueOnce(false);
+    .mockReturnValue(false)
+    .mockReturnValueOnce(true);
 
 jest.mock("../../hooks/useInfiniteScroll", () => {
     return {

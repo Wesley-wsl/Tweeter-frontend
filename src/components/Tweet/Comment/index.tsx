@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 import { ICommentData } from "../../../@types";
 import { AuthContext } from "../../../contexts/AuthContext";
 import api from "../../../services/api";
-import { API_BASE_URL } from "../../../utils/constants";
+import { CLOUDINARY_URL } from "../../../utils/constants";
 import { DeleteTweet } from "../styles";
 import * as S from "./styles";
 
@@ -77,7 +77,7 @@ export const Comment: React.FC<ICommentData> = ({ data, mutateTweets }) => {
                     height="45"
                     src={
                         data.author.avatar
-                            ? `${API_BASE_URL}/files/${data.author.avatar}`
+                            ? `${CLOUDINARY_URL}/${data.author.avatar}`
                             : "/background/background.webp"
                     }
                     alt="Profile Avatar"

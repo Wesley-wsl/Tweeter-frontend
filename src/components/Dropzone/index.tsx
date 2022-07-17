@@ -40,7 +40,7 @@ const Dropzone: React.FC<IDropzone> = ({ imageName, setIsActive }) => {
     const { getRootProps, getInputProps, isDragReject, isDragActive } =
         useDropzone({
             maxFiles: 1,
-            maxSize: 7 * 1000 * 1000,
+            maxSize: 5 * 1000 * 1000,
             accept: {
                 "image/png": [".png"],
                 "image/jpg": [".jpg"],
@@ -48,8 +48,6 @@ const Dropzone: React.FC<IDropzone> = ({ imageName, setIsActive }) => {
             },
             onDropAccepted,
         });
-
-    if (isLoadingUpload) return <Loading />;
 
     return (
         <>
@@ -59,18 +57,27 @@ const Dropzone: React.FC<IDropzone> = ({ imageName, setIsActive }) => {
                 isDragReject={isDragReject}
             >
                 <div className="dropzone__container">
-                    <input {...getInputProps()} data-testid="input-file" />
-
-                    {isDragReject ? (
-                        <p className="error">
-                            File not supported, drag and drop one file jpg, png
-                            or jpeg. Maximum size: 7MB
-                        </p>
+                    {isLoadingUpload ? (
+                        <Loading />
                     ) : (
-                        <p>
-                            Drag and drop one file here, or click here to select
-                            file
-                        </p>
+                        <>
+                            <input
+                                {...getInputProps()}
+                                data-testid="input-file"
+                            />
+
+                            {isDragReject ? (
+                                <p className="error">
+                                    File not supported, drag and drop one file
+                                    jpg, png or jpeg. Maximum size: 5MB
+                                </p>
+                            ) : (
+                                <p>
+                                    Drag and drop one file here, or click here
+                                    to select file
+                                </p>
+                            )}
+                        </>
                     )}
                 </div>
             </S.Container>

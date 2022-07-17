@@ -29,6 +29,7 @@ export const Container = styled.div<IDropzoneStyle>`
         width: 95%;
         height: 95%;
         margin: auto;
+        border-radius: 1rem;
 
         ${props => props.isDragActive && dragActive}
         ${props => props.isDragReject && dragReject}

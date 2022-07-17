@@ -3,7 +3,7 @@ import Router from "next/router";
 import React from "react";
 
 import { IFollowCard } from "../../@types";
-import { API_BASE_URL } from "../../utils/constants";
+import { CLOUDINARY_URL } from "../../utils/constants";
 import FollowButton from "../FollowButton";
 import * as S from "./styles";
 
@@ -18,7 +18,7 @@ const PersonToFollow = ({ data }: IFollowCard) => {
                             height="40"
                             src={
                                 data.avatar
-                                    ? `${API_BASE_URL}/files/${data.avatar}`
+                                    ? `${CLOUDINARY_URL}/${data.avatar}`
                                     : "/background/background.webp"
                             }
                             alt="Profile Avatar"
@@ -43,7 +43,7 @@ const PersonToFollow = ({ data }: IFollowCard) => {
                     height="165"
                     src={
                         data.background
-                            ? `${API_BASE_URL}/files/${data.background}`
+                            ? `${CLOUDINARY_URL}/${data.background}`
                             : "/background/background.webp"
                     }
                     alt="Background image"

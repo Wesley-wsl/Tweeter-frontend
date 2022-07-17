@@ -15,7 +15,7 @@ import { toast } from "react-toastify";
 import { ITweetComponent } from "../../@types";
 import { useTweetServices } from "../../hooks/useTweetServices";
 import api from "../../services/api";
-import { API_BASE_URL } from "../../utils/constants";
+import { CLOUDINARY_URL } from "../../utils/constants";
 import { fadeInUp } from "../../utils/variants";
 import { Comment } from "./Comment";
 import * as S from "./styles";
@@ -68,7 +68,7 @@ const Tweet: React.FC<ITweetComponent> = ({ data, mutateTweets }) => {
                     height="60"
                     src={
                         data.author.avatar
-                            ? `${API_BASE_URL}/files/${data.author.avatar}`
+                            ? `${CLOUDINARY_URL}/${data.author.avatar}`
                             : "/background/background.webp"
                     }
                     alt="Profile Avatar"
@@ -85,7 +85,7 @@ const Tweet: React.FC<ITweetComponent> = ({ data, mutateTweets }) => {
                 <Image
                     width="700"
                     height="400"
-                    src={`${API_BASE_URL}/files/${data.image}`}
+                    src={`${CLOUDINARY_URL}/${data.image}`}
                     alt="Image tweet"
                 />
             )}

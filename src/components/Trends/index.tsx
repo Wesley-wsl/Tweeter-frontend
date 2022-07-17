@@ -5,7 +5,6 @@ import React, { FormEvent } from "react";
 import { IShowTrend, ITrends } from "../../@types";
 import { useFetch } from "../../hooks/useFetch";
 import { fadeInLeft } from "../../utils/variants";
-import LittleLoading from "../LittleLoading";
 import * as S from "./styles";
 
 const Trends = ({ handleReset, search }: ITrends) => {
@@ -28,7 +27,7 @@ const Trends = ({ handleReset, search }: ITrends) => {
             >
                 <p>Trends for you</p>
 
-                {trends ? (
+                {trends &&
                     trends.data.map((trend: IShowTrend, index: number) => (
                         <motion.div
                             animate={
@@ -57,12 +56,7 @@ const Trends = ({ handleReset, search }: ITrends) => {
                                 </S.CloseTrend>
                             )}
                         </motion.div>
-                    ))
-                ) : (
-                    <S.LoadingContainer>
-                        <LittleLoading />
-                    </S.LoadingContainer>
-                )}
+                    ))}
                 {!trends?.data[0] && <p>Don&apos;t have trends for you yet.</p>}
             </S.Container>
         </>

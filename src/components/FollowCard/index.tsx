@@ -3,7 +3,7 @@ import Router from "next/router";
 import React from "react";
 
 import { IFollowCard } from "../../@types";
-import { API_BASE_URL } from "../../utils/constants";
+import { CLOUDINARY_URL } from "../../utils/constants";
 import FollowButton from "../FollowButton";
 import * as S from "./styles";
 
@@ -23,7 +23,7 @@ const FollowCard: React.FC<IFollowCard> = ({ data, setShowFollowing }) => {
                             height="50"
                             src={
                                 data.avatar
-                                    ? `${API_BASE_URL}/files/${data.avatar}`
+                                    ? `${CLOUDINARY_URL}/${data.avatar}`
                                     : "/background/background.webp"
                             }
                             alt="Profile Avatar"

@@ -1,5 +1,5 @@
-export const API_BASE_URL =
-    process.env.NEXT_PUBLIC_API_BASE_URL ?? "http://localhost:3333/api/v1";
+export const CLOUDINARY_URL =
+    process.env.NEXT_PUBLIC_CLOUDINARY_URL ?? "http://localhost:3333/api/v1";
 
 export const BaseUrlStorybook =
     process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:3333";
