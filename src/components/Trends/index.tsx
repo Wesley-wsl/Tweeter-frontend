@@ -13,7 +13,7 @@ const Trends = ({ handleReset, search }: ITrends) => {
     const onChangeTrend = (e: FormEvent, trend: IShowTrend) => {
         e.preventDefault();
         trend.trend.slice(1) !== search
-            ? handleReset("backend", "latest")
+            ? handleReset(search, "latest")
             : handleReset("", "latest");
     };
 
