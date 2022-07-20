@@ -29,8 +29,8 @@ const WriteTweet = ({ handleReset, mutateTweets }: IWriteTweet) => {
 
         if (tweetImage !== undefined) formData.append("image", tweetImage);
 
-        if (tweetContent.trim().length < 50)
-            return toast.error("Must have at least 50 characters in a tweet.");
+        if (tweetContent.trim().length < 20)
+            return toast.error("Must have at least 20 characters in a tweet.");
         setOnLoadingSendTweet(true);
         await api
             .post("/tweet", formData, {
@@ -77,7 +77,7 @@ const WriteTweet = ({ handleReset, mutateTweets }: IWriteTweet) => {
 
                 <textarea
                     placeholder="What's happening?"
-                    maxLength={1400}
+                    maxLength={800}
                     data-cy="write-tweet-textarea"
                     onChange={({ target }) => setTweetContent(target.value)}
                     value={tweetContent}
