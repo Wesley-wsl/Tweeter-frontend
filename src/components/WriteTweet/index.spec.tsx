@@ -86,7 +86,7 @@ describe("#WriteTweet component.", () => {
         fireEvent.click(sendTweet);
 
         const errorMessageOne = screen.queryByText(
-            "Must have at least 50 characters in a tweet.",
+            "Must have at least 20 characters in a tweet.",
         );
         const errorMessageTwo = screen.queryByText(
             "Something went wrong, please try again later.",
@@ -175,7 +175,7 @@ describe("#WriteTweet component.", () => {
 
         await waitFor(() => {
             const errorMessage = screen.getByText(
-                "Must have at least 50 characters in a tweet.",
+                "Must have at least 20 characters in a tweet.",
             );
             expect(errorMessage).toBeInTheDocument();
         });
@@ -227,7 +227,7 @@ describe("#WriteTweet component.", () => {
         fireEvent.click(sendTweet);
 
         const errorMessageOne = screen.queryByText(
-            "Must have at least 50 characters in a tweet.",
+            "Must have at least 20 characters in a tweet.",
         );
         const errorMessageTwo = screen.queryByText(
             "Something went wrong, please try again later.",
